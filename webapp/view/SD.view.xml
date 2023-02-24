@@ -1,0 +1,207 @@
+<!DOCTYPE project>
+<core:View xmlns:core="sap.ui.core" xmlns:commons="sap.ui.commons"
+  xmlns:mvc="sap.ui.core.mvc" xmlns="sap.m" controllerName="zprelimdoc.controller.SD"
+  xmlns:html="http://www.w3.org/1999/xhtml">
+  <Page id="_IDGenPage1" title="{i18n>appTitle}">
+    <content>
+      <Panel id="_IDGenPanel1" headerText="Verkaufsauftrag">
+        <headerToolbar>
+          <OverflowToolbar width="100%" id="tb1">
+            <ToolbarSpacer id="_IDGenToolbarSpacer1" />
+            <ToggleButton text="Filter OFF" icon="sap-icon://filter"
+              id="btnFilter" press="onReadPos" pressed="true"/>
+          </OverflowToolbar>
+        </headerToolbar>
+
+        <content>
+          <HBox id="_IDGenHBox1" height="50px" width="100%" displayInline="false"
+            direction="Row" fitContainer="false" justifyContent="Start"
+            alignItems="Start">
+            <items>
+              <Label id="_IDGenLabel1" text="{i18n>lblOrderNum}" class="sapUiResponsiveMargin"
+                labelFor="vbeln" />
+              <Input id="vbeln" type="Number" change="onReadPos" value="" />
+
+              <Label id="_IDGenLabel2" text="{i18n>lblDefLangu}" class="sapUiResponsiveMargin"
+                labelFor="miDefLangu" />
+              <MultiInput width="200px" id="miDefLangu"
+                suggestionItems="{global>/}"
+                tokenChange="saveDefLangu"
+                showValueHelp="false">
+                <core:ListItem id="_IDGenListItem1" key="{global>Value}" text="{global>Text}"/>
+              </MultiInput>
+            </items>
+          </HBox>
+
+          <Panel id="contactPanel" expandable="true" headerText="{i18n>lblKontaktdaten}" width="auto" class="sapUiResponsiveMargin">
+            <content>
+
+            <Table noDataText="Drop column list items here and columns in the area above" id="table0">
+             <columns>
+             <Column id="_IDGenColumn1" width="5rem">
+             </Column>
+             <Column id="_IDGenColumn2" width="25rem">
+             </Column>
+             <Column id="_IDGenColumn3">
+             </Column>
+             <Column id="_IDGenColumn4" width="5rem">
+             </Column>
+             <Column id="_IDGenColumn5" width="25rem">
+             </Column>
+             </columns>
+              <items>
+                  <ColumnListItem type="Active" id="item6">
+                      <cells>
+                          <Text text="Name" width="50px" id="text18" textAlign="Begin"/>
+                          <Input xmlns="sap.m" value="{reader>Name1}"  id="name1"/>
+                          <Text id="_IDGenText1" xmlns="sap.m"/>
+                          <Text xmlns="sap.m" id="text24" text="Email" width="50px" textAlign="Begin"/>
+                          <Input xmlns="sap.m" value="{reader>Email1}" id="email1" type="Email" fieldWidth="100%" change="emailValidate"/></cells>
+                  </ColumnListItem>
+                  <ColumnListItem id="item7">
+                  <cells>
+                      <Text xmlns="sap.m" id="text26"/>
+                      <Input xmlns="sap.m" value="{reader>Name2}" id="name2"/>
+                      <Text id="_IDGenText2" xmlns="sap.m"/>
+                      <Text xmlns="sap.m" id="text27"/>
+                      <Input xmlns="sap.m" value="{reader>Email2}" id="email2" type="Email" change="emailValidate"/>
+                  </cells>
+                  </ColumnListItem>
+                  <ColumnListItem id="item8">
+                  <cells>
+                      <Text xmlns="sap.m" id="text28"/>
+                      <Input xmlns="sap.m" value="{reader>Name3}" id="name3"/>
+                      <Text id="_IDGenText3" xmlns="sap.m"/>
+                      <Text xmlns="sap.m" id="text29"/>
+                      <Input xmlns="sap.m" value="{reader>Email3}" id="email3" type="Email" change="emailValidate"/>
+                  </cells>
+                  </ColumnListItem>
+                  <ColumnListItem id="item9">
+                      <cells>
+                          <Label id="label5"/>
+                          <Label width="100%" id="label6"/>
+                          <Label id="_IDGenLabel3" width="100%"/>
+                          <Label width="100%" id="label7"/>
+                          <Button xmlns="sap.m" text="{i18n>btnSave}" id="buttonSv" press="onSavePress"/>
+                      </cells>
+                  </ColumnListItem>
+              </items>
+              <columns>
+                  <Column id="column0" hAlign="Right" width="40px">
+                  </Column>
+                  <Column id="column1">
+                  </Column>
+                  <Column id="column2" width="40px">
+                  </Column>
+                  <Column id="column3" hAlign="Right" width="40px">
+                  </Column>
+                  <Column id="column4">
+                  </Column>
+             </columns>
+           </Table>
+
+
+<!--               <Table noDataText="Drop column list items here and columns in the area above" id="table0"> -->
+<!--              <items> -->
+<!--                  <ColumnListItem type="Active" id="item6"> -->
+<!--                      <cells> -->
+<!--                          <Text text="Name" id="text18"/> -->
+<!--                          <Input xmlns="sap.m" value="{reader>Name1}" id="name1"/> -->
+<!--                          <Text xmlns="sap.m" id="text24" text="E-Mail"/> -->
+<!--                          <Input xmlns="sap.m" value="{reader>Email1}" type="Email" id="email1"/></cells> -->
+<!--                  </ColumnListItem> -->
+<!--                  <ColumnListItem id="item7"> -->
+<!--                  <cells> -->
+<!--                      <Text xmlns="sap.m" id="text26"/> -->
+<!--                      <Input xmlns="sap.m" value="{reader>Name2}" id="name2"/> -->
+<!--                      <Text xmlns="sap.m" id="text27"/> -->
+<!--                      <Input xmlns="sap.m" value="{reader>Email2}" type="Email" id="email2"/> -->
+<!--                  </cells> -->
+<!--                  </ColumnListItem> -->
+<!--                  <ColumnListItem id="item8"> -->
+<!--                  <cells> -->
+<!--                      <Text xmlns="sap.m" id="text28"/> -->
+<!--                      <Input xmlns="sap.m" value="{reader>Name3}" id="name3"/> -->
+<!--                      <Text xmlns="sap.m" id="text29"/> -->
+<!--                      <Input xmlns="sap.m" value="{reader>Email3}" type="Email" id="email3"/> -->
+<!--                  </cells> -->
+<!--                  </ColumnListItem> -->
+<!--                  <ColumnListItem id="item9"> -->
+<!--                      <cells> -->
+<!--                          <Label id="label5"/> -->
+<!--                          <Label width="100%" id="label6"/> -->
+<!--                          <Label width="100%" id="label7"/> -->
+<!--                          <Label width="100%" id="label8"/> -->
+<!--                          <Button xmlns="sap.m" text="{i18n>btnSave}" id="buttonSv" press="onSavePress"/> -->
+<!--                      </cells> -->
+<!--                  </ColumnListItem> -->
+<!--              </items> -->
+<!--              <columns> -->
+<!--                  <Column id="column0"> -->
+<!--                  </Column> -->
+<!--                  <Column id="column1"> -->
+<!--                  </Column> -->
+<!--                  <Column id="column2"> -->
+<!--                  </Column> -->
+<!--                  <Column id="column3"> -->
+<!--                  </Column> -->
+<!--                  <Column id="column4"> -->
+<!--                  </Column></columns></Table> -->
+            </content>
+          </Panel>
+
+          <Table id="vbap" class="sapUiResponsiveMargin" width="auto"
+            items="{/}" growing="true" growingThreshold="50">
+            <headerToolbar>
+              <Toolbar id="_IDGenToolbar1">
+                <Title id="_IDGenTitle1" text="{i18n>txtPositions}" />
+                <ToolbarSpacer id="_IDGenToolbarSpacer2" />
+              </Toolbar>
+            </headerToolbar>
+            <columns>
+              <Column id="_IDGenColumn6">
+                <Text id="_IDGenText4" text="{i18n>txtPosNr}" />
+              </Column>
+              <Column id="_IDGenColumn7">
+                <Text id="_IDGenText5" text="{i18n>txtMaterialNr}" />
+              </Column>
+              <Column id="_IDGenColumn8" width="40%">
+                <Text id="_IDGenText6" text="{i18n>txtDescription}" />
+              </Column>
+              <Column id="_IDGenColumn9">
+                <Text id="_IDGenText7" text="{i18n>txtStatus}" />
+              </Column>
+              <Column id="_IDGenColumn10" hAlign="End">
+                <Text id="_IDGenText8" text="{i18n>txtAmount}" />
+              </Column>
+            </columns>
+            <items>
+              <ColumnListItem id="_IDGenColumnListItem1" type="{path:'Inactive',formatter:'.formatter.fnColumnListItem'}" press="onGoDoc">
+                <cells>
+                  <Text id="_IDGenText9" text="{= ${Posnr} > 0 ? ${Posnr} : '' }" />
+                  <Text id="_IDGenText10" text="{Matnr}" />
+                  <Text id="_IDGenText11" text="{Maktx}" />
+
+                  <core:Icon id="_IDGenIcon1"
+                    tooltip="{path:'Docstat', formatter: '.formatter.fnSDIconAltText'}"
+                    size="20px" src="{path:'Docstat', formatter: '.formatter.fnSDIcon'}"
+                    useIconTooltip="false" />
+                  <ObjectNumber id="_IDGenObjectNumber1" number="{= ${Kwmeng} > 0 ? ${Kwmeng} : '' }"
+                    unit="{Vrkme}" />
+                </cells>
+              </ColumnListItem>
+            </items>
+          </Table>
+
+        </content>
+      </Panel>
+    </content>
+    <footer>
+      <Toolbar id="bottomToolbar">
+        <Button id="popoverButton" icon="sap-icon://message-popup" text="{msgModel>/messagesLength}"
+          type="Emphasized" press="handleMessagePopoverPress" />
+        <ToolbarSpacer id="_IDGenToolbarSpacer3" />
+      </Toolbar>
+    </footer>
+  </Page>
+</core:View>

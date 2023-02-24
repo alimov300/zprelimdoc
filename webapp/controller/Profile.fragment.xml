@@ -1,0 +1,31 @@
+<!DOCTYPE project>
+<core:FragmentDefinition
+   xmlns="sap.m"
+   xmlns:l="sap.ui.layout"
+   xmlns:core="sap.ui.core" >
+   <Dialog id="dlgProfile" title="{i18n>cptProfile}">
+      <l:VerticalLayout class="sapUiContentPadding" width="100%">
+        <l:content>
+              <Table id="listProfiles" class="sapUiResponsiveMargin" width="auto">
+							  <columns>
+								<Column width="80%">					
+								<Text text="Profile"/>				
+								</Column>								
+								<Column>
+								<Text text="Action" />									
+								</Column>
+							  </columns>
+						  </Table>
+        </l:content>
+        <l:content>
+          <Label text="{i18n>lblProfileName}" labelFor="fldProfileName"/>
+          <Input id="fldProfileName" class="sapUiSmallMarginBottom"  />
+        </l:content>
+      </l:VerticalLayout>
+      <buttons>
+         <Button id="btnProfileLoad" type="Accept" text="{i18n>btnLoad}" />
+         <Button id="btnProfileSave" text="{i18n>btnSave}"  press="onProfileSave"/>
+         <Button id="btnProfileCancel" type="Reject" text="{i18n>btnClose}"  press="onProfileCancel"/>
+      </buttons>
+   </Dialog>
+</core:FragmentDefinition>

@@ -1,0 +1,48 @@
+<!DOCTYPE project>
+<core:FragmentDefinition
+   xmlns="sap.m"
+   xmlns:l="sap.ui.layout"
+   xmlns:core="sap.ui.core" >
+   <Dialog id="dlgProfile" title="{i18n>cptProfile}">
+
+      <l:VerticalLayout id="_IDGenVerticalLayout1" class="sapUiContentPadding" width="100%">
+        <l:content>
+          <Label id="_IDGenLabel1" text="{i18n>lblProfileName}" labelFor="fldProfileName"/>
+          <Input id="fldProfileName" class="sapUiSmallMarginBottom" maxLength="30" />
+        </l:content>
+        <l:content>
+
+                        <Table id="listProfiles" class="sapUiResponsiveMargin" width="auto">
+<!--                items="{path: 'backend>/ProfileListSet', filters: ''}" -->
+
+                <columns>
+                <Column id="_IDGenColumn1" width="80%">
+                <Text id="_IDGenText1" />
+                </Column>
+                <Column id="_IDGenColumn2">
+                <Text id="_IDGenText2" />
+                </Column>
+                </columns>
+              <items>
+<!--                <ColumnListItem type="Active" press="onProfileListPress"> -->
+<!--                <cells> -->
+<!--                 <Label text="{backend>DcProfile}" />  -->
+<!--                                  <Button icon="sap-icon://delete"  -->
+<!--                                  visible="{= ${backend>DcProfile} !== 'ANTOS'}"  -->
+<!--                                  type="Reject" press="onProfileDelete" /> -->
+<!--                </cells> -->
+<!--                </ColumnListItem> -->
+              </items>
+              </Table>
+
+        </l:content>
+      </l:VerticalLayout>
+
+      <buttons>
+         <Button id="btnProfileLoad" type="Accept" text="{i18n>btnLoad}" />
+         <Button id="btnProfileSave" text="{i18n>btnSave}"  press="onProfileSave"/>
+         <Button id="btnProfileCancel" type="Reject" text="{i18n>btnClose}"  press="onProfileCancel"/>
+      </buttons>
+
+   </Dialog>
+</core:FragmentDefinition>
