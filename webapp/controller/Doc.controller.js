@@ -20,7 +20,7 @@ sap.ui.define(["sap/ui/core/mvc/Controller",
     description: '{description}',
     subtitle: '{subtitle}',
     counter: '{counter}'
-  //  link: oLink
+  //  link: oLink commented out
   });
 
   var oMessagePopover = new MessagePopover({
