@@ -1,11 +1,6 @@
-<mvc:View xmlns:core="sap.ui.core" xmlns:mvc="sap.ui.core.mvc" xmlns="sap.m" xmlns:html="http://www.w3.org/1999/xhtml"
-	controllerName="zprelimdoc.controller.App" id="prldocViewApp">
-    <Shell id="_IDGenShell1">  
-    	<App id="prldocApp">
-		  <pages>
-			<mvc:XMLView id="idSD" viewName="zprelimdoc.view.SD"/>
-			<mvc:XMLView id="idDoc" viewName="zprelimdoc.view.Doc"/>
-		  </pages> 
-	    </App>
+<mvc:View xmlns="sap.m" xmlns:html="http://www.w3.org/1999/xhtml" 
+	controllerName="zprelimdoc.controller.App" xmlns:mvc="sap.ui.core.mvc" id="prldocViewApp" displayBlock="true">
+	<Shell id="_IDGenShell1">
+		<App id="app"/>
 	</Shell>
 </mvc:View>

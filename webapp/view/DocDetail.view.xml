@@ -1,15 +1,27 @@
-<!DOCTYPE project>
-<mvc:View xmlns:u="sap.ui.unified" xmlns:core="sap.ui.core"
-  xmlns:commons="sap.ui.commons" xmlns:mvc="sap.ui.core.mvc" xmlns="sap.m"
-  xmlns:l="sap.ui.commons.layout" controllerName="zprelimdoc.controller.DocDetail"
-  xmlns:html="http://www.w3.org/1999/xhtml">
-  <Label id="_IDGenLabel1" class="zPosition" text="{parts: [{path: '/DocContent'}], formatter: '.formatter.fnRemoveNullsExt'}" />
-  <IconTabBar id="iconTabBar" class="sapUiResponsiveContentPadding">
-    <items>
-      <IconTabFilter id="tabGeneral" icon="sap-icon://detail-view"
-        tooltip="{i18n>tabGeneral}" >
+<mvc:View xmlns:u="sap.ui.unified" xmlns:core="sap.ui.core" xmlns:commons="sap.ui.commons" xmlns:mvc="sap.ui.core.mvc" xmlns="sap.m" xmlns:l="sap.ui.commons.layout" controllerName="zprelimdoc.controller.DocDetail" xmlns:html="http://www.w3.org/1999/xhtml" xmlns:l2="sap.ui.layout">
+    <Label id="_IDGenLabel1dd" class="zPosition" text="{parts: [{path: '/DocContent'}], formatter: '.formatter.fnRemoveNullsExt'}" />
+    <IconTabBar id="iconTabBar" class="sapUiResponsiveContentPadding">
+        <items>
+            <IconTabFilter id="tabGeneral" icon="sap-icon://detail-view" tooltip="{i18n>tabGeneral}">
+                <l2:VerticalLayout width="100%" class="gridWrapper">
+                    <l2:Grid containerQuery="true" hSpacing="0" defaultSpan="XL6 L6 M6 S6">
+                        <Label text="{i18n>lblStatus}" class="sapUiResponsiveMargin" labelFor="cmbSddcStatus" />
+                        <ComboBox
+                            id="cmbSddcStatus"
+                            selectedKey="{/SddcStatus}"
+                            enabled="{/Active}"
+                            valueState="{parts: [{path: '/Active'},{path: '/Status1'}], formatter: '.formatter.fnUiStatus'}"
+                            width="350px"
+                            selectionChange="runValidate"
+                            items="{
+                                    path : 'meta>/DomainValuesSet',
+                                    filters : [ { path : 'Fieldname', operator : 'EQ', value1 : 'SddcStatus'} ] }" >
+                            <core:ListItem key="{meta>Value}" text="{meta>Text}" />
+                        </ComboBox>
+                    </l2:Grid>
+                </l2:VerticalLayout>
 
-      <!--  <l:MatrixLayout id="mlGeneral">
+                <!-- <l:MatrixLayout id="mlGeneral">
           <l:MatrixLayoutRow>
             <l:MatrixLayoutCell>
             <Label text="{i18n>lblStatus}" class="sapUiResponsiveMargin"
@@ -223,188 +235,172 @@
 
         </l:MatrixLayoutCell>
         </l:MatrixLayoutRow>
-        </l:MatrixLayout>  -->
-      </IconTabFilter>
+        </l:MatrixLayout>   -->
+            </IconTabFilter>
 
+            <IconTabFilter id="tabCollection" icon="sap-icon://multi-select" tooltip="{i18n>tabCollection}">
+                <Label id="_IDGenLabel2" text="{i18n>txtTargetNr}" class="sapUiResponsiveMargin" labelFor="mslTarget" />
 
-      <IconTabFilter id="tabCollection" icon="sap-icon://multi-select"
-        tooltip="{i18n>tabCollection}">
-
-        <Label id="_IDGenLabel2" text="{i18n>txtTargetNr}" class="sapUiResponsiveMargin"
-          labelFor="mslTarget" />
-
-        <MultiComboBox id="mslTarget" enabled="{/Active}"
-          items="{
+                <MultiComboBox id="mslTarget" enabled="{/Active}" items="{
                    path : 'meta>/DomainValuesSet',
                              filters : [ { path: 'Fieldname', operator : 'EQ', value1 : 'DocContent'} ] }">
-          <core:ListItem id="_IDGenListItem1" key="{meta>Value}"
-            text="{parts: [{path: 'meta>Value'},{path: 'meta>Text'}], formatter: '.formatter.fnDocContAsDD'}" />
-        </MultiComboBox>
+                    <core:ListItem id="_IDGenListItem1" key="{meta>Value}" text="{parts: [{path: 'meta>Value'},{path: 'meta>Text'}], formatter: '.formatter.fnDocContAsDD'}" />
+                </MultiComboBox>
 
+                <Label id="_IDGenLabel3" text="{i18n>tabMatGroup}" class="sapUiResponsiveMargin" labelFor="mslMatGroup" />
 
-        <Label id="_IDGenLabel3" text="{i18n>tabMatGroup}" class="sapUiResponsiveMargin"
-          labelFor="mslMatGroup" />
-
-        <MultiComboBox id="mslMatGroup" enabled="false"
-          items="{
+                <MultiComboBox id="mslMatGroup" enabled="false" items="{
                    path : 'meta>/DomainValuesSet',
                              filters : [ { path: 'Fieldname', operator : 'EQ', value1 : 'Matkl'} ] }">
-          <core:ListItem id="_IDGenListItem2" key="{meta>Value}" text="{meta>Value} - {meta>Text}" />
-        </MultiComboBox>
+                    <core:ListItem id="_IDGenListItem2" key="{meta>Value}" text="{meta>Value} - {meta>Text}" />
+                </MultiComboBox>
 
-        <Label id="_IDGenLabel4" text="{i18n>lblKeyword1}" class="sapUiResponsiveMargin"
-                labelFor="cmbKeyword1" />
+                <Label id="_IDGenLabel4" text="{i18n>lblKeyword1}" class="sapUiResponsiveMargin" labelFor="cmbKeyword1" />
 
-        <MultiComboBox id="cmbKeyword1" enabled="false" >
-<!--          <core:ListItem key="{meta>Value}" text="{meta>Value} - {meta>Text}" /> -->
-        </MultiComboBox>
+                <MultiComboBox id="cmbKeyword1" enabled="false">
+                    <!--          <core:ListItem key="{meta>Value}" text="{meta>Value} - {meta>Text}" /> -->
+                </MultiComboBox>
 
-        <Label id="_IDGenLabel5" text="{i18n>lblKeyword2}" class="sapUiResponsiveMargin"
-                labelFor="cmbKeyword2" />
-         <MultiComboBox id="cmbKeyword2" enabled="false" >
-<!--          <core:ListItem key="{meta>Value}" text="{meta>Value} - {meta>Text}" /> -->
-        </MultiComboBox>
-      </IconTabFilter>
+                <Label id="_IDGenLabel5" text="{i18n>lblKeyword2}" class="sapUiResponsiveMargin" labelFor="cmbKeyword2" />
+                <MultiComboBox id="cmbKeyword2" enabled="false">
+                    <!--          <core:ListItem key="{meta>Value}" text="{meta>Value} - {meta>Text}" /> -->
+                </MultiComboBox>
+            </IconTabFilter>
 
-      <IconTabFilter id="tabLang" icon="sap-icon://globe"
-        tooltip="{i18n>tabLang}">
-
-        <Label id="_IDGenLabel6" text="{i18n>txtLanguages}" class="sapUiResponsiveMargin"
-          labelFor="mslLang" />
-        <MultiComboBox id="mslLang"
-            enabled="{/Active}"
-          items="{
+            <IconTabFilter id="tabLang" icon="sap-icon://globe" tooltip="{i18n>tabLang}">
+                <Label id="_IDGenLabel6" text="{i18n>txtLanguages}" class="sapUiResponsiveMargin" labelFor="mslLang" />
+                <MultiComboBox id="mslLang" enabled="{/Active}" items="{
             path : 'lang>/langItems',
             templateShareable : false
         }">
-          <core:Item id="_IDGenItem1" key="{lang>Value}" text="{lang>Text}" />
-          <!-- <selectedKey> -->
-          <!-- <core:Item key="{lang>key}" > -->
-          <!-- </core:Item> -->
-          <!-- </selectedKey> -->
-        </MultiComboBox>
+                    <core:Item id="_IDGenItem1" key="{lang>Value}" text="{lang>Text}" />
+                    <!-- <selectedKey> -->
+                    <!-- <core:Item key="{lang>key}" > -->
+                    <!-- </core:Item> -->
+                    <!-- </selectedKey> -->
+                </MultiComboBox>
 
-        <Table id="tblLang" visible="{lang>/isTopLevel}" class="sapUiResponsiveMargin zLangsTable"
-          width="auto" items="{path: 'lang>/langAssignments',templateShareable: false}">
-          <headerToolbar>
-            <Toolbar id="_IDGenToolbar1">
-              <Title id="_IDGenTitle1" text="" />
-              <ToolbarSpacer id="_IDGenToolbarSpacer1" />
-              <Button id="_IDGenButton1" icon="sap-icon://sys-last-page"
-              enabled="{/Active}"
-              text="{i18n>btnDerive}"
-              press="deriveLanguages" />
-            </Toolbar>
-          </headerToolbar>
-          <columns>
-            <Column id="_IDGenColumn1" width="10%" vAlign="Middle">
-              <Checkbox id="_IDGenCheckbox1" select="onAllLanguSelection"></Checkbox>
-            </Column>
-            <Column id="_IDGenColumn2" width="100px" vAlign="Middle">
-              <Text id="_IDGenText1" text="{i18n>txtAssignment}" />
-            </Column>
-            <Column id="_IDGenColumn3" width="50%" vAlign="Middle">
-              <Text id="_IDGenText2" text="" />
-            </Column>
-            <Column id="_IDGenColumn4" width="40%" vAlign="Middle">
-              <Text id="_IDGenText3" text="{i18n>txtLanguages}" />
-            </Column>
-          </columns>
-          <items>
-            <ColumnListItem id="_IDGenColumnListItem1" type="Navigation" vAlign="Middle">
-              <cells>
-                <Checkbox id="_IDGenCheckbox2" selected="{lang>Selected}" enabled="{/Active}"></Checkbox>
-                <Text id="_IDGenText4"                   text="{path: 'lang>DocContent', formatter: '.formatter.fnDocContentFormatter'}" />
-                <Text id="_IDGenText5" text="{lang>Text}"  />
-                <MultiInput id="_IDGenMultiInput1" showValueHelp="false" tokens="{
+                <Table id="tblLang" visible="{lang>/isTopLevel}" class="sapUiResponsiveMargin zLangsTable" width="auto" items="{path: 'lang>/langAssignments',templateShareable: false}">
+                    <headerToolbar>
+                        <Toolbar id="_IDGenToolbar1">
+                            <Title id="_IDGenTitle1" text="" />
+                            <ToolbarSpacer id="_IDGenToolbarSpacer1" />
+                            <Button id="_IDGenButton1" icon="sap-icon://sys-last-page" enabled="{/Active}" text="{i18n>btnDerive}" press="deriveLanguages" />
+                        </Toolbar>
+                    </headerToolbar>
+                    <columns>
+                        <Column id="_IDGenColumn1" width="10%" vAlign="Middle">
+                            <CheckBox id="_IDGenCheckbox1" select="onAllLanguSelection" />
+                        </Column>
+                        <Column id="_IDGenColumn2" width="100px" vAlign="Middle">
+                            <Text id="_IDGenText1dd" text="{i18n>txtAssignment}" />
+                        </Column>
+                        <Column id="_IDGenColumn3" width="50%" vAlign="Middle">
+                            <Text id="_IDGenText2dd" text="" />
+                        </Column>
+                        <Column id="_IDGenColumn4" width="40%" vAlign="Middle">
+                            <Text id="_IDGenText3dd" text="{i18n>txtLanguages}" />
+                        </Column>
+                    </columns>
+                    <items>
+                        <ColumnListItem id="_IDGenColumnListItem1" type="Navigation" vAlign="Middle">
+                            <cells>
+                                <CheckBox id="_IDGenCheckbox2" selected="{lang>Selected}" enabled="{/Active}" />
+                                <Text id="_IDGenText4dd" text="{path: 'lang>DocContent', formatter: '.formatter.fnDocContentFormatter'}" />
+                                <Text id="_IDGenText5dd" text="{lang>Text}" />
+                                <MultiInput
+                                    id="_IDGenMultiInput1dd"
+                                    showValueHelp="false"
+                                    tokens="{
                  path : 'lang>Langs',
                  templateShareable : false
-                 }"             
-                 tokenUpdate="onTokensUpdateNew"
-                 enabled="{/Active}"
-                 suggestionItems="{path:'lang>/allItems',
+                 }"
+                                    tokenUpdate="onTokensUpdateNew"
+                                    enabled="{/Active}"
+                                    suggestionItems="{path:'lang>/allItems',
                                  templateShareable : false,
                                 sorter: {path:'Text'}}"
-                 showSuggestion="true" enableMultiLineMode="lang>fldFalse"
-                 >
-                 <core:ListItem id="_IDGenListItem3" key="{lang>Value}"
-                   additionalText="{lang>fldTrue}" text="{lang>Text}"
-                  enabled="{/Active}" />
-                <tokens>
-                <Token id="_IDGenToken1" key="{lang>Value}" editable="{lang>fldTrue}" text="{lang>Text}" />
-                </tokens>
-                </MultiInput>
-              </cells>
-            </ColumnListItem>
-          </items>
-        </Table>
-
-      </IconTabFilter>
-      <IconTabFilter id="tabMedia" visible="{/SDDocCont_MetaSet/Mdcntavail}"
-        icon="sap-icon://it-system" tooltip="{i18n>tabMedia}">
-        <Table id="tblMedia" class="sapUiResponsiveMargin" width="auto"
-           items="{/SDDocCont_MdcntSet/results}">
-          <headerToolbar>
-            <Toolbar id="_IDGenToolbar2">
-              <Title id="_IDGenTitle2" text="{i18n>tabMedia}" />
-              <ToolbarSpacer id="_IDGenToolbarSpacer2" />
-              <Button id="_IDGenButton2" icon="sap-icon://add" enabled="{/Active}"
-                text="{i18n>txtRow}" press="addMdcntRow" />
-            </Toolbar>
-          </headerToolbar>
-          <columns>
-            <Column id="_IDGenColumn5">
-              <Text id="_IDGenText6" text="{i18n>colDocKind}" />
-            </Column>
-            <Column id="_IDGenColumn6">
-              <Text id="_IDGenText7" text="{i18n>colMdCount}" />
-            </Column>
-            <Column id="_IDGenColumn7">
-              <Text id="_IDGenText8" text="{i18n>colLangu}" />
-            </Column>
-            <Column id="_IDGenColumn8">
-              <Text id="_IDGenText9" text="{i18n>colMedium}" />
-            </Column>
-            <Column id="_IDGenColumn9" width="50px" />
-          </columns>
-          <items>
-            <ColumnListItem id="_IDGenColumnListItem2" type="Navigation">
-              <cells>
-                <ComboBox id="_IDGenComboBox1" selectedKey="{DocKind}" enabled="{/Active}"
-                  items="{
+                                    showSuggestion="true"
+                                    enableMultiLineMode="{lang>fldFalse}"
+                                >
+                                    <core:ListItem id="_IDGenListItem3" key="{lang>Value}" additionalText="{lang>fldTrue}" text="{lang>Text}" enabled="{/Active}" />
+                                    <tokens>
+                                        <Token id="_IDGenToken1" key="{lang>Value}" editable="{lang>fldTrue}" text="{lang>Text}" />
+                                    </tokens>
+                                </MultiInput>
+                            </cells>
+                        </ColumnListItem>
+                    </items>
+                </Table>
+            </IconTabFilter>
+            <IconTabFilter id="tabMedia" visible="{/SDDocCont_MetaSet/Mdcntavail}" icon="sap-icon://it-system" tooltip="{i18n>tabMedia}">
+                <Table id="tblMedia" class="sapUiResponsiveMargin" width="auto" items="{/SDDocCont_MdcntSet/results}">
+                    <headerToolbar>
+                        <Toolbar id="_IDGenToolbar2">
+                            <Title id="_IDGenTitle2" text="{i18n>tabMedia}" />
+                            <ToolbarSpacer id="_IDGenToolbarSpacer2" />
+                            <Button id="_IDGenButton2" icon="sap-icon://add" enabled="{/Active}" text="{i18n>txtRow}" press="addMdcntRow" />
+                        </Toolbar>
+                    </headerToolbar>
+                    <columns>
+                        <Column id="_IDGenColumn5">
+                            <Text id="_IDGenText6" text="{i18n>colDocKind}" />
+                        </Column>
+                        <Column id="_IDGenColumn6">
+                            <Text id="_IDGenText7" text="{i18n>colMdCount}" />
+                        </Column>
+                        <Column id="_IDGenColumn7">
+                            <Text id="_IDGenText8" text="{i18n>colLangu}" />
+                        </Column>
+                        <Column id="_IDGenColumn8">
+                            <Text id="_IDGenText9" text="{i18n>colMedium}" />
+                        </Column>
+                        <Column id="_IDGenColumn9" width="50px" />
+                    </columns>
+                    <items>
+                        <ColumnListItem id="_IDGenColumnListItem2" type="Navigation">
+                            <cells>
+                                <ComboBox
+                                    id="_IDGenComboBox1"
+                                    selectedKey="{DocKind}"
+                                    enabled="{/Active}"
+                                    items="{
                          path : 'meta>/DomainValuesSet',
                          templateShareable: false,
-                                   filters : [ { path : 'Fieldname', operator : 'EQ', value1 : 'DocKind'} ] }">
-                  <core:ListItem id="_IDGenListItem4" key="{meta>Value}" text="{meta>Text}" />
-                </ComboBox>
+                                   filters : [ { path : 'Fieldname', operator : 'EQ', value1 : 'DocKind'} ] }"
+                                >
+                                    <core:ListItem id="_IDGenListItem4" key="{meta>Value}" text="{meta>Text}" />
+                                </ComboBox>
 
-                <Input id="_IDGenInput1" enabled="{/Active}" change="validateNumber"
-                  value="{ path: 'MdCount', type:'sap.ui.model.type.Integer' }" />
-                <ComboBox id="_IDGenComboBox2" selectedKey="{Langu}" enabled="{/Active}"
-                  items="{
+                                <Input id="_IDGenInput1" enabled="{/Active}" change="validateNumber" value="{ path: 'MdCount', type:'sap.ui.model.type.Integer' }" />
+                                <ComboBox
+                                    id="_IDGenComboBox2"
+                                    selectedKey="{Langu}"
+                                    enabled="{/Active}"
+                                    items="{
                          path : 'meta>/DomainValuesSet',
                          templateShareable: false,
-                                   filters : [ { path : 'Fieldname', operator : 'EQ', value1 : 'Lang'} ] }">
-                  <core:ListItem id="_IDGenListItem5" key="{meta>Value}" text="{meta>Text}" />
-                </ComboBox>
-                <ComboBox id="_IDGenComboBox3" selectedKey="{Medium}" enabled="{/Active}"
-                  items="{
+                                   filters : [ { path : 'Fieldname', operator : 'EQ', value1 : 'Lang'} ] }"
+                                >
+                                    <core:ListItem id="_IDGenListItem5" key="{meta>Value}" text="{meta>Text}" />
+                                </ComboBox>
+                                <ComboBox
+                                    id="_IDGenComboBox3"
+                                    selectedKey="{Medium}"
+                                    enabled="{/Active}"
+                                    items="{
                          path : 'meta>/DomainValuesSet',
                          templateShareable: false,
-                                   filters : [ { path : 'Fieldname', operator : 'EQ', value1 : 'Medium'} ] }">
-                  <core:ListItem id="_IDGenListItem6" key="{meta>Value}" text="{meta>Text}" />
-                </ComboBox>
-                <Button id="_IDGenButton3" icon="sap-icon://delete" enabled="{/Active}"
-                  press="deleteMdcntRow" type="Reject" />
-              </cells>
-            </ColumnListItem>
-          </items>
-        </Table>
-
-      </IconTabFilter>
-
-    </items>
-  </IconTabBar>
-
-
+                                   filters : [ { path : 'Fieldname', operator : 'EQ', value1 : 'Medium'} ] }"
+                                >
+                                    <core:ListItem id="_IDGenListItem6" key="{meta>Value}" text="{meta>Text}" />
+                                </ComboBox>
+                                <Button id="_IDGenButton3" icon="sap-icon://delete" enabled="{/Active}" press="deleteMdcntRow" type="Reject" />
+                            </cells>
+                        </ColumnListItem>
+                    </items>
+                </Table>
+            </IconTabFilter>
+        </items>
+    </IconTabBar>
 </mvc:View>

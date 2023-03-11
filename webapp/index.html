@@ -1,42 +1,38 @@
-<!DOCTYPE HTML>
-<html>
-	<head>
-		<meta http-equiv="X-UA-Compatible" content="IE=edge">
-		<meta http-equiv='Content-Type' content='text/html;charset=UTF-8'/>
-
-		<script src="resources/sap-ui-core.js"
-				id="sap-ui-bootstrap"
-				data-sap-ui-libs="sap.m"
-				data-sap-ui-xx-bindingSyntax="complex"
-				data-sap-ui-theme="sap_bluecrystal">
-		</script>
-		
-		<link rel="stylesheet" type="text/css" href="zprelimdoc/css/style.css" />
-
-		<script>
-				sap.ui.localResources("zprelimdoc");
-				$.sap.require('commons.lang');
-
-				sap.ui.getCore().attachInit(function() {
-					new sap.m.Shell({
-					    appWidthLimited : false,
-						app: new sap.ui.core.ComponentContainer({
-							height : "100%",
-							name : "zprelimdoc"
-						})
-					}).placeAt("content");
-				});
-				
-				//var app = new sap.m.App({id:"app", initialPage:"idSD"});
-				//var page_sd = sap.ui.view({id:"idSD", viewName:"zprelimdoc.view.SD", type:sap.ui.core.mvc.ViewType.XML});
-				//app.addPage(page_sd);
-				//var page_doc = sap.ui.view({id:"idDoc", viewName:"zprelimdoc.view.Doc", type:sap.ui.core.mvc.ViewType.XML});
-				//app.addPage(page_doc);
-				//app.placeAt("content");
-		</script>
-
-	</head>
-	<body class="sapUiBody" role="application">
-		<div id="content"></div>
-	</body>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>App Title</title>
+    <style>
+        html, body, body > div, #container, #container-uiarea {
+            height: 100%;
+        }
+    </style>
+    <script
+        id="sap-ui-bootstrap"
+        src="resources/sap-ui-core.js"
+        data-sap-ui-theme="sap_horizon"
+        data-sap-ui-resourceroots='{
+            "zprelimdoc": "./"
+        }'
+        data-sap-ui-compatVersion="edge"
+        data-sap-ui-async="true"
+        data-sap-ui-frameOptions="trusted"
+    ></script>
+    <script id="locate-reuse-libs" src="./utils/locate-reuse-libs.js"
+        data-sap-ui-manifest-uri="./manifest.json"
+        data-sap-ui-componentName="zprelimdoc">
+    </script> 
+</head>
+<body class="sapUiBody sapUiSizeCompact" id="content">
+    <div
+        data-sap-ui-component
+        data-name="zprelimdoc"
+        data-id="container"
+        data-settings='{"id" : "zprelimdoc"}'
+        data-handle-validation="true"
+    ></div>
+</body>
 </html>

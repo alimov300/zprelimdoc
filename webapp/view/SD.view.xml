@@ -1,5 +1,4 @@
-<!DOCTYPE project>
-<core:View xmlns:core="sap.ui.core" xmlns:commons="sap.ui.commons"
+<mvc:View xmlns:core="sap.ui.core" xmlns:commons="sap.ui.commons"
   xmlns:mvc="sap.ui.core.mvc" xmlns="sap.m" controllerName="zprelimdoc.controller.SD"
   xmlns:html="http://www.w3.org/1999/xhtml">
   <Page id="_IDGenPage1" title="{i18n>appTitle}">
@@ -18,7 +17,7 @@
             direction="Row" fitContainer="false" justifyContent="Start"
             alignItems="Start">
             <items>
-              <Label id="_IDGenLabel1" text="{i18n>lblOrderNum}" class="sapUiResponsiveMargin"
+              <Label id="_IDGenLabel1sd" text="{i18n>lblOrderNum}" class="sapUiResponsiveMargin"
                 labelFor="vbeln" />
               <Input id="vbeln" type="Number" change="onReadPos" value="" />
 
@@ -54,7 +53,7 @@
                       <cells>
                           <Text text="Name" width="50px" id="text18" textAlign="Begin"/>
                           <Input xmlns="sap.m" value="{reader>Name1}"  id="name1"/>
-                          <Text id="_IDGenText1" xmlns="sap.m"/>
+                          <Text id="_IDGenText1sd" xmlns="sap.m"/>
                           <Text xmlns="sap.m" id="text24" text="Email" width="50px" textAlign="Begin"/>
                           <Input xmlns="sap.m" value="{reader>Email1}" id="email1" type="Email" fieldWidth="100%" change="emailValidate"/></cells>
                   </ColumnListItem>
@@ -178,15 +177,15 @@
             <items>
               <ColumnListItem id="_IDGenColumnListItem1" type="{path:'Inactive',formatter:'.formatter.fnColumnListItem'}" press="onGoDoc">
                 <cells>
-                  <Text id="_IDGenText9" text="{= ${Posnr} > 0 ? ${Posnr} : '' }" />
-                  <Text id="_IDGenText10" text="{Matnr}" />
-                  <Text id="_IDGenText11" text="{Maktx}" />
+                  <Text id="_IDGenText9sd" text="{= ${Posnr} > 0 ? ${Posnr} : '' }" />
+                  <Text id="_IDGenText10sd" text="{Matnr}" />
+                  <Text id="_IDGenText11sd" text="{Maktx}" />
 
-                  <core:Icon id="_IDGenIcon1"
+                  <core:Icon id="_IDGenIcon1sd"
                     tooltip="{path:'Docstat', formatter: '.formatter.fnSDIconAltText'}"
                     size="20px" src="{path:'Docstat', formatter: '.formatter.fnSDIcon'}"
                     useIconTooltip="false" />
-                  <ObjectNumber id="_IDGenObjectNumber1" number="{= ${Kwmeng} > 0 ? ${Kwmeng} : '' }"
+                  <ObjectNumber id="_IDGenObjectNumber1sd" number="{= ${Kwmeng} > 0 ? ${Kwmeng} : '' }"
                     unit="{Vrkme}" />
                 </cells>
               </ColumnListItem>
@@ -204,4 +203,4 @@
       </Toolbar>
     </footer>
   </Page>
-</core:View>
+</mvc:View>

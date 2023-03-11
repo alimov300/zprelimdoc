@@ -1,143 +1,127 @@
-<!DOCTYPE project>
-<mvc:View xmlns:u="sap.ui.unified" xmlns:core="sap.ui.core" xmlns:l="sap.ui.layout"
-	xmlns:commons="sap.ui.commons" xmlns:mvc="sap.ui.core.mvc" xmlns="sap.m" xmlns:f="sap.ui.layout.form"
-	controllerName="zprelimdoc.controller.Doc" xmlns:html="http://www.w3.org/1999/xhtml">
-	<Page id="_IDGenPage1" title="Pflege Vorabdoku">
-		<content>
-			<Panel headerText="Dokumente" id="docPanel" height="auto">
-				<headerToolbar>
-					<OverflowToolbar width="100%" id="tlbar1">
-						<content>
-							<Button text="{i18n>btnBack}" type="Back" width="100px"
-								id="btnBack" press="onBack" />
-							<Button text="{i18n>btnProfileMaint}" id="btnProfile"
-								enabled="{meta>/Active}" press="onProfileClick" icon="sap-icon://personnel-view" />
-							<ToggleButton id="idFiltersOn" icon="sap-icon://filter" text="{i18n>lblFilterButton}" press="setFiltersOn">
-							</ToggleButton>
-							<ToggleButton id="idCheckboxFilters" icon="sap-icon://sys-enter" text="{i18n>lblCheckBoxFilter}"
-							 pressed="{path:'meta>/Checkboxes', formatter:'.formatter.fnCheckedButton'}" press="setCheckFilters">
-							</ToggleButton>
-							<ToolbarSpacer id="_IDGenToolbarSpacer1" />
-							<Label id="_IDGenLabel1" text="{path: 'DocList>/results/1/Vbeln', formatter:'.formatter.fnRemoveZeros'}" />
-							<Label id="_IDGenLabel2" text="/" visible="{path:'DocList>/results/1/Posnr', formatter:'.formatter.fnNoAllZeros'}" />
-							<Label id="_IDGenLabel3" text="{path: 'DocList>/results/1/Posnr', formatter:'.formatter.fnRemoveZeros'}"
-							    visible="{path:'DocList>/results/1/Posnr',formatter:'.formatter.fnNoAllZeros'}" />
-						    <Label id="_IDGenLabel4" text="{path:'meta>/Profile',formatter:'.formatter.fnProfile'}" />
-						    <ToolbarSpacer id="_IDGenToolbarSpacer2" />
-						    <Button text="{i18n>btnComplete}" id="btnComplete"
-								enabled="{meta>/Active}" press="onComplete" icon="sap-icon://complete" />
-							<Button text="{i18n>btnSave}" id="btnSave" enabled="{meta>/Active}"
-								press="onSave" icon="sap-icon://save" />
-						</content>
-					</OverflowToolbar>
-				</headerToolbar>
-				<content>
-					<u:SplitContainer id="mySplitContainer"
-						showSecondaryContent="true">
-						<u:secondaryContent width="260px">
-						
-						 <l:VerticalLayout id="_IDGenVerticalLayout1">
-						  <l:content>
-						  <f:SimpleForm id="filterform1" visible="false" class="sapUiNoMargin zFilter">
-						  <l:HorizontalLayout id="_IDGenHorizontalLayout1">
-						  <core:Icon id="_IDGenIcon1" size="24px" src="sap-icon://filter">
-						  </core:Icon>
-						  <MultiComboBox width="190px" id="filter1" class="zMulti" items="{
+<mvc:View
+    xmlns:u="sap.ui.unified"
+    xmlns:core="sap.ui.core"
+    xmlns:l="sap.ui.layout"
+    xmlns:custom="http://schemas.sap.com/sapui5/extension/sap.ui.core.CustomData/1"
+    xmlns:commons="sap.ui.commons"
+    xmlns:mvc="sap.ui.core.mvc"
+    xmlns="sap.m"
+    xmlns:f="sap.ui.layout.form"
+    controllerName="zprelimdoc.controller.Doc"
+    xmlns:html="http://www.w3.org/1999/xhtml"
+>
+    <Panel headerText="Dokumente" id="docPanel" height="auto">
+        <headerToolbar>
+            <OverflowToolbar width="100%" id="tlbar1">
+                <content>
+                    <Button text="{i18n>btnBack}" type="Back" width="100px" id="btnBack" press="onBack" />
+                    <Button text="{i18n>btnProfileMaint}" id="btnProfile" enabled="{meta>/Active}" press="onProfileClick" icon="sap-icon://personnel-view" />
+                    <ToggleButton id="idFiltersOn" icon="sap-icon://filter" text="{i18n>lblFilterButton}" press="setFiltersOn" />
+                    <ToggleButton id="idCheckboxFilters" icon="sap-icon://sys-enter" text="{i18n>lblCheckBoxFilter}" pressed="{path:'meta>/Checkboxes', formatter:'.formatter.fnCheckedButton'}" press="setCheckFilters" />
+                    <ToolbarSpacer id="_IDGenToolbarSpacer1" />
+                    <Label id="_IDGenLabel1a" text="{path: 'DocList>/results/1/Vbeln', formatter:'.formatter.fnRemoveZeros'}" />
+                    <Label id="_IDGenLabel2a" text="/" visible="{path:'DocList>/results/1/Posnr', formatter:'.formatter.fnNoAllZeros'}" />
+                    <Label id="_IDGenLabel3a" text="{path: 'DocList>/results/1/Posnr', formatter:'.formatter.fnRemoveZeros'}" visible="{path:'DocList>/results/1/Posnr',formatter:'.formatter.fnNoAllZeros'}" />
+                    <Label id="_IDGenLabel4" text="{path:'meta>/Profile',formatter:'.formatter.fnProfile'}" />
+                    <ToolbarSpacer id="_IDGenToolbarSpacer2" />
+                    <Button text="{i18n>btnComplete}" id="btnComplete" enabled="{meta>/Active}" press="onComplete" icon="sap-icon://complete" />
+                    <Button text="{i18n>btnSave}" id="btnSave" enabled="{meta>/Active}" press="onSave" icon="sap-icon://save" />
+					<Button id="_IDGenButton1" icon="sap-icon://message-popup" text="{msgModel>/messagesLength}" type="Emphasized" press="handleMessagePopoverPress" />
+                    <ToolbarSpacer id="_IDGenToolbarSpacer3" />
+                </content>
+            </OverflowToolbar>
+
+        </headerToolbar>
+    </Panel>
+    <SplitContainer id="SplitContDemo" initialDetail="detail" initialMaster="master">
+        <detailPages>
+            <!-- <Page id="detail" title="Detail 1" backgroundDesign="Solid" showNavButton="{= !${device>/system/desktop} }" navButtonPress=".onPressDetailBack">
+                <Label text="Detail page 1" class="sapUiTinyMarginEnd" />
+                <Button text="Go to Detail page 2" press=".onPressNavToDetail" />
+            </Page> -->
+            <!-- <Page id="detailDetail" title="Detail Detail" backgroundDesign="Solid" showNavButton="true" navButtonPress=".onPressDetailBack">
+                <VBox class="sapUiSmallMargin">
+                    <Label text="This is Detail Page 2" />
+                    <Text text="Here you could change the Split Application mode. After the mode change, resize the browser window to see the difference in the master form behaviour." />
+                    <RadioButtonGroup columns="1" width="500px" class="sapUiMediumMarginBottom" select=".onPressModeBtn">
+                        <buttons>
+                            <RadioButton id="RB1-1" text="show/hide" selected="true" custom:splitAppMode="ShowHideMode" />
+                            <RadioButton id="RB1-2" text="stretch/compress" custom:splitAppMode="StretchCompressMode" />
+                            <RadioButton id="RB1-3" text="hide" custom:splitAppMode="HideMode" />
+                            <RadioButton id="RB1-4" text="popover" custom:splitAppMode="PopoverMode" />
+                        </buttons>
+                    </RadioButtonGroup>
+                </VBox>
+            </Page> -->
+            <mvc:XMLView id="idDocDetail" viewName="zprelimdoc.view.DocDetail" height="100%" />
+        </detailPages>
+        <masterPages>
+            <l:VerticalLayout id="_IDGenVerticalLayout1d">
+                <l:content>
+                    <f:SimpleForm id="filterform1" visible="false" class="sapUiNoMargin zFilter">
+                        <l:HorizontalLayout id="_IDGenHorizontalLayout1">
+                            <core:Icon id="_IDGenIcon1" size="24px" src="sap-icon://filter" />
+                            <MultiComboBox width="190px" id="filter1" class="zMulti" items="{
 						           path: 'filterModel>/DomainValuesSet',
 						           filters: [ { path: 'Fieldname', operator: 'EQ', value1: 'KwGroup1' } ]
 						  }" selectionChange="onFilter1">
-						  <core:ListItem id="_IDGenListItem1" key="{filterModel>Value}" text="{filterModel>Text}"></core:ListItem>
-						  </MultiComboBox>
-						  </l:HorizontalLayout>
-<!-- 						  <l:HorizontalLayout> -->
-<!-- 						  <core:Icon size="24px" src="sap-icon://filter"> -->
-<!-- 						  </core:Icon> -->
-<!-- 						  <MulticomboBox id="filter2"></MulticomboBox> -->
-<!-- 						  </l:HorizontalLayout> -->
-						  </f:SimpleForm>
-						  <f:SimpleForm id="filterform2" visible="false" class="sapUiNoMargin zFilter">
-						  <l:HorizontalLayout id="_IDGenHorizontalLayout2">
-						  <core:Icon id="_IDGenIcon2" size="24px" src="sap-icon://filter">
-						  </core:Icon>
-						  <MultiComboBox width="190px" id="filter2" class="zMulti" items="{
+                                <core:ListItem id="_IDGenListItem1" key="{filterModel>Value}" text="{filterModel>Text}" />
+                            </MultiComboBox>
+                        </l:HorizontalLayout>
+                        <!-- 						  <l:HorizontalLayout> -->
+                        <!-- 						  <core:Icon size="24px" src="sap-icon://filter"> -->
+                        <!-- 						  </core:Icon> -->
+                        <!-- 						  <MulticomboBox id="filter2"></MulticomboBox> -->
+                        <!-- 						  </l:HorizontalLayout> -->
+                    </f:SimpleForm>
+                    <f:SimpleForm id="filterform2" visible="false" class="sapUiNoMargin zFilter">
+                        <l:HorizontalLayout id="_IDGenHorizontalLayout2">
+                            <core:Icon id="_IDGenIcon2" size="24px" src="sap-icon://filter" />
+                            <MultiComboBox width="190px" id="filter2" class="zMulti" items="{
 						         path: 'filterModel>/DomainValuesSet',
 						         filters: [{ path: 'Fieldname', operator: 'EQ', value1: 'KwGroup2' }]
 						  }" selectionChange="onFilter1">
-						  <core:ListItem id="_IDGenListItem2" key="{filterModel>Value}" text="{filterModel>Text}">
-						  </core:ListItem>
-						  </MultiComboBox>
-						  </l:HorizontalLayout>
-						  </f:SimpleForm>
-<!-- 						  <Panel> -->
-<!-- 						  <content> -->
-<!-- 						    <f:Form> -->
-<!-- 						    <f:formContainers> -->
-<!-- 						    <f:formContainer> -->
-<!-- 						    <f:formElements> -->
-<!-- 						    <f:formElement> -->
-<!-- 						    <core:Icon src="sap-icon://filter"></core:Icon> -->
-<!-- 						    <f:fields> -->
-<!-- 						    <MultiComboBox id="filter1"> -->
-<!-- 						    </MultiComboBox> -->
-<!-- 						    </f:fields> -->
-<!-- 						    </f:formElement> -->
-<!-- 						    </f:formElements> -->
-<!-- 						    </f:formContainer> -->
-<!-- 						    </f:formContainers> -->
-<!-- 						    </f:Form>	 -->
-<!-- 						    </content>	 -->
-<!-- 						    </Panel>				    				     -->
-							<List id="list" items="{DocList>/results}" noDataText=""
-								mode="SingleSelectMaster" growing="true" growingScrollToLoad="true"
-								growingThreshold="999" selectionChange="OnListItemPressed"
-								updateFinished="onUpdateFinished">
-								<infoToolbar>
-									<Toolbar active="true" id="filterBar" visible="true"
-										press="onOpenViewSettings">
-										<Title id="filterBarLabel" text="Dokumente" />
-									</Toolbar>
-								</infoToolbar>
-								<CustomListItem id="listItem" type="Inactive">
-									<CheckBox id="_IDGenCheckBox1" visible="{path: 'DocList>Selectable', formatter: '.formatter.fnSelectableFormatter'}" select="onCheckboxChange"
-									    text=" "
-									    enabled="{meta>/Active}"
-										selected="{path: 'DocList>DcSelected', formatter: '.formatter.fnCheckDcOptFormatter'}" />
-									<ToggleButton id="_IDGenToggleButton1" visible="{path: 'DocList>Selectable', formatter: '.formatter.fnSelectableFormatter'}"
-										enabled="{parts: [{path: 'DocList>DcOption'}, {path: 'meta>/Active'},{path: 'DocList>DcSelected'}], formatter: '.formatter.fnToggleFlgFormatter'}"
-										text="{path: 'DocList>DcOption', formatter: '.formatter.fnToggleTextFormatter'}"
-										pressed="{path: 'DocList>DcOption', formatter: '.formatter.fnSwitchDcOptFormatter'}"
-										press="onTogglePress">
-										<layoutData>
-											<FlexItemData id="_IDGenFlexItemData1" growFactor="1" />
-										</layoutData>
-									</ToggleButton>
-									<HBox id="_IDGenHBox1" width="100%" alignItems="End" class="sapUiTinyMarginBegin">
-									  <items>
-									    <Text id="_IDGenText1" visible="{path: 'DocList>Selectable', formatter: '.formatter.fnSelectableFormatter'}" text="{path: 'DocList>DocContent', formatter: '.formatter.fnDocContentFormatter'}" />	
-									  </items>
-									</HBox>	
-									<Label id="_IDGenLabel5" text="{DocList>DcDescr}" visible="{path: 'DocList>Selectable', formatter: '.formatter.fnSelectableFormatter'}" width="260px" class="sapUiTinyMarginBegin" />
+                                <core:ListItem id="_IDGenListItem2" key="{filterModel>Value}" text="{filterModel>Text}" />
+                            </MultiComboBox>
+                        </l:HorizontalLayout>
+                    </f:SimpleForm>
+                    <List id="list" items="{DocList>/results}" noDataText="" mode="SingleSelectMaster" growing="true" growingScrollToLoad="true" growingThreshold="999" selectionChange="OnListItemPressed" updateFinished="onUpdateFinished">
+                        <infoToolbar>
+                            <Toolbar active="true" id="filterBar" visible="true" press="onOpenViewSettings">
+                                <Title id="filterBarLabel" text="Dokumente" />
+                            </Toolbar>
+                        </infoToolbar>
+                        <CustomListItem id="listItem" type="Inactive">
+                            <CheckBox id="_IDGenCheckBox1" visible="{path: 'DocList>Selectable', formatter: '.formatter.fnSelectableFormatter'}" select="onCheckboxChange" text=" " enabled="{meta>/Active}" selected="{path: 'DocList>DcSelected', formatter: '.formatter.fnCheckDcOptFormatter'}" />
+                            <ToggleButton
+                                id="_IDGenToggleButton1"
+                                visible="{path: 'DocList>Selectable', formatter: '.formatter.fnSelectableFormatter'}"
+                                enabled="{parts: [{path: 'DocList>DcOption'}, {path: 'meta>/Active'},{path: 'DocList>DcSelected'}], formatter: '.formatter.fnToggleFlgFormatter'}"
+                                text="{path: 'DocList>DcOption', formatter: '.formatter.fnToggleTextFormatter'}"
+                                pressed="{path: 'DocList>DcOption', formatter: '.formatter.fnSwitchDcOptFormatter'}"
+                                press="onTogglePress"
+                            >
+                                <layoutData>
+                                    <FlexItemData id="_IDGenFlexItemData1" growFactor="1" />
+                                </layoutData>
+                            </ToggleButton>
+                            <HBox id="_IDGenHBox1d" width="100%" alignItems="End" class="sapUiTinyMarginBegin">
+                                <items>
+                                    <Text id="_IDGenText1d" visible="{path: 'DocList>Selectable', formatter: '.formatter.fnSelectableFormatter'}" text="{path: 'DocList>DocContent', formatter: '.formatter.fnDocContentFormatter'}" />
+                                </items>
+                            </HBox>
+                            <Label id="_IDGenLabel5d" text="{DocList>DcDescr}" visible="{path: 'DocList>Selectable', formatter: '.formatter.fnSelectableFormatter'}" width="260px" class="sapUiTinyMarginBegin" />
 
-									<Text id="_IDGenText2" text="{DocList>DcDescr}" visible="{path: 'DocList>Selectable', formatter: '.formatter.fnNonSelectableFormatter'}"
-										class="sapUiResponsiveMargin sapThemeBaseBG" />
-								</CustomListItem>
-							</List>
-						  </l:content>
-						 </l:VerticalLayout>
-						</u:secondaryContent>
-						<u:content>
-							<mvc:XMLView id="idDocDetail" viewName="zprelimdoc.view.DocDetail" />
-						</u:content>
-					</u:SplitContainer>
-				</content>
-			</Panel>
-		</content>
-		<footer>
-		 <Toolbar id="bottomToolbar">
-		 <Button id="_IDGenButton1" icon="sap-icon://message-popup" text="{msgModel>/messagesLength}"
-		 type="Emphasized" press="handleMessagePopoverPress" />
-		 <ToolbarSpacer id="_IDGenToolbarSpacer3" />
-		 </Toolbar>
-		</footer>
-	</Page>
+                            <Text id="_IDGenText2d" text="{DocList>DcDescr}" visible="{path: 'DocList>Selectable', formatter: '.formatter.fnNonSelectableFormatter'}" class="sapUiResponsiveMargin sapThemeBaseBG" />
+                        </CustomListItem>
+                    </List>
+                </l:content>
+            </l:VerticalLayout>
+        </masterPages>
+    </SplitContainer>
+    <Panel id="docPanel2" height="auto">
+        <headerToolbar>
+
+        </headerToolbar>
+    </Panel>
 </mvc:View>

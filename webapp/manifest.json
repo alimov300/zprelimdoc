@@ -1,5 +1,5 @@
 {
-  "_version": "1.17.0",
+  "_version": "1.49.0",
   "sap.app": {
     "id": "zprelimdoc",
     "type": "application",
@@ -12,8 +12,8 @@
     "resources": "resources.json",
     "sourceTemplate": {
       "id": "@sap/generator-fiori:basic",
-      "version": "1.8.5",
-      "toolsId": "ffc22cde-e48c-4ce3-8339-76f753e4cb41"
+      "version": "1.9.0",
+      "toolsId": "13e3591b-b3bb-4df8-bd09-edbebb3c2bb4"
     },
     "dataSources": {
       "mainService": {
@@ -53,7 +53,7 @@
     }
   },
   "sap.ui5": {
-    "flexEnabled": true,
+    "flexEnabled": false,
     "dependencies": {
       "minUI5Version": "1.71.50",
       "libs": {
@@ -94,50 +94,58 @@
         {
           "uri": "css/style.css"
         }
-      ],
-      "js": [
-				{
-            		"uri": "utils/lang.js"
-        },
- 				{
-            		"uri": "utils/utils.js"
-        }
-        ]
+      ]
     },
     "routing": {
       "config": {
         "routerClass": "sap.m.routing.Router",
+        "type": "View",
         "viewType": "XML",
         "async": true,
-        "viewPath": "zprelimdoc.view",
+        "path": "zprelimdoc.view",
         "controlAggregation": "pages",
         "controlId": "app",
-        "clearControlAggregation": false
+        "bypassed": {
+          "target": "notFound"
+        },
+        "transition": "slide"
       },
       "routes": [
         {
-          "name": "RouteApp",
-          "pattern": ":?query:",
-          "target": [
-            "TargetApp"
-          ]
+          "name": "appHome",
+          "pattern": "",
+          "target": "home"
+        },
+        {
+          "pattern": "employees",
+          "name": "employeeList",
+          "target": "employees"
         }
       ],
       "targets": {
-        "TargetApp": {
-          "viewType": "XML",
-          "transition": "slide",
-          "clearControlAggregation": false,
-          "viewId": "App",
-          "viewName": "App"
-        }
+        "notFound": {
+          "id": "notFound",
+          "name": "NotFound",
+          "transition": "show"
+        },
+        "home": {
+          "id": "home",
+          "name": "SD",
+          "level": 1
+        },
+        "employees": {
+					"id": "employeeList",
+					"path": "zprelimdoc.view",
+					"name": "Doc",
+					"level" : 2
+				}
       }
     },
     "rootView": {
       "viewName": "zprelimdoc.view.App",
       "type": "XML",
       "async": true,
-      "id": "App"
+      "id": "app"
     }
   }
 }

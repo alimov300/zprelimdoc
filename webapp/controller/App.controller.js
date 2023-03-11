@@ -1,9 +1,9 @@
 sap.ui.define([
-	"sap/ui/core/mvc/Controller"
-], function(Controller) {
+	"../controller/BaseController",
+], function(BaseController) {
 	"use strict";
 
-	return Controller.extend("zprelimdoc.controller.App", {
+	return BaseController.extend("zprelimdoc.controller.App", {
 
 		/**
 		 * Called when a controller is instantiated and its View controls (if available) are already created.
@@ -40,11 +40,16 @@ sap.ui.define([
 		    var oModel = that.app.getModel();
 //		    var dModel = sap.ui.getCore().getModel("DStore");
 //		    dModel.setData({ "docList": [], "changedDocs": [] });
-		    that.app.to(that.getView().createId("idDoc"), "slide" ,data.data);
+		    
+			//this.getRouter().navTo("doc");
+			this.getRouter().navTo("employeeList");
+			//that.app.to(that.getView().createId("idDoc"), "slide" ,data.data);
 		},	
 
 		navBack: function() {
-		    this.app.back(null, {transitionName: "door"});
+
+			this.onNavBack();
+
 		},
 		
 

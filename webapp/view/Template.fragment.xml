@@ -4,9 +4,9 @@
    xmlns:l="sap.ui.layout"
    xmlns:core="sap.ui.core" >
    <Dialog id="dlgTemplate" title="{i18n>cptTemplate}">
-      <l:VerticalLayout id="_IDGenVerticalLayout1" class="sapUiContentPadding" width="100%">
+      <l:VerticalLayout id="_IDGenVerticalLayout1t" class="sapUiContentPadding" width="100%">
         <l:content>
-          <Label id="_IDGenLabel1" text="{i18n>lblOrderNum}" labelFor="fldDocument"/>
+          <Label id="_IDGenLabel1t" text="{i18n>lblOrderNum}" labelFor="fldDocument"/>
           <Input id="fldDocument" class="sapUiSmallMarginBottom" maxLength="30" change="onTemplateDialogSend"/>
         </l:content>
         <l:content>
@@ -18,13 +18,13 @@
                         <Table id="listTemplates" class="sapUiResponsiveMargin" width="auto">															
 							  <columns>
 								<Column id="_IDGenColumn1" width="20%">					
-								<Text id="_IDGenText1" />				
+								<Text id="_IDGenText1t" />				
 								</Column>								
 								<Column id="_IDGenColumn2">
-								<Text id="_IDGenText2" />
+								<Text id="_IDGenText2t" />
 								</Column>
 								<Column id="_IDGenColumn3">
-								<Text id="_IDGenText3" />
+								<Text id="_IDGenText3t" />
 								</Column>
 							  </columns>
 							<items>
