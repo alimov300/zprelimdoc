@@ -15,9 +15,159 @@
                             selectionChange="runValidate"
                             items="{
                                     path : 'meta>/DomainValuesSet',
-                                    filters : [ { path : 'Fieldname', operator : 'EQ', value1 : 'SddcStatus'} ] }" >
+                                    filters : [ { path : 'Fieldname', operator : 'EQ', value1 : 'SddcStatus'} ] }"
+                        >
                             <core:ListItem key="{meta>Value}" text="{meta>Text}" />
                         </ComboBox>
+                    </l2:Grid>
+                    <l2:Grid containerQuery="true" hSpacing="0" defaultSpan="XL3 L3 M3 S3">
+                        <Label text="{i18n>lblDokar}" class="sapUiResponsiveMargin" labelFor="cmbDokart" />
+                        <ComboBox
+                            id="cmbDokart"
+                            selectedKey="{/Dokar}"
+                            selectionChange="runValidate"
+                            enabled="{/Active}"
+                            valueState="{parts: [{path: '/Active'},{path: '/Status2'}], formatter: '.formatter.fnUiStatus'}"
+                            items="{
+                   path : 'meta>/DomainValuesSet',
+                             filters : [ { path : 'Fieldname', operator : 'EQ', value1 : 'Dokar'} ] }"
+                        >
+                            <core:ListItem key="{meta>Value}" text="{meta>Value} - {meta>Text}" />
+                        </ComboBox>
+
+                        <Label text="{i18n>lblPlansCre}" class="sapUiResponsiveMargin" labelFor="cmbPlansCre" />
+                        <ComboBox
+                            id="cmbPlansCre"
+                            selectedKey="{/PlansCre}"
+                            enabled="{/Active}"
+                            valueState="{parts: [{path: '/Active'},{path: '/Status3'}], formatter: '.formatter.fnUiStatus'}"
+                            selectionChange="runValidate"
+                            items="{
+                   path : 'meta>/DomainValuesSet',
+                             filters : [ { path : 'Fieldname', operator : 'EQ', value1 : 'PlanPos'} ] }"
+                        >
+                            <core:ListItem key="{meta>Value}" text="{meta>Text}" />
+                        </ComboBox>
+                    </l2:Grid>
+                    <l2:Grid containerQuery="true" hSpacing="0" defaultSpan="XL3 L3 M3 S3">
+                        <Label text="{i18n>lblPrelimDate}" class="sapUiResponsiveMargin" labelFor="fldPrelimDate" />
+                        <DatePicker
+                            id="fldPrelimDate"
+                            enabled="{/Active}"
+                            change="runValidate"
+                            valueState="{parts: [{path: '/Active'},{path: '/Status4'}], formatter: '.formatter.fnUiStatus'}"
+                            valueFormat="yyyyMMdd"
+                            displayFormat="dd.MM.yyyy"
+                            value="{path:'/PrelimDate',
+                valueFormat:'yyyyMMdd', type:'sap.ui.model.type.Date',
+                 formatOptions: { style: 'medium',
+                 source: {pattern: 'yyyy-MM-ddTHH:mm:ss.SSSZ'},
+                 strictParsing: true}}"
+                        />
+                        <Label text="{i18n>lblPlansIfs}" class="sapUiResponsiveMargin" labelFor="cmbPlansIfs" />
+                        <ComboBox
+                            id="cmbPlansIfs"
+                            selectedKey="{/PlansIfs}"
+                            valueState="{parts: [{path: '/Active'},{path: '/Status5'}], formatter: '.formatter.fnUiStatus'}"
+                            enabled="{/Active}"
+                            selectionChange="runValidate"
+                            items="{
+                   path : 'meta>/DomainValuesSet',
+                             filters : [ { path : 'Fieldname', operator : 'EQ', value1 : 'PlanPos'} ] }"
+                        >
+                            <core:ListItem key="{meta>Value}" text="{meta>Text}" />
+                        </ComboBox>
+                    </l2:Grid>
+                    <l2:Grid containerQuery="true" hSpacing="0" defaultSpan="XL3 L3 M3 S3" />
+                    <l2:Grid containerQuery="true" hSpacing="0" defaultSpan="XL3 L3 M3 S3">
+                        <Label text="{i18n>lblFinalDate}" class="sapUiResponsiveMargin" labelFor="fldFinalDate" />
+                        <DatePicker
+                            id="fldFinalDate"
+                            enabled="{path: '/Active'}"
+                            change="runValidate"
+                            valueFormat="yyyyMMdd"
+                            displayFormat="dd.MM.yyyy"
+                            valueState="{parts: [{path: '/Active'},{path: '/Status6'}], formatter: '.formatter.fnUiStatus'}"
+                            value="{path:'/FinalDate',
+                 valueFormat:'yyyyMMdd',
+                 type:'sap.ui.model.type.Date',
+                 formatOptions: { style: 'medium',
+                 source: {pattern: 'yyyy-MM-ddTHH:mm:ss.SSSZ'},
+                 strictParsing: true}}"
+                        />
+                        <Label text="{i18n>lblPlansEfs}" class="sapUiResponsiveMargin" labelFor="cmbPlansEfs" />
+                        <ComboBox
+                            id="cmbPlansEfs"
+                            selectedKey="{/PlansEfs}"
+                            enabled="false"
+                            selectionChange="runValidate"
+                            valueState="{parts: [{path: '/Active'},{path: '/Status7'}], formatter: '.formatter.fnUiStatus'}"
+                            items="{
+                   path : 'meta>/DomainValuesSet',
+                             filters : [ { path : 'Fieldname', operator : 'EQ', value1 : 'PlanPos'} ] }"
+                        >
+                            <core:ListItem key="{meta>Value}" text="{meta>Text}" />
+                        </ComboBox>
+                    </l2:Grid>
+                    <l2:Grid containerQuery="true" hSpacing="0" defaultSpan="XL3 L3 M3 S3">
+                        <Label text="{i18n>lblCustDocNo}" class="sapUiResponsiveMargin" labelFor="fldCustDocNo" />
+                        <Input id="fldCustDocNo" enabled="{/Active}" maxLength="255" valueState="{parts: [{path: '/Active'},{path: '/Status8'}], formatter: '.formatter.fnUiStatus'}" value="{/CustomerDocno}" />
+                        <Label text="{i18n>lblPenal}" class="sapUiResponsiveMargin" labelFor="cmbPenal" />
+                        <ComboBox
+                            id="cmbPenal"
+                            selectedKey="{/Penal}"
+                            enabled="{/Active}"
+                            selectionChange="runValidate"
+                            valueState="{parts: [{path: '/Active'},{path: '/Status9'}], formatter: '.formatter.fnUiStatus'}"
+                            items="{
+                   path : 'meta>/DomainValuesSet',
+                             filters : [ { path : 'Fieldname', operator : 'EQ', value1 : 'Penal'} ] }"
+                        >
+                            <core:ListItem key="{meta>Value}" text="{meta>Text}" />
+                        </ComboBox>
+                    </l2:Grid>
+                    <l2:Grid containerQuery="true" hSpacing="0" defaultSpan="XL6 L6 M6 S6">
+                        <Label text="{i18n>lblComment}" class="sapUiResponsiveMargin" labelFor="fldComment" />
+                        <TextArea id="fldComment" enabled="{/Active}" liveChange="runValidate" valueState="{parts: [{path: '/Active'},{path: '/Status10'}], formatter: '.formatter.fnUiStatus'}" value="{/DcComment}" width="100%" />
+                    </l2:Grid>
+                    <l2:Grid containerQuery="true" hSpacing="0" defaultSpan="XL12 L12 M12 S12">
+                        <Table noDataText="No Profiles" id="Profiles">
+                            <items>
+                                <ColumnListItem type="Active" id="item0">
+                                    <cells>
+                                        <ComboBox enabled="{/Active}" xmlns="sap.m" id="cmbProfile1" selectedKey="{/SDDocCont_TemplSet/results/0/Template}" items="{path: 'templ1data>/results'}">
+                                            <core:Item key="{templ1data>Template}" text="{templ1data>TemplDescr}" />
+                                        </ComboBox>
+                                        <ComboBox enabled="{/Active}" xmlns="sap.m" id="cmbProfile2" selectedKey="{/SDDocCont_TemplSet/results/1/Template}" items="{path: 'templ2data>/results'}">
+                                            <core:Item key="{templ2data>Template}" text="{templ2data>TemplDescr}" />
+                                        </ComboBox>
+                                        <ComboBox enabled="{/Active}" xmlns="sap.m" id="cmbProfile3" selectedKey="{/SDDocCont_TemplSet/results/2/Template}" items="{path: 'templ3data>/results'}">
+                                            <core:Item key="{templ3data>Template}" text="{templ3data>TemplDescr}" />
+                                        </ComboBox>
+                                        <Text text="stext0" id="text0" />
+                                        <Text text="stext1" id="text1" />
+                                        <Text text="stext2" id="text2" />
+                                    </cells>
+                                </ColumnListItem>
+                            </items>
+                            <columns>
+                                <Column id="column0">
+                                    <header>
+                                        <Label text="{templateModel>/0/Title}" id="label0" />
+                                    </header>
+                                </Column>
+                                <Column id="column1">
+                                    <header>
+                                        <Label text="{templateModel>/1/Title}" id="label1" />
+                                    </header>
+                                </Column>
+                                <Column id="column2">
+                                    <header>
+                                        <Label text="{templateModel>/2/Title}" id="label2" />
+                                    </header>
+                                </Column>
+                            </columns>
+                        </Table>
                     </l2:Grid>
                 </l2:VerticalLayout>
 

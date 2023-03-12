@@ -82,6 +82,8 @@ sap.ui.define([
       this.oDialog = sap.ui.xmlfragment(this.getView().getId(), "zprelimdoc.view.Profile");
       this.getView().addDependent(this.oDialog);
 
+      this.getOwnerComponent().getRouter().getRoute("employeeList").attachPatternMatched(this._onRouteMatched, this);
+
 
       this.getView().addEventDelegate({
         onBeforeShow: function (evt) {
@@ -109,6 +111,11 @@ sap.ui.define([
 
       oBus.subscribe("msg", "display", this.onDisplayMsg, this);
     },
+
+    _onRouteMatched :  function(oEvent) {
+
+      this._orderId = oEvent.getParameter("arguments").orderId;
+		},
 
     onBeforeShowHandler: function (oParams) {
 
@@ -204,16 +211,16 @@ sap.ui.define([
 
               that.getOwnerComponent().getModel("DocList").setData(emptyArr);
               var oList = that.getView().byId("list");
-              //if(!oList.getAggregation("items")){
-              //  oList.bindItems("DocList>/results", that.getView().byId("listItem"));
-              //}
-              //that.getOwnerComponent().getModel("DocList").updateBindings(true);
-              //that.getView().byId("list").refreshItems();
+              if(!oList.getAggregation("items")){
+                oList.bindItems("DocList>/results", that.getView().byId("listItem"));
+              }
+              that.getOwnerComponent().getModel("DocList").updateBindings(true);
+              that.getView().byId("list").refreshItems();
               that.getView().byId("docPanel").setHeight("100%");
 
-              //if(!that.Noinit){
-              //  that.readLangInfo(rModel, that);
-              //}
+              if(!that.Noinit){
+                that.readLangInfo(rModel, that);
+              }
               if (fn) {
                 fn.call(that, { skipCheck: true });
               }
@@ -231,16 +238,16 @@ sap.ui.define([
                   },
 
                   success: function (oData, Resp) {
-                    //that.getView().getModel().setData(oData);
-                    //that.getOwnerComponent().getModel("DocList").setData({});
+                    that.getView().getModel().setData(oData);
+                    that.getOwnerComponent().getModel("DocList").setData({});
                     that.getOwnerComponent().getModel("DocList").setData(oData);
                     var oList = that.getView().byId("list");
                     if (!oList.getAggregation("items")) {
                       oList.bindItems("DocList>/results", that.getView().byId("listItem"));
                     }
-                    //that.getOwnerComponent().getModel("DocList").updateBindings(true);
-                    //that.getView().byId("list").refreshItems();
-                    that.getView().byId("docPanel").setHeight("100%");
+                    that.getOwnerComponent().getModel("DocList").updateBindings(true);
+                    that.getView().byId("list").refreshItems();
+                    //that.getView().byId("docPanel").setHeight("100%");
 
                     if (!that.Noinit) {
                       that.readLangInfo(rModel, that);
@@ -997,8 +1004,9 @@ sap.ui.define([
               template: oTemplate
             });
 
-            //              var listControl = that.getView().byId("list");
-            //              var aItems = listControl.getItems();
+                          var listControl = that.getView().byId("list");
+                          var aItems = listControl.getItems();
+                          debugger;
             //              var firstItem;
             //
             //              if(aItems.length == 0){

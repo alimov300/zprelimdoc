@@ -42,7 +42,7 @@ sap.ui.define([
 //		    dModel.setData({ "docList": [], "changedDocs": [] });
 		    
 			//this.getRouter().navTo("doc");
-			this.getRouter().navTo("employeeList");
+			this.getRouter().navTo("employeeList",{Vbeln: data.data.Vbeln, Posnr: data.data.Posnr, Docstat: data.data.Docstat});
 			//that.app.to(that.getView().createId("idDoc"), "slide" ,data.data);
 		},	
 

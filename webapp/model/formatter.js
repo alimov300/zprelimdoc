@@ -204,8 +204,9 @@ sap.ui.define([], function () {
         },
         fnToggleTextFormatter : function(oDcOption, oField){
         	
-        	var oBundle = sap.ui.getCore().getModel("i18n").getResourceBundle();
-        	
+        	//var oBundle = sap.ui.getCore().getModel("i18n").getResourceBundle();
+        	var oBundle = this.getView().getModel("i18n").getResourceBundle();
+
         	if(+oDcOption <= 1){
         		return oBundle.getText("optStandard");
         	}else{

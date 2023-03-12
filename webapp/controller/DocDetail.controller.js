@@ -1179,6 +1179,7 @@ sap.ui.define([
     },
 
     resetFormLayout: function () {
+      try{
       var cmb = this.getView().byId("cmbDokart");
       cmb.setValueState(sap.ui.core.ValueState.None);
 
@@ -1188,6 +1189,7 @@ sap.ui.define([
       oCmbSddcStatus.setValueState(sap.ui.core.ValueState.None);
       var cmbFreiStelle = this.getView().byId("cmbPlansEfs");
       cmbFreiStelle.setValueState(sap.ui.core.ValueState.None);
+      } catch(e){}
 
     },
 

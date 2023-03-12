@@ -9,6 +9,7 @@
     xmlns:f="sap.ui.layout.form"
     controllerName="zprelimdoc.controller.Doc"
     xmlns:html="http://www.w3.org/1999/xhtml"
+	id="idDoc"
 >
     <Panel headerText="Dokumente" id="docPanel" height="auto">
         <headerToolbar>
@@ -33,7 +34,7 @@
 
         </headerToolbar>
     </Panel>
-    <SplitContainer id="SplitContDemo" initialDetail="detail" initialMaster="master">
+    <SplitContainer id="SplitContDemo" initialDetail="idDocDetail" initialMaster="_IDGenVerticalLayout1dPage">
         <detailPages>
             <!-- <Page id="detail" title="Detail 1" backgroundDesign="Solid" showNavButton="{= !${device>/system/desktop} }" navButtonPress=".onPressDetailBack">
                 <Label text="Detail page 1" class="sapUiTinyMarginEnd" />
@@ -56,6 +57,7 @@
             <mvc:XMLView id="idDocDetail" viewName="zprelimdoc.view.DocDetail" height="100%" />
         </detailPages>
         <masterPages>
+			<Page id="_IDGenVerticalLayout1dPage">
             <l:VerticalLayout id="_IDGenVerticalLayout1d">
                 <l:content>
                     <f:SimpleForm id="filterform1" visible="false" class="sapUiNoMargin zFilter">
@@ -68,11 +70,6 @@
                                 <core:ListItem id="_IDGenListItem1" key="{filterModel>Value}" text="{filterModel>Text}" />
                             </MultiComboBox>
                         </l:HorizontalLayout>
-                        <!-- 						  <l:HorizontalLayout> -->
-                        <!-- 						  <core:Icon size="24px" src="sap-icon://filter"> -->
-                        <!-- 						  </core:Icon> -->
-                        <!-- 						  <MulticomboBox id="filter2"></MulticomboBox> -->
-                        <!-- 						  </l:HorizontalLayout> -->
                     </f:SimpleForm>
                     <f:SimpleForm id="filterform2" visible="false" class="sapUiNoMargin zFilter">
                         <l:HorizontalLayout id="_IDGenHorizontalLayout2">
@@ -117,6 +114,7 @@
                     </List>
                 </l:content>
             </l:VerticalLayout>
+			</Page>
         </masterPages>
     </SplitContainer>
     <Panel id="docPanel2" height="auto">
