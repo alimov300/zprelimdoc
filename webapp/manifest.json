@@ -120,9 +120,9 @@
           "target": "home"
         },
         {
-          "pattern": "employees/vbeln/:Vbeln:/posnr/:Posnr:/docstat/:Docstat:",
-          "name": "employeeList",
-          "target": "employees"
+          "pattern": "documents/vbeln/:Vbeln:/posnr/:Posnr:/docstat/:Docstat:",
+          "name": "docList",
+          "target": "documents"
         }
       ],
       "targets": {
@@ -136,8 +136,8 @@
           "name": "SD",
           "level": 1
         },
-        "employees": {
-					"id": "employeeList",
+        "documents": {
+					"id": "docList",
 					"path": "zprelimdoc.view",
 					"name": "Doc",
 					"level" : 2

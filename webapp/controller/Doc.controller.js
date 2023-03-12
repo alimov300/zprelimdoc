@@ -82,7 +82,7 @@ sap.ui.define([
       this.oDialog = sap.ui.xmlfragment(this.getView().getId(), "zprelimdoc.view.Profile");
       this.getView().addDependent(this.oDialog);
 
-      this.getOwnerComponent().getRouter().getRoute("employeeList").attachPatternMatched(this._onRouteMatched, this);
+      this.getOwnerComponent().getRouter().getRoute("docList").attachPatternMatched(this._onRouteMatched, this);
 
 
       this.getView().addEventDelegate({
