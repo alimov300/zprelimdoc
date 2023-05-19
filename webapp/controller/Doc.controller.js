@@ -87,17 +87,25 @@ sap.ui.define([
 
       this.getView().addEventDelegate({
         onBeforeShow: function (evt) {
-          var oDocstat = evt.data.Docstat;
+          // var oDocstat = evt.data.Docstat;
 
-          if (!oDocstat || oDocstat.length == 0) {
-            that.onProfile({ load: true, save: false, Docstat: evt.data.Docstat, Vbeln: evt.data.Vbeln, Posnr: evt.data.Posnr, initial: true });
-          } else {
-            that.onBeforeShowHandler({ Vbeln: evt.data.Vbeln, Posnr: evt.data.Posnr, Docstat: evt.data.Docstat });
-          }
+          // if (!oDocstat || oDocstat.length == 0) {
+          //   that.onProfile({ load: true, save: false, Docstat: evt.data.Docstat, Vbeln: evt.data.Vbeln, Posnr: evt.data.Posnr, initial: true });
+          // } else {
+          //   that.onBeforeShowHandler({ Vbeln: evt.data.Vbeln, Posnr: evt.data.Posnr, Docstat: evt.data.Docstat });
+          // }
 
 
         },
         onAfterShow: function (evt) {
+
+          // var oDocstat = evt.data.Docstat;
+
+          // if (!oDocstat || oDocstat.length == 0) {
+          //   that.onProfile({ load: true, save: false, Docstat: evt.data.Docstat, Vbeln: evt.data.Vbeln, Posnr: evt.data.Posnr, initial: true });
+          // } else {
+          //   that.onBeforeShowHandler({ Vbeln: evt.data.Vbeln, Posnr: evt.data.Posnr, Docstat: evt.data.Docstat });
+          // }
 
           sap.ui.core.BusyIndicator.hide();
           var oModel = evt.to.getModel();

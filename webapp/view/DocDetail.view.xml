@@ -1,9 +1,148 @@
-<mvc:View xmlns:u="sap.ui.unified" xmlns:core="sap.ui.core" xmlns:commons="sap.ui.commons" xmlns:mvc="sap.ui.core.mvc" xmlns="sap.m" xmlns:l="sap.ui.commons.layout" controllerName="zprelimdoc.controller.DocDetail" xmlns:html="http://www.w3.org/1999/xhtml" xmlns:l2="sap.ui.layout">
+<mvc:View xmlns:u="sap.ui.unified" xmlns:core="sap.ui.core" 
+xmlns:commons="sap.ui.commons" xmlns:mvc="sap.ui.core.mvc" xmlns="sap.m" 
+xmlns:l="sap.ui.commons.layout" xmlns:la="sap.ui.layout" xmlns:laf="sap.ui.layout.form"  
+controllerName="zprelimdoc.controller.DocDetail" xmlns:html="http://www.w3.org/1999/xhtml" xmlns:l2="sap.ui.layout">
     <Label id="_IDGenLabel1dd" class="zPosition" text="{parts: [{path: '/DocContent'}], formatter: '.formatter.fnRemoveNullsExt'}" />
     <IconTabBar id="iconTabBar" class="sapUiResponsiveContentPadding">
         <items>
             <IconTabFilter id="tabGeneral" icon="sap-icon://detail-view" tooltip="{i18n>tabGeneral}">
-                <l2:VerticalLayout width="100%" class="gridWrapper">
+            	<!-- <VBox class="sapUiSmallMargin"> -->
+		<laf:SimpleForm id="SimpleFormDisplay354"
+			editable="false"
+			layout="ResponsiveGridLayout"
+			title="Form"
+			labelSpanXL="6"
+			labelSpanL="6"
+			labelSpanM="6"
+			labelSpanS="12"
+			adjustLabelSpan="true"
+			emptySpanXL="1"
+			emptySpanL="1"
+			emptySpanM="1"
+			emptySpanS="1"
+			columnsXL="6"
+			columnsL="6"
+			columnsM="6"
+			singleContainerFullSize="true" >
+			<laf:content>
+				<Label text="{i18n>lblStatus}" class="" labelFor="cmbSddcStatus" />
+                        <ComboBox
+                            id="cmbSddcStatus"
+                            selectedKey="{/SddcStatus}"
+                            enabled="{/Active}"
+                            valueState="{parts: [{path: '/Active'},{path: '/Status1'}], formatter: '.formatter.fnUiStatus'}"
+                            
+                            selectionChange="runValidate"
+                            items="{
+                                    path : 'meta>/DomainValuesSet',
+                                    filters : [ { path : 'Fieldname', operator : 'EQ', value1 : 'SddcStatus'} ] }"
+                        >
+                            <core:ListItem key="{meta>Value}" text="{meta>Text}" />
+                        </ComboBox>
+				<Label text="{i18n>lblDokar}" class="" labelFor="cmbDokart" />
+                        <ComboBox
+                            id="cmbDokart"
+                            selectedKey="{/Dokar}"
+                            selectionChange="runValidate"
+                            enabled="{/Active}"
+                            valueState="{parts: [{path: '/Active'},{path: '/Status2'}], formatter: '.formatter.fnUiStatus'}"
+                            items="{
+                   path : 'meta>/DomainValuesSet',
+                             filters : [ { path : 'Fieldname', operator : 'EQ', value1 : 'Dokar'} ] }"
+                        >
+                            <core:ListItem key="{meta>Value}" text="{meta>Value} - {meta>Text}" />
+                        </ComboBox>
+				<Label text="{i18n>lblPlansCre}" class="" labelFor="cmbPlansCre" />
+                        <ComboBox
+                            id="cmbPlansCre"
+                            selectedKey="{/PlansCre}"
+                            enabled="{/Active}"
+                            valueState="{parts: [{path: '/Active'},{path: '/Status3'}], formatter: '.formatter.fnUiStatus'}"
+                            selectionChange="runValidate"
+                            items="{
+                   path : 'meta>/DomainValuesSet',
+                             filters : [ { path : 'Fieldname', operator : 'EQ', value1 : 'PlanPos'} ] }"
+                        >
+                            <core:ListItem key="{meta>Value}" text="{meta>Text}" />
+                        </ComboBox>
+				<Label text="{i18n>lblPrelimDate}" class="" labelFor="fldPrelimDate" />
+                        <DatePicker
+                            id="fldPrelimDate"
+                            enabled="{/Active}"
+                            change="runValidate"
+                            valueState="{parts: [{path: '/Active'},{path: '/Status4'}], formatter: '.formatter.fnUiStatus'}"
+                            valueFormat="yyyyMMdd"
+                            displayFormat="dd.MM.yyyy"
+                            value="{path:'/PrelimDate',
+                valueFormat:'yyyyMMdd', type:'sap.ui.model.type.Date',
+                 formatOptions: { style: 'medium',
+                 source: {pattern: 'yyyy-MM-ddTHH:mm:ss.SSSZ'},
+                 strictParsing: true}}"
+                        />
+                        <Label text="{i18n>lblPlansIfs}" class="" labelFor="cmbPlansIfs" />
+                        <ComboBox
+                            id="cmbPlansIfs"
+                            selectedKey="{/PlansIfs}"
+                            valueState="{parts: [{path: '/Active'},{path: '/Status5'}], formatter: '.formatter.fnUiStatus'}"
+                            enabled="{/Active}"
+                            selectionChange="runValidate"
+                            items="{
+                   path : 'meta>/DomainValuesSet',
+                             filters : [ { path : 'Fieldname', operator : 'EQ', value1 : 'PlanPos'} ] }"
+                        >
+                            <core:ListItem key="{meta>Value}" text="{meta>Text}" />
+                        </ComboBox>
+                        <Label text="{i18n>lblFinalDate}" class="" labelFor="fldFinalDate" />
+                        <DatePicker
+                            id="fldFinalDate"
+                            enabled="{path: '/Active'}"
+                            change="runValidate"
+                            valueFormat="yyyyMMdd"
+                            displayFormat="dd.MM.yyyy"
+                            valueState="{parts: [{path: '/Active'},{path: '/Status6'}], formatter: '.formatter.fnUiStatus'}"
+                            value="{path:'/FinalDate',
+                 valueFormat:'yyyyMMdd',
+                 type:'sap.ui.model.type.Date',
+                 formatOptions: { style: 'medium',
+                 source: {pattern: 'yyyy-MM-ddTHH:mm:ss.SSSZ'},
+                 strictParsing: true}}"
+                        />
+                        <Label text="{i18n>lblPlansEfs}" class="" labelFor="cmbPlansEfs" />
+                        <ComboBox
+                            id="cmbPlansEfs"
+                            selectedKey="{/PlansEfs}"
+                            enabled="false"
+                            selectionChange="runValidate"
+                            valueState="{parts: [{path: '/Active'},{path: '/Status7'}], formatter: '.formatter.fnUiStatus'}"
+                            items="{
+                   path : 'meta>/DomainValuesSet',
+                             filters : [ { path : 'Fieldname', operator : 'EQ', value1 : 'PlanPos'} ] }"
+                        >
+                            <core:ListItem key="{meta>Value}" text="{meta>Text}" />
+                        </ComboBox>
+                        <Label text="{i18n>lblCustDocNo}" class="" labelFor="fldCustDocNo" />
+                        <Input id="fldCustDocNo" enabled="{/Active}" maxLength="255" valueState="{parts: [{path: '/Active'},{path: '/Status8'}], formatter: '.formatter.fnUiStatus'}" value="{/CustomerDocno}" />
+                        <Label text="{i18n>lblPenal}" class="" labelFor="cmbPenal" />
+                        <ComboBox
+                            id="cmbPenal"
+                            selectedKey="{/Penal}"
+                            enabled="{/Active}"
+                            selectionChange="runValidate"
+                            valueState="{parts: [{path: '/Active'},{path: '/Status9'}], formatter: '.formatter.fnUiStatus'}"
+                            items="{
+                   path : 'meta>/DomainValuesSet',
+                             filters : [ { path : 'Fieldname', operator : 'EQ', value1 : 'Penal'} ] }"
+                        >
+                            <core:ListItem key="{meta>Value}" text="{meta>Text}" />
+                        </ComboBox>
+                        <Label text="{i18n>lblComment}" class="" labelFor="fldComment" />
+                        <TextArea id="fldComment" enabled="{/Active}" liveChange="runValidate" valueState="{parts: [{path: '/Active'},{path: '/Status10'}], formatter: '.formatter.fnUiStatus'}" value="{/DcComment}" width="100%" />
+
+			</laf:content>
+		</laf:SimpleForm>
+	<!-- </VBox> -->
+                <!-- <l2:VerticalLayout width="100%" class="gridWrapper">
+                
                     <l2:Grid containerQuery="true" hSpacing="0" defaultSpan="XL6 L6 M6 S6">
                         <Label text="{i18n>lblStatus}" class="sapUiResponsiveMargin" labelFor="cmbSddcStatus" />
                         <ComboBox
@@ -18,7 +157,7 @@
                                     filters : [ { path : 'Fieldname', operator : 'EQ', value1 : 'SddcStatus'} ] }"
                         >
                             <core:ListItem key="{meta>Value}" text="{meta>Text}" />
-                        </ComboBox>
+                        </ComboBox>////
                     </l2:Grid>
                     <l2:Grid containerQuery="true" hSpacing="0" defaultSpan="XL3 L3 M3 S3">
                         <Label text="{i18n>lblDokar}" class="sapUiResponsiveMargin" labelFor="cmbDokart" />
@@ -33,7 +172,7 @@
                              filters : [ { path : 'Fieldname', operator : 'EQ', value1 : 'Dokar'} ] }"
                         >
                             <core:ListItem key="{meta>Value}" text="{meta>Value} - {meta>Text}" />
-                        </ComboBox>
+                        </ComboBox>////
 
                         <Label text="{i18n>lblPlansCre}" class="sapUiResponsiveMargin" labelFor="cmbPlansCre" />
                         <ComboBox
@@ -47,7 +186,7 @@
                              filters : [ { path : 'Fieldname', operator : 'EQ', value1 : 'PlanPos'} ] }"
                         >
                             <core:ListItem key="{meta>Value}" text="{meta>Text}" />
-                        </ComboBox>
+                        </ComboBox>////
                     </l2:Grid>
                     <l2:Grid containerQuery="true" hSpacing="0" defaultSpan="XL3 L3 M3 S3">
                         <Label text="{i18n>lblPrelimDate}" class="sapUiResponsiveMargin" labelFor="fldPrelimDate" />
@@ -63,7 +202,7 @@
                  formatOptions: { style: 'medium',
                  source: {pattern: 'yyyy-MM-ddTHH:mm:ss.SSSZ'},
                  strictParsing: true}}"
-                        />
+                        />////
                         <Label text="{i18n>lblPlansIfs}" class="sapUiResponsiveMargin" labelFor="cmbPlansIfs" />
                         <ComboBox
                             id="cmbPlansIfs"
@@ -76,7 +215,7 @@
                              filters : [ { path : 'Fieldname', operator : 'EQ', value1 : 'PlanPos'} ] }"
                         >
                             <core:ListItem key="{meta>Value}" text="{meta>Text}" />
-                        </ComboBox>
+                        </ComboBox>////
                     </l2:Grid>
                     <l2:Grid containerQuery="true" hSpacing="0" defaultSpan="XL3 L3 M3 S3" />
                     <l2:Grid containerQuery="true" hSpacing="0" defaultSpan="XL3 L3 M3 S3">
@@ -107,7 +246,7 @@
                              filters : [ { path : 'Fieldname', operator : 'EQ', value1 : 'PlanPos'} ] }"
                         >
                             <core:ListItem key="{meta>Value}" text="{meta>Text}" />
-                        </ComboBox>
+                        </ComboBox>////
                     </l2:Grid>
                     <l2:Grid containerQuery="true" hSpacing="0" defaultSpan="XL3 L3 M3 S3">
                         <Label text="{i18n>lblCustDocNo}" class="sapUiResponsiveMargin" labelFor="fldCustDocNo" />
@@ -124,12 +263,13 @@
                              filters : [ { path : 'Fieldname', operator : 'EQ', value1 : 'Penal'} ] }"
                         >
                             <core:ListItem key="{meta>Value}" text="{meta>Text}" />
-                        </ComboBox>
+                        </ComboBox>////
                     </l2:Grid>
                     <l2:Grid containerQuery="true" hSpacing="0" defaultSpan="XL6 L6 M6 S6">
                         <Label text="{i18n>lblComment}" class="sapUiResponsiveMargin" labelFor="fldComment" />
                         <TextArea id="fldComment" enabled="{/Active}" liveChange="runValidate" valueState="{parts: [{path: '/Active'},{path: '/Status10'}], formatter: '.formatter.fnUiStatus'}" value="{/DcComment}" width="100%" />
-                    </l2:Grid>
+                    </l2:Grid>////-->
+                    <l2:VerticalLayout width="100%" class="gridWrapper">
                     <l2:Grid containerQuery="true" hSpacing="0" defaultSpan="XL12 L12 M12 S12">
                         <Table noDataText="No Profiles" id="Profiles">
                             <items>
@@ -169,7 +309,7 @@
                             </columns>
                         </Table>
                     </l2:Grid>
-                </l2:VerticalLayout>
+                </l2:VerticalLayout> 
 
                 <!-- <l:MatrixLayout id="mlGeneral">
           <l:MatrixLayoutRow>

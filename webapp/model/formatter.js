@@ -168,7 +168,7 @@ sap.ui.define([], function () {
 				return "sap-icon://instance";
 			}
 
-			return "sap-icon://status-inactive";
+			return "";
 		},
 		fnDocContentFormatter : function(oDocCont){
 			return (+oDocCont).toString();

@@ -361,12 +361,15 @@ sap.ui.define([
           var oMetaModel = that.getView().getModel("meta");
 
 
-          var tblTemplate = availModel[0].SDDocCont_TemplSet.results;
+          var tblTemplate = null;
+          if(availModel[0].SDDocCont_TemplSet){
+            tblTemplate = availModel[0].SDDocCont_TemplSet.results;
+          }
           var templateModel = that.getView().getModel("templateModel");
           templateModel.setData(tblTemplate);
 
           var cmbProfile1 = that.getView().byId("cmbProfile1");
-          if (availModel[0].SDDocCont_TemplSet.results.length >= 1) {
+          if (tblTemplate && availModel[0].SDDocCont_TemplSet.results.length >= 1) {
             cmbProfile1.setVisible(true);
 
             oMetaModel.read("/TemplateTextsSet", {
@@ -413,7 +416,7 @@ sap.ui.define([
           }
 
           var cmbProfile2 = that.getView().byId("cmbProfile2");
-          if (availModel[0].SDDocCont_TemplSet.results.length >= 2) {
+          if (tblTemplate && availModel[0].SDDocCont_TemplSet.results.length >= 2) {
             cmbProfile2.setVisible(true);
 
             oMetaModel.read("/TemplateTextsSet", {
@@ -460,7 +463,7 @@ sap.ui.define([
           }
 
           var cmbProfile3 = that.getView().byId("cmbProfile3");
-          if (availModel[0].SDDocCont_TemplSet.results.length >= 3) {
+          if (tblTemplate && availModel[0].SDDocCont_TemplSet.results.length >= 3) {
             cmbProfile1.setVisible(true);
 
             oMetaModel.read("/TemplateTextsSet", {
