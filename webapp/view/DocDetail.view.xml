@@ -10,7 +10,7 @@ controllerName="zprelimdoc.controller.DocDetail" xmlns:html="http://www.w3.org/1
 		<laf:SimpleForm id="SimpleFormDisplay354"
 			editable="false"
 			layout="ResponsiveGridLayout"
-			title="Form"
+			title=""
 			labelSpanXL="6"
 			labelSpanL="6"
 			labelSpanM="6"
