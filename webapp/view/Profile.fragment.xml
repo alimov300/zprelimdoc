@@ -16,11 +16,11 @@
                 items="{path: 'backend>/ProfileListSet', filters: ''}" >
 
                 <columns>
-                <Column id="_IDGenColumn1" width="80%">
-                <Text id="_IDGenText1" />
+                <Column width="80%">
+                <Text  />
                 </Column>
-                <Column id="_IDGenColumn2">
-                <Text id="_IDGenText2" />
+                <Column >
+                <Text  />
                 </Column>
                 </columns>
               <items>

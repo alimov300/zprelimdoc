@@ -87,7 +87,18 @@ sap.ui.define([
 
       this.getView().addEventDelegate({
         onBeforeShow: function (evt) {
+          debugger;
           // var oDocstat = evt.data.Docstat;
+
+          if(evt.data.Profile !== ""){
+            that.onProfileLoad({profile_vbeln: evt.data.Vbeln,
+            profile_posnr: evt.data.Posnr,
+            profile_name: evt.data.Profile
+          });
+
+          }else{
+            that.onBeforeShowHandler({ Vbeln: evt.data.Vbeln, Posnr: evt.data.Posnr, Docstat: evt.data.Docstat });
+          }
 
           // if (!oDocstat || oDocstat.length == 0) {
           //   that.onProfile({ load: true, save: false, Docstat: evt.data.Docstat, Vbeln: evt.data.Vbeln, Posnr: evt.data.Posnr, initial: true });
@@ -98,6 +109,7 @@ sap.ui.define([
 
         },
         onAfterShow: function (evt) {
+          debugger;
 
           // var oDocstat = evt.data.Docstat;
 
@@ -224,7 +236,7 @@ sap.ui.define([
               }
               that.getOwnerComponent().getModel("DocList").updateBindings(true);
               that.getView().byId("list").refreshItems();
-              that.getView().byId("docPanel").setHeight("100%");
+              //that.getView().byId("docPanel").setHeight("100%");
 
               if(!that.Noinit){
                 that.readLangInfo(rModel, that);
@@ -602,13 +614,13 @@ sap.ui.define([
     handleMessagePopover: function () {
       oMessagePopover.rerender();
       oMessagePopover.close();
-      oMessagePopover.openBy(this.getView().getContent()[0].getAggregation('footer').getContent()[0]);
+      oMessagePopover.toggle(this.getView().byId("_IDGenButton1"));
     },
 
     handleMessagePopoverPress: function (oEvent) {
       oMessagePopover.rerender();
       oMessagePopover.close();
-      oMessagePopover.openBy(oEvent.getSource());
+      oMessagePopover.toggle(oEvent.getSource());
     },
 
     onComplete: function () {
@@ -1197,7 +1209,7 @@ sap.ui.define([
                 }
               });
 
-              that.getView().byId("docPanel").setHeight("100%");
+              //that.getView().byId("docPanel").setHeight("100%");
 
               this.onProfileLoad({ skipCheck: true, sendData: oSendData });
           }
@@ -1485,7 +1497,7 @@ sap.ui.define([
             success: function (oData, Resp) {
               that.getView().getModel().setData({});
               that.getView().getModel().setData(oData);
-              that.getView().byId("docPanel").setHeight("100%");
+              //that.getView().byId("docPanel").setHeight("100%");
 
               var listControl = that.getView().byId("list");
               var aItems = listControl.getItems();
@@ -1544,9 +1556,13 @@ sap.ui.define([
 
       if (oParams && oParams.NoProfile) {
         sProfile = "";
+      } else if(oParams.profile_name !== "") {
+        sProfile = oParams.profile_name;
       } else {
         sProfile = that.getView().byId("fldProfileName").getValue();
       }
+
+      sap.ui.getCore().sProfile = sProfile;
 
       var rModel = that.getView().getModel("backend");
 
@@ -1968,7 +1984,7 @@ sap.ui.define([
               success: function (oData, Resp) {
                 that.getView().getModel().setData({});
                 that.getView().getModel().setData(oData);
-                that.getView().byId("docPanel").setHeight("100%");
+                //that.getView().byId("docPanel").setHeight("100%");
 
                 var listControl = that.getView().byId("list");
                 var aItems = listControl.getItems();
@@ -1976,6 +1992,10 @@ sap.ui.define([
 
                 if (aItems.length == 0) {
                   return;
+                }
+
+                if(!that.Noinit){
+                  that.readLangInfo(rModel, that);
                 }
 
                 $.each(aItems, function (idx, el) {

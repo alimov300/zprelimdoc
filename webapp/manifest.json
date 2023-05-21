@@ -120,7 +120,7 @@
           "target": "home"
         },
         {
-          "pattern": "documents/vbeln/:Vbeln:/posnr/:Posnr:/docstat/:Docstat:",
+          "pattern": "documents/vbeln/:Vbeln:/posnr/:Posnr:/docstat/:Docstat:/profile/:Profile:",
           "name": "docList",
           "target": "documents"
         }

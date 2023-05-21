@@ -42,6 +42,7 @@ sap.ui.define(["../controller/BaseController"], function (BaseController) {
         Vbeln: data.data.Vbeln,
         Posnr: data.data.Posnr,
         Docstat: data.data.Docstat,
+        Profile: data.data.Profile
       });
       //that.app.to(that.getView().createId("idDoc"), "slide" ,data.data);
     },

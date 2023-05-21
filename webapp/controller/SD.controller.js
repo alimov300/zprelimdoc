@@ -35,6 +35,16 @@ sap.ui.define([
   return BaseController.extend("zprelimdoc.controller.SD", {
     formatter: formatter,
     onInit: function () {
+      var that = this;
+      var sService = "/sap/opu/odata/SAP/ZPRELIMDOC_SRV";
+      var oModel = new sap.ui.model.odata.ODataModel(sService, {
+        json: true,
+        useBatch: false
+      });
+      oModel.setSizeLimit(999);
+      this.getView().setModel(oModel, "backend");
+
+
       var sService = "/sap/opu/odata/SAP/ZPRELIMDOC_UTILS_SRV";
       var msgModel = new JSONModel();
       msgModel.setData({ messagesLength: 0, items: [] });
@@ -161,6 +171,12 @@ sap.ui.define([
         this.getView().byId("buttonSv").setEnabled(true);
       }
 
+    },
+
+    onProfileListPress: function (e) {
+      var oSrc = e.getSource();
+      var sVal = oSrc.getModel("backend").getProperty(oSrc.getBindingContextPath());
+      this.getView().byId("fldProfileName").setValue(sVal.DcProfile);
     },
 
     onSavePress: function () {
@@ -353,18 +369,198 @@ sap.ui.define([
 
     },
 
+    onProfileLoad: function (oParams) {
+
+      var bus = sap.ui.getCore().getEventBus();
+      let oSrc = oParams.getSource();
+      //let sVal = oSrc.getModel("backend").getProperty(oSrc.getBindingContextPath());
+      debugger;
+
+      let sVal = this.getView().byId("fldProfileName").getValue();
+      let oData = this.oDialog.data("position");
+
+      bus.publish("nav", "to", {
+        id: "DocPage",
+        data: {
+          Vbeln: oData.Vbeln,
+          Posnr: oData.Posnr,
+          Docstat: oData.Docstat,
+          Profile: sVal
+        }
+      });
+
+    },
+
+    onProfile: function (oParams) {
+
+      var that = this;
+
+      var oView = this.getView();
+      that.oDialog = oView.byId("dlgProfile");
+      // create dialog lazily
+      if (!that.oDialog) {
+        //        oDialog = sap.ui.xmlfragment("zprelimdoc.view.Profile");
+        //oDialog = sap.ui.xmlfragment(oView.getId(), "zprelimdoc.view.Profile", that);
+        that.oDialog = sap.ui.xmlfragment(oView.getId(), "zprelimdoc.view.Profile", that);
+        that.getView().addDependent(that.oDialog);
+
+      }
+
+      var oButton = new sap.m.Button({
+        icon: "sap-icon://delete",
+        type: "Reject",
+        //visible : "{= ${DcProfile} !== 'ANTOS'}",
+        //visible : false,
+        //press: that.onProfileDelete
+      });
+
+      oButton.bindProperty("visible",
+        { parts: [{ path: "backend>DcProfile" }], formatter: this.formatter.fnProfileEditable });
+
+      // if (oParams.start === false) {
+
+      //   var oTemplate = new sap.m.ColumnListItem({
+      //     cells: [
+      //       new sap.m.Label({ text: "{backend>DcProfile}" }),
+      //       oButton
+      //     ],
+      //     type: "Active", press: function (evt) {
+      //       that.onProfileListPress(evt);
+      //     }
+      //   });
+      // } else {
+        var oTemplate = new sap.m.ColumnListItem({
+          cells: [
+            new sap.m.Label({ text: "{backend>DcProfile}" }),
+          ],
+          type: "Active", press: function (evt) {
+            that.onProfileListPress(evt);
+          }
+        });
+      // }
+      var oPosnr = "";
+
+      if (oParams) {
+        oPosnr = oParams.Posnr;
+      }
+      if (!oPosnr) {
+        oPosnr = this.Posnr;
+      }
+
+      if (!oPosnr) {
+        oPosnr = "";
+      }
+
+      this.getView().byId("listProfiles").columns = [new sap.m.Column(), new sap.m.Column()];
+
+      this.getView().byId("listProfiles").bindItems({
+        path: "backend>/ProfileListSet",
+        filters: [new sap.ui.model.Filter("Posnr", sap.ui.model.FilterOperator.EQ, oPosnr)],
+        template: oTemplate
+      });
+
+
+      // if (oParams) {
+
+        var fnPressHandler = function (oEvent) {
+
+          var src = oEvent.getSource();
+
+          if (src.getId().indexOf("Cancel") >= 0) {
+            //that.getView().byId("fldProfileName").setValue("");
+            that.setProfileValue("");
+          }
+
+          //that.getView().getModel("meta").setProperty("/Profile", that.getView().byId("fldProfileName").getValue());
+          that.setProfileValue(that.getView().byId("fldProfileName").getValue());
+
+          if (oParams.Vbeln) {
+            switch (that.getView().byId("fldProfileName").getValue()) {
+              case "ANTOS":
+                that.onBeforeShowHandler({
+                  Vbeln: oParams.Vbeln,
+                  Posnr: oParams.Posnr, Docstat: oParams.Docstat, Noinit: true,
+                  callback: that.onProfileLoad
+                });
+                break;
+              case "TEMPLATE":
+                that.onTemplate({
+                  load: true, save: false, Docstat: oParams.Docstat,
+                  Vbeln: oParams.Vbeln, Posnr: oParams.Posnr, initial: true
+                });
+                break;
+              default:
+                that.onBeforeShowHandler({
+                  Vbeln: oParams.Vbeln,
+                  Posnr: oParams.Posnr, Docstat: oParams.Docstat,
+                  callback: that.onProfileLoad
+                });
+            }
+
+          }
+
+
+          $.each(this.oDialog.getAggregation("buttons"), function (idx, obj) {
+            if (obj.mEventRegistry["press"]) {
+              obj.mEventRegistry["press"].length = 0;
+            }
+          });
+
+          that.oDialog.close();
+        }
+
+        // this.getView().byId("btnProfileLoad").setVisible(oParams.load);
+        if (false) {
+          this.getView().byId("btnProfileLoad").attachPress(fnPressHandler, this);
+        } else {
+          this.getView().byId("btnProfileLoad").attachPress(this.onProfileLoad, this);
+        }
+
+        this.getView().byId("btnProfileCancel").attachPress(fnPressHandler, this);
+
+        this.getView().byId("btnProfileSave").setVisible(false);
+        this.getView().byId("btnProfileSave").attachPress(this.onProfileSave, this);
+      // }
+
+      that.oDialog.data("position",oParams);
+      that.oDialog.open();
+    },
+
+    onProfileSave : function () {
+      
+    },
+
+    onProfileCancel: function () {
+
+      //this.onProfileLoad({skipCheck: true, NoProfile: true});
+      //this.getView().byId("dlgProfile").close();
+      //debugger;
+      this.oDialog.close();
+    },
+
     onGoDoc: function (oSrc) {
       var bus = sap.ui.getCore().getEventBus();
 
       sap.ui.getCore().mdocArray = [];
-      bus.publish("nav", "to", {
-        id: "DocPage",
-        data: {
+
+ //     if(true){
+
+        if(oSrc.getSource().getBindingContext().getModel().getObject(oSrc.getSource().getBindingContext().getPath()).Docstat !== ""){
+            bus.publish("nav", "to", {
+              id: "DocPage",
+              data: {
+                Vbeln: oSrc.getSource().getBindingContext().getModel().getObject(oSrc.getSource().getBindingContext().getPath()).Vbeln,
+                Posnr: oSrc.getSource().getBindingContext().getModel().getObject(oSrc.getSource().getBindingContext().getPath()).Posnr,
+                Docstat: oSrc.getSource().getBindingContext().getModel().getObject(oSrc.getSource().getBindingContext().getPath()).Docstat
+              }
+            });
+      }else{
+        this.onProfile({
           Vbeln: oSrc.getSource().getBindingContext().getModel().getObject(oSrc.getSource().getBindingContext().getPath()).Vbeln,
           Posnr: oSrc.getSource().getBindingContext().getModel().getObject(oSrc.getSource().getBindingContext().getPath()).Posnr,
           Docstat: oSrc.getSource().getBindingContext().getModel().getObject(oSrc.getSource().getBindingContext().getPath()).Docstat
-        }
-      });
+        });
+      }
     }
   });
 });

@@ -58,7 +58,7 @@
         </detailPages>
         <masterPages>
 			<Page id="_IDGenVerticalLayout1dPage">
-            <l:VerticalLayout id="_IDGenVerticalLayout1d">
+            <l:VerticalLayout id="_IDGenVerticalLayout1d" width="100%">
                 <l:content>
                     <f:SimpleForm id="filterform1" visible="false" class="sapUiNoMargin zFilter">
                         <l:HorizontalLayout id="_IDGenHorizontalLayout1">
@@ -84,7 +84,7 @@
                     </f:SimpleForm>
                     <List id="list" items="{DocList>/results}" noDataText="" mode="SingleSelectMaster" growing="true" growingScrollToLoad="true" growingThreshold="999" selectionChange="OnListItemPressed" updateFinished="onUpdateFinished">
                         <infoToolbar>
-                            <Toolbar active="true" id="filterBar" visible="true" press="onOpenViewSettings">
+                            <Toolbar active="true" id="filterBar" design="Solid" visible="true" press="onOpenViewSettings">
                                 <Title id="filterBarLabel" text="Dokumente" />
                             </Toolbar>
                         </infoToolbar>
