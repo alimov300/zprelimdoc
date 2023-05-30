@@ -7,6 +7,8 @@
         <headerToolbar>
           <OverflowToolbar width="100%" id="tb1">
             <ToolbarSpacer id="_IDGenToolbarSpacer1" />
+            <Button id="popoverButton" icon="sap-icon://message-popup" text="{msgModel>/messagesLength}"
+          type="Emphasized" press="handleMessagePopoverPress" />
             <ToggleButton text="Filter OFF" icon="sap-icon://filter"
               id="btnFilter" press="onReadPos" pressed="true"/>
           </OverflowToolbar>
@@ -25,7 +27,7 @@
                 labelFor="miDefLangu" />
               <MultiInput width="200px" id="miDefLangu"
                 suggestionItems="{global>/}"
-                tokenChange="saveDefLangu"
+                tokenUpdate="saveDefLangu"
                 showValueHelp="false">
                 <core:ListItem id="_IDGenListItem1" key="{global>Value}" text="{global>Text}"/>
               </MultiInput>
@@ -197,8 +199,7 @@
     </content>
     <footer>
       <Toolbar id="bottomToolbar">
-        <Button id="popoverButton" icon="sap-icon://message-popup" text="{msgModel>/messagesLength}"
-          type="Emphasized" press="handleMessagePopoverPress" />
+        
         <ToolbarSpacer id="_IDGenToolbarSpacer3" />
       </Toolbar>
     </footer>

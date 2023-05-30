@@ -10,6 +10,9 @@ div.zLangsTable th{
 	vertical-align: middle;
 }
 
-label.zPosition {
+span.zPosition {
+	text-align: left;
+    font-size: 18px;
+    font-weight: bolder;
     margin-left: 50px;
 }

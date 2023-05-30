@@ -1549,14 +1549,14 @@ sap.ui.define([
       }
 
       var bSkip = false;
-      var sProfile;
+      var sProfile  = "";
       if (oParams && oParams.skipCheck) {
         bSkip = true;
       }
 
       if (oParams && oParams.NoProfile) {
         sProfile = "";
-      } else if(oParams.profile_name !== "") {
+      } else if(oParams.profile_name) {
         sProfile = oParams.profile_name;
       } else {
         sProfile = that.getView().byId("fldProfileName").getValue();
