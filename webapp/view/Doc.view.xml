@@ -89,7 +89,7 @@
                             </Toolbar>
                         </infoToolbar>
                         <CustomListItem id="listItem" type="Inactive">
-                            <CheckBox id="_IDGenCheckBox1" visible="{path: 'DocList>Selectable', formatter: '.formatter.fnSelectableFormatter'}" select="onCheckboxChange" text=" " enabled="{meta>/Active}" selected="{path: 'DocList>DcSelected', formatter: '.formatter.fnCheckDcOptFormatter'}" />
+                            <CheckBox id="_IDGenCheckBox1" visible="{path: 'DocList>Selectable', formatter: '.formatter.fnSelectableFormatter'}" select="onCheckboxChange" text=" " enabled="{meta>/Active}" selected="{path: 'DocList>DcSelected', formatter: '.formatter.fnCheckDcOptFormatter'}" class="sapUiMediumMarginBegin" />
                             <ToggleButton
                                 id="_IDGenToggleButton1"
                                 visible="{path: 'DocList>Selectable', formatter: '.formatter.fnSelectableFormatter'}"
@@ -102,14 +102,14 @@
                                     <FlexItemData id="_IDGenFlexItemData1" growFactor="1" />
                                 </layoutData>
                             </ToggleButton>
-                            <HBox id="_IDGenHBox1d" width="100%" alignItems="End" class="sapUiTinyMarginBegin">
+                            <HBox id="_IDGenHBox1d" width="100%" alignItems="End" class="sapUiMediumMarginBegin">
                                 <items>
                                     <Text id="_IDGenText1d" visible="{path: 'DocList>Selectable', formatter: '.formatter.fnSelectableFormatter'}" text="{path: 'DocList>DocContent', formatter: '.formatter.fnDocContentFormatter'}" />
                                 </items>
                             </HBox>
-                            <Label id="_IDGenLabel5d" text="{DocList>DcDescr}" visible="{path: 'DocList>Selectable', formatter: '.formatter.fnSelectableFormatter'}" width="260px" class="sapUiTinyMarginBegin" />
+                            <Label id="_IDGenLabel5d" text="{DocList>DcDescr}" visible="{path: 'DocList>Selectable', formatter: '.formatter.fnSelectableFormatter'}" width="260px" class="sapUiMediumMarginBegin" />
 
-                            <Text id="_IDGenText2d" text="{DocList>DcDescr}" visible="{path: 'DocList>Selectable', formatter: '.formatter.fnNonSelectableFormatter'}" class="sapUiResponsiveMargin sapThemeBaseBG" />
+                            <Text id="_IDGenText2d" text="{DocList>DcDescr}" visible="{path: 'DocList>Selectable', formatter: '.formatter.fnNonSelectableFormatter'}" class="sapUiTinyMarginBegin sapThemeBaseBG" />
                         </CustomListItem>
                     </List>
                 </l:content>
