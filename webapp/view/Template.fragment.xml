@@ -6,25 +6,25 @@
    <Dialog id="dlgTemplate" title="{i18n>cptTemplate}">
       <l:VerticalLayout id="_IDGenVerticalLayout1t" class="sapUiContentPadding" width="100%">
         <l:content>
-          <Label id="_IDGenLabel1t" text="{i18n>lblOrderNum}" labelFor="fldDocument"/>
-          <Input id="fldDocument" class="sapUiSmallMarginBottom" maxLength="30" change="onTemplateDialogSend"/>
+          <Label id="_IDGenLabel1tpl" text="{i18n>lblOrderNum}" labelFor="fldDocument"/>
+          <Input id="fldDocumentpl" class="sapUiSmallMarginBottom" maxLength="30" change="onTemplateDialogSend"/>
         </l:content>
         <l:content>
-          <Label id="_IDGenLabel2" text="{i18n>txtPosNr}" labelFor="lblPosition"/>
-          <Input id="fldPosition" class="sapUiSmallMarginBottom" maxLength="30" change="onTemplateDialogSend"/>
+          <Label id="_IDGenLabel2tpl" text="{i18n>txtPosNr}" labelFor="lblPosition"/>
+          <Input id="fldPositiontpl" class="sapUiSmallMarginBottom" maxLength="30" change="onTemplateDialogSend"/>
         </l:content>
         <l:content>
 
                         <Table id="listTemplates" class="sapUiResponsiveMargin" width="auto">															
 							  <columns>
-								<Column id="_IDGenColumn1" width="20%">					
-								<Text id="_IDGenText1t" />				
+								<Column id="_IDGenColumn1tpl" width="20%">					
+								<Text id="_IDGenText1ttpl" />				
 								</Column>								
-								<Column id="_IDGenColumn2">
-								<Text id="_IDGenText2t" />
+								<Column id="_IDGenColumn2tpl">
+								<Text id="_IDGenText2ttpl" />
 								</Column>
-								<Column id="_IDGenColumn3">
-								<Text id="_IDGenText3t" />
+								<Column id="_IDGenColumn3tpl">
+								<Text id="_IDGenText3ttpl" />
 								</Column>
 							  </columns>
 							<items>
