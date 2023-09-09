@@ -103,6 +103,17 @@ sap.ui.define(
             debugger;
             // var oDocstat = evt.data.Docstat;
 
+
+
+            // if (!oDocstat || oDocstat.length == 0) {
+            //   that.onProfile({ load: true, save: false, Docstat: evt.data.Docstat, Vbeln: evt.data.Vbeln, Posnr: evt.data.Posnr, initial: true });
+            // } else {
+            //   that.onBeforeShowHandler({ Vbeln: evt.data.Vbeln, Posnr: evt.data.Posnr, Docstat: evt.data.Docstat });
+            // }
+          },
+          onAfterShow: function (evt) {
+            debugger;
+
             if (evt.data.Profile !== "") {
               that.onProfileLoad({
                 profile_vbeln: evt.data.Vbeln,
@@ -116,15 +127,6 @@ sap.ui.define(
                 Docstat: evt.data.Docstat,
               });
             }
-
-            // if (!oDocstat || oDocstat.length == 0) {
-            //   that.onProfile({ load: true, save: false, Docstat: evt.data.Docstat, Vbeln: evt.data.Vbeln, Posnr: evt.data.Posnr, initial: true });
-            // } else {
-            //   that.onBeforeShowHandler({ Vbeln: evt.data.Vbeln, Posnr: evt.data.Posnr, Docstat: evt.data.Docstat });
-            // }
-          },
-          onAfterShow: function (evt) {
-            debugger;
 
             // var oDocstat = evt.data.Docstat;
 
@@ -587,6 +589,8 @@ sap.ui.define(
       onSave: function () {
         this.addCurrentDetails();
 
+        this.getView().setBusy(true);
+
         var bDetailErrors = sap.ui
           .getCore()
           .getModel("UIModel")
@@ -642,6 +646,7 @@ sap.ui.define(
                 "msgSDocNotFound",
                 that.getView().byId("vbeln")
               );
+              that.getView().setBusy(false);
             }
             var newMsgs = {
               messagesLength: 1,
@@ -656,6 +661,9 @@ sap.ui.define(
               ],
             };
             that.getView().getModel("msgModel").setData(newMsgs);
+            that.getView().setBusy(false);
+
+
             that.handleMessagePopover();
           },
           success: function (res) {
@@ -689,6 +697,7 @@ sap.ui.define(
               });
               that.getView().getModel("msgModel").setData([]);
               that.getView().getModel("msgModel").setData(newMsgs);
+              that.getView().setBusy(false);
               that.handleMessagePopover();
             }
           },
@@ -711,6 +720,7 @@ sap.ui.define(
 
       onComplete: function () {
         var that = this;
+        that.getView().setBusy(true);
         var mData = this.getView().getModel().getData();
         var obj = {};
         if (!this.Vbeln || !this.Posnr) {
@@ -741,6 +751,7 @@ sap.ui.define(
               "msgSDocNotFound",
               that.getView().byId("vbeln")
             );
+            that.getView().setBusy(false);
           }
           var newMsgs = {
             messagesLength: 1,
@@ -789,6 +800,8 @@ sap.ui.define(
             };
             that.getView().getModel("msgModel").setData(newMsgs);
             that.handleMessagePopover();
+
+            that.getView().setBusy(false);
           },
           success: function (res) {
             var msg = JSON.parse(res);
@@ -837,6 +850,7 @@ sap.ui.define(
                 mModel.setProperty("/Checkboxes", false);
               }
             }
+            that.getView().setBusy(false);
           },
         });
       },
@@ -1325,8 +1339,8 @@ sap.ui.define(
               case "Reject":
                 that.setProfileValue("");
                 that.onBeforeShowHandler({
-                  Vbeln: that.inputParams.Vbeln,
-                  Posnr: that.inputParams.Posnr,
+                  Vbeln: that.Vbeln,
+                  Posnr: that.Posnr,
                   Docstat: that.inputParams.Docstat,
                   callback: that.onProfileLoad,
                 });
@@ -1338,8 +1352,8 @@ sap.ui.define(
 
                 var oSendData = {
                   key: {
-                    vbeln: that.inputParams.Vbeln,
-                    posnr: that.inputParams.Posnr,
+                    vbeln: that.Vbeln,
+                    posnr: that.Posnr,
                   },
                   template_key: { vbeln: sVbeln, posnr: sPosnr },
                   docids: aSelected,
@@ -1348,8 +1362,8 @@ sap.ui.define(
                 rModel.callFunction("/SetRefTemplate", {
                   method: "GET",
                   urlParameters: {
-                    Vbeln: that.inputParams.Vbeln,
-                    Posnr: that.inputParams.Posnr,
+                    Vbeln: that.Vbeln,
+                    Posnr: that.Posnr,
                     Vbeln_templ: sVbeln,
                     Posnr_templ: sPosnr,
                   },
@@ -1404,18 +1418,13 @@ sap.ui.define(
 
           this.getView().byId("btnTemplateLoad").setVisible(oParams.load);
           if (oParams.Docstat === "") {
-            this.getView()
-              .byId("btnTemplateLoad")
-              .attachPress(fnPressHandler, this);
+            this.getView().byId("btnTemplateLoad").attachPress(fnPressHandler, this);
           } else {
-            this.getView()
-              .byId("btnTemplateLoad")
-              .attachPress(this.onTemplateLoad, this);
+            //this.getView().byId("btnTemplateLoad").attachPress(this.onTemplateLoad, this);
+            this.getView().byId("btnTemplateLoad").attachPress(fnPressHandler, this);
           }
 
-          this.getView()
-            .byId("btnTemplateCancel")
-            .attachPress(fnPressHandler, this);
+          this.getView().byId("btnTemplateCancel").attachPress(fnPressHandler, this);
 
           //this.getView().byId("btnTemplateSave").setVisible(oParams.save);
           //this.getView().byId("btnTemplateSave").attachPress(this.onProfileSave, this);
@@ -1769,6 +1778,7 @@ sap.ui.define(
         var rModel = that.getView().getModel("backend");
 
         switch (sProfile) {
+          case  "Create with template":
           case "TEMPLATE":
             function display_msg1(data) {
               var oBundle = that.getView().getModel("i18n").getResourceBundle();
@@ -1847,6 +1857,16 @@ sap.ui.define(
                 },
               });
             }
+
+            that.onTemplate({
+              load: true,
+              save: false,
+              Docstat: oParams.Docstat,
+              Vbeln: oParams.Vbeln,
+              Posnr: oParams.Posnr,
+              initial: true,
+            });
+            break;
 
             $.ajax({
               type: "POST",

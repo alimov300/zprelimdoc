@@ -7,16 +7,16 @@
 
       <l:VerticalLayout id="_IDGenVerticalLayout1p" class="sapUiContentPadding" width="100%">
         <l:content>
-          <Label id="_IDGenLabel1pr" text="{i18n>lblProfileName}" labelFor="fldProfileName"/>
+          <Label text="{i18n>lblProfileName}" labelFor="fldProfileName"/>
           <Input id="fldProfileName" class="sapUiSmallMarginBottom" maxLength="30" />
         </l:content>
         <l:content>
 
-         <Table id="listProfiles" class="sapUiResponsiveMargin" width="auto"
-                items="{path: 'backend>/ProfileListSet', filters: ''}" >
+                        <Table id="listProfiles" class="sapUiResponsiveMargin" width="auto">
+<!--                items="{path: 'backend>/ProfileListSet', filters: ''}" -->
 
                 <columns>
-                <Column width="80%">
+                <Column  width="80%">
                 <Text  />
                 </Column>
                 <Column >
@@ -24,14 +24,14 @@
                 </Column>
                 </columns>
               <items>
-               <ColumnListItem type="Active" press="onProfileListPress"> 
-                <cells> 
-                 <Label text="{backend>DcProfile}" />  
-                                  <Button icon="sap-icon://delete"  
-                                  visible="{= ${backend>DcProfile} !== 'ANTOS'}" 
-                                  type="Reject" press="onProfileDelete" />
-                </cells> 
-                </ColumnListItem>
+<!--                <ColumnListItem type="Active" press="onProfileListPress"> -->
+<!--                <cells> -->
+<!--                 <Label text="{backend>DcProfile}" />  -->
+<!--                                  <Button icon="sap-icon://delete"  -->
+<!--                                  visible="{= ${backend>DcProfile} !== 'ANTOS'}"  -->
+<!--                                  type="Reject" press="onProfileDelete" /> -->
+<!--                </cells> -->
+<!--                </ColumnListItem> -->
               </items>
               </Table>
 

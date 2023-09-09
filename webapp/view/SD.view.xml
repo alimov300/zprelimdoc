@@ -7,8 +7,6 @@
         <headerToolbar>
           <OverflowToolbar width="100%" id="tb1">
             <ToolbarSpacer id="_IDGenToolbarSpacer1" />
-            <Button id="popoverButton" icon="sap-icon://message-popup" text="{msgModel>/messagesLength}"
-          type="Emphasized" press="handleMessagePopoverPress" />
             <ToggleButton text="Filter OFF" icon="sap-icon://filter"
               id="btnFilter" press="onReadPos" pressed="true"/>
           </OverflowToolbar>
@@ -27,7 +25,7 @@
                 labelFor="miDefLangu" />
               <MultiInput width="200px" id="miDefLangu"
                 suggestionItems="{global>/}"
-                tokenUpdate="saveDefLangu"
+                tokenChange="saveDefLangu"
                 showValueHelp="false">
                 <core:ListItem id="_IDGenListItem1" key="{global>Value}" text="{global>Text}"/>
               </MultiInput>
@@ -39,7 +37,7 @@
 
             <Table noDataText="Drop column list items here and columns in the area above" id="table0">
              <columns>
-             <Column id="_IDGenColumn1" width="5rem">
+             <Column id="_IDGenColumn201" width="5rem">
              </Column>
              <Column id="_IDGenColumn2" width="25rem">
              </Column>
@@ -199,7 +197,8 @@
     </content>
     <footer>
       <Toolbar id="bottomToolbar">
-        
+        <Button id="popoverButton" icon="sap-icon://message-popup" text="{msgModel>/messagesLength}"
+          type="Emphasized" press="handleMessagePopoverPress" />
         <ToolbarSpacer id="_IDGenToolbarSpacer3" />
       </Toolbar>
     </footer>

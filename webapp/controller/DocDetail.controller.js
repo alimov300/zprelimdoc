@@ -365,6 +365,7 @@ sap.ui.define([
           if(availModel[0].SDDocCont_TemplSet){
             tblTemplate = availModel[0].SDDocCont_TemplSet.results;
           }
+
           var templateModel = that.getView().getModel("templateModel");
           templateModel.setData(tblTemplate);
 
@@ -1182,7 +1183,6 @@ sap.ui.define([
     },
 
     resetFormLayout: function () {
-      try{
       var cmb = this.getView().byId("cmbDokart");
       cmb.setValueState(sap.ui.core.ValueState.None);
 
@@ -1192,7 +1192,6 @@ sap.ui.define([
       oCmbSddcStatus.setValueState(sap.ui.core.ValueState.None);
       var cmbFreiStelle = this.getView().byId("cmbPlansEfs");
       cmbFreiStelle.setValueState(sap.ui.core.ValueState.None);
-      } catch(e){}
 
     },
 
