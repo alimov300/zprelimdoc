@@ -83,6 +83,7 @@ sap.ui.define(
 
         this.getOwnerComponent().setModel(jModel, "DocList");
         var mModel = new sap.ui.model.json.JSONModel();
+        mModel.setData({ Active: true, Checkboxes: true });
         this.getView().setModel(mModel, "meta");
 
         this.oDialog = null;
@@ -101,6 +102,11 @@ sap.ui.define(
         this.getView().addEventDelegate({
           onBeforeShow: function (evt) {
             debugger;
+
+            var mModel = new sap.ui.model.json.JSONModel();
+            mModel.setData({ Active: true });
+            that.getView().setModel(mModel, "meta");
+
             // var oDocstat = evt.data.Docstat;
 
 
@@ -113,6 +119,18 @@ sap.ui.define(
           },
           onAfterShow: function (evt) {
             debugger;
+
+            var oUiModel = sap.ui.getCore().getModel("UIModel");
+
+            if (!oUiModel) {
+              oUiModel = new sap.ui.model.json.JSONModel();
+              oUiModel.setData({ DetailsErrors: false, finalized: false });
+              sap.ui.getCore().setModel(oUiModel, "UIModel");
+            } else {
+              oUiModel.setProperty("/finalized", false);
+              oUiModel.setProperty("/saved", false);
+              oUiModel.setProperty("/hasChanges", false);
+            }
 
             if (evt.data.Profile !== "") {
               that.onProfileLoad({
@@ -136,7 +154,8 @@ sap.ui.define(
             //   that.onBeforeShowHandler({ Vbeln: evt.data.Vbeln, Posnr: evt.data.Posnr, Docstat: evt.data.Docstat });
             // }
 
-            sap.ui.core.BusyIndicator.hide();
+            //sap.ui.core.BusyIndicator.hide();
+            that.getView().setBusy(false);
             var oModel = evt.to.getModel();
           },
         });
@@ -586,6 +605,191 @@ sap.ui.define(
         });
       },
 
+      onUpdateITP : function(){
+        debugger;
+
+        var that = this;
+
+        var oView = this.getView();
+        that.oITPDialog = oView.byId("dlgITP");
+        // create dialog lazily
+        if (!that.oITPDialog) {
+          that.oITPDialog = sap.ui.xmlfragment(
+            oView.getId(),
+            "zprelimdoc.view.ITP",
+            that
+          );
+          that.getView().addDependent(that.oITPDialog);
+        }
+
+
+        var oTemplate = new sap.m.ColumnListItem({
+            cells: [
+              new sap.m.Label({ text: "{prod>SalesOrderID}" }),
+              new sap.m.Label({ text: "{prod>SalesOrderItem}" }),
+              new sap.m.Label({ text: "{prod>DocContent}" }),
+              new sap.m.Label({ text: "{prod>DocContentDescr}" })
+            ],
+            type: "Active",
+            press: function (evt) {
+              that.onTemplateListPress(evt);
+            },
+          });
+
+          this.getView().byId("listITPs").bindItems({
+            path: "prod>/ITPChangeSet",
+            // filters: [
+            //   new sap.ui.model.Filter(
+            //     "Posnr",
+            //     sap.ui.model.FilterOperator.EQ,
+            //     oPosnr
+            //   ),
+            // ],
+            template: oTemplate
+          });
+        
+        var oPosnr = "";
+
+        // this.getView().byId("listTemplates").columns = [
+        //   new sap.m.Column(),
+        //   new sap.m.Column(),
+        // ];
+
+        var rModel = that.getView().getModel("backend");
+
+
+        var fnPressHandler = function (oEvent) {
+          debugger;
+        var src = oEvent.getSource();
+        var oModel = this.getView().getModel("listTemplates");
+
+        var aSelected = [];
+
+            if (!oModel) {
+              // that.setProfileValue("");
+              // that.onBeforeShowHandler({
+              //   Vbeln: that.inputParams.Vbeln,
+              //   Posnr: that.inputParams.Posnr,
+              //   Docstat: that.inputParams.Docstat,
+              //   callback: that.onProfileLoad,
+              // });
+
+              that.oITPDialog.close();
+              return;
+            }
+
+            if (!oModel.getData()) {
+              // that.setProfileValue("");
+              // that.onBeforeShowHandler({
+              //   Vbeln: that.inputParams.Vbeln,
+              //   Posnr: that.inputParams.Posnr,
+              //   Docstat: that.inputParams.Docstat,
+              //   callback: that.onProfileLoad,
+              // });
+
+              that.oITPDialog.close();
+              return;
+            }
+            $.each(oModel.getData().results, function (idx, el) {
+              if (el.Selected) {
+                aSelected.push({ doccontent: el.DocContent });
+              }
+            });
+
+            switch (src.getProperty("type")) {
+              case "Reject":
+                // that.setProfileValue("");
+                // that.onBeforeShowHandler({
+                //   Vbeln: that.Vbeln,
+                //   Posnr: that.Posnr,
+                //   Docstat: that.inputParams.Docstat,
+                //   callback: that.onProfileLoad,
+                // });
+
+                break;
+              case "Accept":
+                // var sVbeln = that.getView().byId("fldDocument").getValue();
+                // var sPosnr = that.getView().byId("fldPosition").getValue();
+
+                // var oSendData = {
+                //   key: {
+                //     vbeln: that.Vbeln,
+                //     posnr: that.Posnr,
+                //   },
+                //   template_key: { vbeln: sVbeln, posnr: sPosnr },
+                //   docids: aSelected,
+                // };
+                // var rModel = that.getView().getModel("backend");
+                // rModel.callFunction("/SetRefTemplate", {
+                //   method: "GET",
+                //   urlParameters: {
+                //     Vbeln: that.Vbeln,
+                //     Posnr: that.Posnr,
+                //     Vbeln_templ: sVbeln,
+                //     Posnr_templ: sPosnr,
+                //   },
+                //   error: function (oData) {
+                //     var oBundle = that
+                //       .getView()
+                //       .getModel("i18n")
+                //       .getResourceBundle();
+                //     var sMsg = "";
+                //     try {
+                //       var oResponse = JSON.parse(oData.response.body);
+                //       sMsg = oResponse.error.message.value;
+                //     } catch (e) {
+                //       sMsg = oBundle.getText(
+                //         "msgSDocNotFound",
+                //         that.getView().byId("vbeln")
+                //       );
+                //     }
+                //     var newMsgs = {
+                //       messagesLength: 1,
+                //       items: [
+                //         {
+                //           type: oBundle.getText("msgError"),
+                //           title: oBundle.getText("msgErrorTitle"),
+                //           description: sMsg,
+                //           counter: 1,
+                //         },
+                //       ],
+                //     };
+                //     that.getView().getModel("msgModel").setData(newMsgs);
+                //     that.handleMessagePopover();
+                //   },
+                //   success: function (oData, Resp) {},
+                // });
+
+                //that.getView().byId("docPanel").setHeight("100%");
+
+                // this.onProfileLoad({ skipCheck: true, sendData: oSendData });
+            }
+
+            $.each(
+              this.oTmplDialog.getAggregation("buttons"),
+              function (idx, obj) {
+                if (obj.mEventRegistry["press"]) {
+                  obj.mEventRegistry["press"].length = 0;
+                }
+              }
+            );
+
+            that.oITPDialog.close();
+          };
+
+          //this.getView().byId("btnITP").setVisible(oParams.load);
+          //if (oParams.Docstat === "") {
+            this.getView().byId("btnITPLoad").attachPress(fnPressHandler, this);
+          //} else {
+          //  this.getView().byId("btnITPLoad").attachPress(fnPressHandler, this);
+          //}
+
+          this.getView().byId("btnITPCancel").attachPress(fnPressHandler, this);
+
+        that.oITPDialog.open();
+
+      },
+
       onSave: function () {
         this.addCurrentDetails();
 
@@ -720,6 +924,7 @@ sap.ui.define(
 
       onComplete: function () {
         var that = this;
+        oMessagePopover.close();
         that.getView().setBusy(true);
         var mData = this.getView().getModel().getData();
         var obj = {};

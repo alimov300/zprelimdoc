@@ -391,6 +391,14 @@ sap.ui.define([
 
     },
 
+    setProfileValue: function (value) {
+      if (this.getView().byId("fldProfileName")) {
+        this.getView().byId("fldProfileName").setValue(value);
+      }
+      this.getView().getModel("meta").setProperty("/Profile", value);
+      sap.ui.getCore().sProfile = value;
+    },
+
     onProfile: function (oParams) {
       var bNewDialog = false;
       var that = this;

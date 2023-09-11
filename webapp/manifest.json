@@ -25,6 +25,15 @@
           "odataVersion": "2.0"
         }
       },
+      "prodService": {
+        "uri": "/sap/opu/odata/sap/ZPRODDOC_SRV/",
+        "type": "OData",
+        "settings": {
+          "annotations": [],
+          "localUri": "localService/metadata.xml",
+          "odataVersion": "2.0"
+        }
+      },
       "metaService": {
         "uri": "/sap/opu/odata/sap/ZPRELIMDOC_META_SRV/",
         "type": "OData",
@@ -81,6 +90,11 @@
       },
       "": {
         "dataSource": "mainService",
+        "preload": true,
+        "settings": {}
+      },
+      "prod": {
+        "dataSource": "prodService",
         "preload": true,
         "settings": {}
       },

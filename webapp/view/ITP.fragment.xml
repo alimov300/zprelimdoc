@@ -1,0 +1,40 @@
+<!DOCTYPE project>
+<core:FragmentDefinition
+   xmlns="sap.m"
+   xmlns:l="sap.ui.layout"
+   xmlns:core="sap.ui.core" >
+   <Dialog id="dlgITP" title="{i18n>cptITP}">
+      <l:VerticalLayout class="sapUiContentPadding" width="100%">
+        <l:content>
+          <Table id="listITPs" class="sapUiResponsiveMargin" width="auto" mode="MultiSelect">															
+							  <columns>
+								<Column  width="20%">					
+								<Text  />				
+								</Column>								
+								<Column >
+								<Text  />
+								</Column>
+                <Column >
+								<Text  />
+								</Column>
+                <Column >
+								<Text  />
+								</Column>
+								<Column >
+								<Text  />
+								</Column>
+							  </columns>
+							<items>
+							</items>
+						  </Table>
+        </l:content>
+      </l:VerticalLayout>
+
+      <buttons>
+         <Button id="btnITPLoad" type="Accept" text="{i18n>btnLoad}" />
+<!--          <Button id="btnProfileSave" text="{i18n>btnSave}"  press="onProfileSave"/> -->
+         <Button id="btnITPCancel" type="Reject" text="{i18n>btnClose}"  press="onITPCancel"/>
+      </buttons>
+
+   </Dialog>
+</core:FragmentDefinition>
