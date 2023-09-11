@@ -23,6 +23,9 @@
 								<Column >
 								<Text  />
 								</Column>
+                <Column >
+								<Text  />
+								</Column>
 							  </columns>
 							<items>
 							</items>

@@ -628,7 +628,8 @@ sap.ui.define(
               new sap.m.Label({ text: "{prod>SalesOrderID}" }),
               new sap.m.Label({ text: "{prod>SalesOrderItem}" }),
               new sap.m.Label({ text: "{prod>DocContent}" }),
-              new sap.m.Label({ text: "{prod>DocContentDescr}" })
+              new sap.m.Label({ text: "{prod>DocContentDescr}" }),
+              new sap.ui.core.Icon({ src: "sap-icon://edit" }),
             ],
             type: "Active",
             press: function (evt) {
