@@ -20,7 +20,7 @@ builder:
           username: env:UI5_USERNAME
           password: env:UI5_PASSWORD
         app:
-          name: ZPRELIMDOC2
-          description: ZPRELIMDOC2
+          name: ZPRELIMDOC3
+          description: ZPRELIMDOC3
           package: ZPDMS
           transport: EKDK928899

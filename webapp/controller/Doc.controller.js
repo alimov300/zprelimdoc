@@ -629,7 +629,7 @@ sap.ui.define(
               new sap.m.Label({ text: "{prod>SalesOrderItem}" }),
               new sap.m.Label({ text: "{prod>DocContent}" }),
               new sap.m.Label({ text: "{prod>DocContentDescr}" }),
-              new sap.ui.core.Icon({ src: "sap-icon://edit" }),
+              new sap.ui.core.Icon({ src: "{= ${prod>ModifyState} === 'C' ? 'sap-icon://create' :  ${prod>ModifyState} === 'U' ? 'sap-icon://edit' : 'sap-icon://delete'  }" }),
             ],
             type: "Active",
             press: function (evt) {
@@ -639,13 +639,18 @@ sap.ui.define(
 
           this.getView().byId("listITPs").bindItems({
             path: "prod>/ITPChangeSet",
-            // filters: [
-            //   new sap.ui.model.Filter(
-            //     "Posnr",
-            //     sap.ui.model.FilterOperator.EQ,
-            //     oPosnr
-            //   ),
-            // ],
+            filters: [
+              new sap.ui.model.Filter(
+                "SalesOrderItem",
+                sap.ui.model.FilterOperator.EQ,
+                this.Posnr
+              ),
+              new sap.ui.model.Filter(
+                "SalesOrderID",
+                sap.ui.model.FilterOperator.EQ,
+                this.Vbeln
+              )
+            ],
             template: oTemplate
           });
         
