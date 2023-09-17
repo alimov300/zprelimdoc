@@ -34,7 +34,7 @@
       </l:VerticalLayout>
 
       <buttons>
-         <Button id="btnITPLoad" type="Accept" text="{i18n>btnLoad}" />
+         <Button id="btnITPLoad" type="Accept" text="{i18n>btnApply}" />
 <!--          <Button id="btnProfileSave" text="{i18n>btnSave}"  press="onProfileSave"/> -->
          <Button id="btnITPCancel" type="Reject" text="{i18n>btnClose}"  press="onITPCancel"/>
       </buttons>
