@@ -160,6 +160,14 @@ sap.ui.define([], function () {
 			return "";
 
 		},
+
+		TimeFormatter : function(sString){
+			if(sString === ""){
+				return "";
+			}
+			return sString.substr(2,2) + ":" + sString.substr(5,2);
+		},
+
 		fnSDIcon : function(oStatus){
 			switch(oStatus){
 			case "ZDO2":

@@ -25,7 +25,7 @@
                     <Label id="_IDGenLabel3a" text="{path: 'DocList>/results/1/Posnr', formatter:'.formatter.fnRemoveZeros'}" visible="{path:'DocList>/results/1/Posnr',formatter:'.formatter.fnNoAllZeros'}" />
                     <Label id="_IDGenLabel4" text="{path:'meta>/Profile',formatter:'.formatter.fnProfile'}" />
                     <ToolbarSpacer id="_IDGenToolbarSpacer2" />
-                    <Button text="{i18n>btnITP}" id="btnITP" enabled="{meta>/Active}" type="Emphasized" press="onUpdateITP" icon="sap-icon://copy" />
+                    <Button text="{i18n>btnITP}" id="btnITP" visible="{meta>/ITPButton}" type="Emphasized" press="onUpdateITP" icon="sap-icon://copy" />
                     <Button text="{i18n>btnComplete}" id="btnComplete" enabled="{meta>/Active}" press="onComplete" icon="sap-icon://complete" />
                     <Button text="{i18n>btnSave}" id="btnSave" enabled="{meta>/Active}" press="onSave" icon="sap-icon://save" />
 					<Button id="_IDGenButton1" icon="sap-icon://message-popup" text="{msgModel>/messagesLength}" type="Emphasized" press="handleMessagePopoverPress" />

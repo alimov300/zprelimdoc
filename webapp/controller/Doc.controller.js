@@ -7,6 +7,7 @@ sap.ui.define(
     "sap/m/MessagePopoverItem",
     "sap/m/Link",
     "sap/ui/model/json/JSONModel",
+    "sap/m/MessageToast",
   ],
   function (
     BaseController,
@@ -15,7 +16,8 @@ sap.ui.define(
     MessagePopover,
     MessagePopoverItem,
     Link,
-    JSONModel
+    JSONModel,
+    MessageToast
   ) {
     "use strict";
 
@@ -106,6 +108,31 @@ sap.ui.define(
             var mModel = new sap.ui.model.json.JSONModel();
             mModel.setData({ Active: true });
             that.getView().setModel(mModel, "meta");
+
+            var oProdModel = that.getView().getModel("prod");
+
+            oProdModel.read("/ITPChangeSet", {
+              json: true,
+                        filters: [ new sap.ui.model.Filter("SalesOrderID", sap.ui.model.FilterOperator.EQ, evt.data.Vbeln ),
+                                   new sap.ui.model.Filter("SalesOrderItem", sap.ui.model.FilterOperator.EQ, evt.data.Posnr)],
+              success: function (data) {
+                 debugger;
+                 if(!data){
+                  mModel.setProperty("/ITPButton", false);
+                 }
+                 if(!data.results){
+                  mModel.setProperty("/ITPButton", false);
+                 }
+                 if(data.results.length > 0){
+                    mModel.setProperty("/ITPButton", true);
+                 }else{
+                    mModel.setProperty("/ITPButton", false);
+                 }
+              },
+              error: function (error) {
+                debugger;
+              },
+            });
 
             // var oDocstat = evt.data.Docstat;
 
@@ -625,15 +652,15 @@ sap.ui.define(
 
         var oTemplate = new sap.m.ColumnListItem({
             cells: [
-              new sap.m.Label({ text: "{prod>SalesOrderID}" }),
-              new sap.m.Label({ text: "{prod>SalesOrderItem}" }),
-              new sap.m.Label({ text: "{prod>DocContent}" }),
+              new sap.m.Label({ text: "{= +${prod>DocContent} }" }),
               new sap.m.Label({ text: "{prod>DocContentDescr}" }),
+              new sap.m.Label({ text: "{ path: 'prod>ReleaseTimestamp',type: 'sap.ui.model.type.DateTime',formatOptions: {pattern: 'yyyy-MM-dd HH:mm' } }" }),
+              //new sap.m.Label({ text: "{ path: 'prod>ReleaseTime' }" }),
               new sap.ui.core.Icon({ src: "{= ${prod>ModifyState} === 'C' ? 'sap-icon://create' :  ${prod>ModifyState} === 'U' ? 'sap-icon://edit' : 'sap-icon://delete'  }" }),
             ],
             type: "Active",
             press: function (evt) {
-              that.onTemplateListPress(evt);
+              that.onITPListPress(evt);
             },
           });
 
@@ -656,10 +683,6 @@ sap.ui.define(
         
         var oPosnr = "";
 
-        // this.getView().byId("listTemplates").columns = [
-        //   new sap.m.Column(),
-        //   new sap.m.Column(),
-        // ];
 
         var rModel = that.getView().getModel("backend");
 
@@ -714,61 +737,9 @@ sap.ui.define(
 
                 break;
               case "Accept":
-                // var sVbeln = that.getView().byId("fldDocument").getValue();
-                // var sPosnr = that.getView().byId("fldPosition").getValue();
 
-                // var oSendData = {
-                //   key: {
-                //     vbeln: that.Vbeln,
-                //     posnr: that.Posnr,
-                //   },
-                //   template_key: { vbeln: sVbeln, posnr: sPosnr },
-                //   docids: aSelected,
-                // };
-                // var rModel = that.getView().getModel("backend");
-                // rModel.callFunction("/SetRefTemplate", {
-                //   method: "GET",
-                //   urlParameters: {
-                //     Vbeln: that.Vbeln,
-                //     Posnr: that.Posnr,
-                //     Vbeln_templ: sVbeln,
-                //     Posnr_templ: sPosnr,
-                //   },
-                //   error: function (oData) {
-                //     var oBundle = that
-                //       .getView()
-                //       .getModel("i18n")
-                //       .getResourceBundle();
-                //     var sMsg = "";
-                //     try {
-                //       var oResponse = JSON.parse(oData.response.body);
-                //       sMsg = oResponse.error.message.value;
-                //     } catch (e) {
-                //       sMsg = oBundle.getText(
-                //         "msgSDocNotFound",
-                //         that.getView().byId("vbeln")
-                //       );
-                //     }
-                //     var newMsgs = {
-                //       messagesLength: 1,
-                //       items: [
-                //         {
-                //           type: oBundle.getText("msgError"),
-                //           title: oBundle.getText("msgErrorTitle"),
-                //           description: sMsg,
-                //           counter: 1,
-                //         },
-                //       ],
-                //     };
-                //     that.getView().getModel("msgModel").setData(newMsgs);
-                //     that.handleMessagePopover();
-                //   },
-                //   success: function (oData, Resp) {},
-                // });
 
-                //that.getView().byId("docPanel").setHeight("100%");
 
-                // this.onProfileLoad({ skipCheck: true, sendData: oSendData });
             }
 
             $.each(
@@ -785,15 +756,58 @@ sap.ui.define(
 
           //this.getView().byId("btnITP").setVisible(oParams.load);
           //if (oParams.Docstat === "") {
-            this.getView().byId("btnITPLoad").attachPress(fnPressHandler, this);
+            this.getView().byId("btnITPLoad").attachPress(this.onITPListPress, this);
           //} else {
           //  this.getView().byId("btnITPLoad").attachPress(fnPressHandler, this);
           //}
 
-          this.getView().byId("btnITPCancel").attachPress(fnPressHandler, this);
+          this.getView().byId("btnITPCancel").attachPress(function(){that.oITPDialog.close();}, this);
 
         that.oITPDialog.open();
 
+      },
+
+      onITPListPress : function (evt) {        
+
+        let aSelected = [];
+
+        const oProdModel = this.getView().getModel("prod");
+
+        this.getView().byId("listITPs").getSelectedItems().forEach(function (val, idx, o) {
+
+            aSelected.push(oProdModel.getObject(val.getBindingContextPath()));
+
+        });
+
+        if(aSelected.length > 0){
+          const oITP = {
+            SalesOrderID: this.Vbeln,
+            SalesOrderItem: this.Posnr,
+           // Profile: this.Profile || "",
+            ItemToITPChange: aSelected
+          };
+
+          oProdModel.create("/SalesItemChangeKeySet", oITP, {
+            method: "POST",
+            success() {
+              debugger;
+              // const oSalesItem = aSalesItems.find(
+              //   (el) => el.SalesOrderItem === oSalesOrder.SalesOrderItem
+              // ) || { ItpState: "" };
+              // if (oSalesItem.ItpState === "") oCtrl.onToggleRelease();
+  
+              MessageToast.show("Saved"
+                // oLangModel
+                //   .getResourceBundle()
+                //   .getText(this.Profile === "" ? "msgITPSaved" : "msgProfileSaved")
+              );
+            },
+            error() {
+              debugger;
+            },
+          });
+
+        }
       },
 
       onSave: function () {

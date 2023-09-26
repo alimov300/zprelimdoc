@@ -9,21 +9,15 @@
           <Table id="listITPs" class="sapUiResponsiveMargin" width="auto" mode="MultiSelect">															
 							  <columns>
 								<Column  width="20%">					
-								<Text  />				
+								<Text text="DocContent"/>				
 								</Column>								
-								<Column >
-								<Text  />
+								<Column  width="34%">
+								<Text text="Description" />
 								</Column>
-                <Column >
-								<Text  />
+                				<Column >
+								<Text text="Date" />
 								</Column>
-                <Column >
-								<Text  />
-								</Column>
-								<Column >
-								<Text  />
-								</Column>
-                <Column >
+                				<Column hAlign="End" >
 								<Text  />
 								</Column>
 							  </columns>
