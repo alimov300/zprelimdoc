@@ -25,6 +25,20 @@ controllerName="zprelimdoc.controller.DocDetail" xmlns:html="http://www.w3.org/1
 			columnsM="6"
 			singleContainerFullSize="true" >
 			<laf:content>
+                <Label text="{i18n>lblPrelimDate}" class="" labelFor="fldPrelimDate" />
+                        <DatePicker
+                            id="fldPrelimDate"
+                            enabled="{/Active}"
+                            change="runValidate"
+                            valueState="{parts: [{path: '/Active'},{path: '/Status4'}], formatter: '.formatter.fnUiStatus'}"
+                            valueFormat="yyyyMMdd"
+                            displayFormat="dd.MM.yyyy"
+                            value="{path:'/PrelimDate',
+                valueFormat:'yyyyMMdd', type:'sap.ui.model.type.Date',
+                 formatOptions: { style: 'medium',
+                 source: {pattern: 'yyyy-MM-ddTHH:mm:ss.SSSZ'},
+                 strictParsing: true}}"
+                        />
 				<Label text="{i18n>lblStatus}" class="" labelFor="cmbSddcStatus" />
                         <ComboBox
                             id="cmbSddcStatus"
@@ -39,8 +53,8 @@ controllerName="zprelimdoc.controller.DocDetail" xmlns:html="http://www.w3.org/1
                         >
                             <core:ListItem key="{meta>Value}" text="{meta>Text}" />
                         </ComboBox>
-				<Label text="{i18n>lblDokar}" class="" labelFor="cmbDokart" />
-                        <ComboBox
+				<Label text="{i18n>lblDokar}" visible="false" class="" labelFor="cmbDokart" />
+                        <ComboBox visible="false"
                             id="cmbDokart"
                             selectedKey="{/Dokar}"
                             selectionChange="runValidate"
@@ -65,20 +79,7 @@ controllerName="zprelimdoc.controller.DocDetail" xmlns:html="http://www.w3.org/1
                         >
                             <core:ListItem key="{meta>Value}" text="{meta>Text}" />
                         </ComboBox>
-				<Label text="{i18n>lblPrelimDate}" class="" labelFor="fldPrelimDate" />
-                        <DatePicker
-                            id="fldPrelimDate"
-                            enabled="{/Active}"
-                            change="runValidate"
-                            valueState="{parts: [{path: '/Active'},{path: '/Status4'}], formatter: '.formatter.fnUiStatus'}"
-                            valueFormat="yyyyMMdd"
-                            displayFormat="dd.MM.yyyy"
-                            value="{path:'/PrelimDate',
-                valueFormat:'yyyyMMdd', type:'sap.ui.model.type.Date',
-                 formatOptions: { style: 'medium',
-                 source: {pattern: 'yyyy-MM-ddTHH:mm:ss.SSSZ'},
-                 strictParsing: true}}"
-                        />
+				
                         <Label text="{i18n>lblPlansIfs}" class="" labelFor="cmbPlansIfs" />
                         <ComboBox
                             id="cmbPlansIfs"
@@ -107,8 +108,8 @@ controllerName="zprelimdoc.controller.DocDetail" xmlns:html="http://www.w3.org/1
                  source: {pattern: 'yyyy-MM-ddTHH:mm:ss.SSSZ'},
                  strictParsing: true}}"
                         />
-                        <Label text="{i18n>lblPlansEfs}" class="" labelFor="cmbPlansEfs" />
-                        <ComboBox
+                        <Label text="{i18n>lblPlansEfs}" visible="false" class="" labelFor="cmbPlansEfs" />
+                        <ComboBox visible="false" 
                             id="cmbPlansEfs"
                             selectedKey="{/PlansEfs}"
                             enabled="false"

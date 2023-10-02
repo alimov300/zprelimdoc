@@ -103,9 +103,9 @@
                                     <FlexItemData id="_IDGenFlexItemData1" growFactor="1" />
                                 </layoutData>
                             </ToggleButton>
-                            <HBox id="_IDGenHBox1d" width="100%" alignItems="End" class="sapUiMediumMarginBegin">
+                            <HBox width="100%" alignItems="End" class="sapUiMediumMarginBegin">
                                 <items>
-                                    <Text id="_IDGenText1d" visible="{path: 'DocList>Selectable', formatter: '.formatter.fnSelectableFormatter'}" text="{path: 'DocList>DocContent', formatter: '.formatter.fnDocContentFormatter'}" />
+                                    <Text visible="{path: 'DocList>Selectable', formatter: '.formatter.fnSelectableFormatter'}" text="{path: 'DocList>DocContent', formatter: '.formatter.fnDocContentFormatter'}" />
                                 </items>
                             </HBox>
                             <Label id="_IDGenLabel5d" text="{DocList>DcDescr}" visible="{path: 'DocList>Selectable', formatter: '.formatter.fnSelectableFormatter'}" width="260px" class="sapUiMediumMarginBegin" />
