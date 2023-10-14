@@ -112,7 +112,7 @@
                             <Label id="_IDGenLabel5d" text="{DocList>DcDescr}" visible="{path: 'DocList>Selectable', formatter: '.formatter.fnSelectableFormatter'}" width="260px" class="sapUiMediumMarginBegin" />
 
                             <!-- <Text id="_IDGenText2d" text="{DocList>DcDescr}" visible="{path: 'DocList>Selectable', formatter: '.formatter.fnNonSelectableFormatter'}" class="sapUiTinyMarginBegin sapThemeBaseBG" /> -->
-                            <Button id="_IDGenButton2d" text="{DocList>DcDescr}" visible="{path: 'DocList>Selectable', formatter: '.formatter.fnNonSelectableFormatter'}" class="sapUiTinyMarginBegin sapThemeBaseBG" />
+                            <Button id="_IDGenButton2d" text="{DocList>DcDescr}" press="toogleTreeClose" visible="{path: 'DocList>Selectable', formatter: '.formatter.fnNonSelectableFormatter'}" class="sapUiTinyMarginBegin sapThemeBaseBG zNoBorder" />
                         </CustomListItem>
                     </List>
                 </l:content>

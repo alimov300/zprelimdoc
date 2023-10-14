@@ -16,3 +16,7 @@ span.zPosition {
     font-weight: bolder;
     margin-left: 50px;
 }
+
+button.zNoBorder span {
+    border: 0px;
+}

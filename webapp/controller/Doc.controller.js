@@ -810,6 +810,36 @@ sap.ui.define(
         }
       },
 
+      toogleTreeClose: function (oEvent, oData) {
+        let oModel = oEvent.getSource().getBinding("text").getModel();
+
+        const sPath = oEvent.getSource().getBinding("text").getContext().getPath();
+        const oList = this.getView().byId("list");
+        const oParent = oModel.getObject(sPath);
+
+        $.each(oList.getItems(), function (idx, el) {
+          debugger;
+          let zPath = el.getBindingContextPath();
+          if(sPath !== zPath){
+
+            let oObject = oModel.getObject(zPath); 
+
+            if(oParent.DocContent == oObject.ParentDocContent){
+              // zu
+              el.setVisible(!el.getVisible());
+
+            }else{
+              // auf
+              //el.setVisible(true);
+            }
+
+          }
+
+
+        });
+
+      },
+
       onSave: function () {
         this.addCurrentDetails();
 
