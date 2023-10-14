@@ -106,11 +106,13 @@
                             <HBox width="100%" alignItems="End" class="sapUiMediumMarginBegin">
                                 <items>
                                     <Text visible="{path: 'DocList>Selectable', formatter: '.formatter.fnSelectableFormatter'}" text="{path: 'DocList>DocContent', formatter: '.formatter.fnDocContentFormatter'}" />
+                                    <!-- <Button visible="{path: 'DocList>Selectable', formatter: '.formatter.fnSelectableFormatter'}" text="{path: 'DocList>DocContent', formatter: '.formatter.fnDocContentFormatter'}" /> -->
                                 </items>
                             </HBox>
                             <Label id="_IDGenLabel5d" text="{DocList>DcDescr}" visible="{path: 'DocList>Selectable', formatter: '.formatter.fnSelectableFormatter'}" width="260px" class="sapUiMediumMarginBegin" />
 
-                            <Text id="_IDGenText2d" text="{DocList>DcDescr}" visible="{path: 'DocList>Selectable', formatter: '.formatter.fnNonSelectableFormatter'}" class="sapUiTinyMarginBegin sapThemeBaseBG" />
+                            <!-- <Text id="_IDGenText2d" text="{DocList>DcDescr}" visible="{path: 'DocList>Selectable', formatter: '.formatter.fnNonSelectableFormatter'}" class="sapUiTinyMarginBegin sapThemeBaseBG" /> -->
+                            <Button id="_IDGenButton2d" text="{DocList>DcDescr}" visible="{path: 'DocList>Selectable', formatter: '.formatter.fnNonSelectableFormatter'}" class="sapUiTinyMarginBegin sapThemeBaseBG" />
                         </CustomListItem>
                     </List>
                 </l:content>
