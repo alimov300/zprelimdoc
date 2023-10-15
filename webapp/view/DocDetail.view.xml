@@ -25,6 +25,20 @@ controllerName="zprelimdoc.controller.DocDetail" xmlns:html="http://www.w3.org/1
 			columnsM="6"
 			singleContainerFullSize="true" >
 			<laf:content>
+            	<Label text="{i18n>lblStatus}" class="" labelFor="cmbSddcStatus" />
+                        <ComboBox
+                            id="cmbSddcStatus"
+                            selectedKey="{/SddcStatus}"
+                            enabled="{/Active}"
+                            valueState="{parts: [{path: '/Active'},{path: '/Status1'}], formatter: '.formatter.fnUiStatus'}"
+                            
+                            selectionChange="runValidate"
+                            items="{
+                                    path : 'meta>/DomainValuesSet',
+                                    filters : [ { path : 'Fieldname', operator : 'EQ', value1 : 'SddcStatus'} ] }"
+                        >
+                            <core:ListItem key="{meta>Value}" text="{meta>Text}" />
+                        </ComboBox>
                 <Label text="{i18n>lblPrelimDate}" class="" labelFor="fldPrelimDate" />
                         <DatePicker
                             id="fldPrelimDate"
@@ -39,20 +53,21 @@ controllerName="zprelimdoc.controller.DocDetail" xmlns:html="http://www.w3.org/1
                  source: {pattern: 'yyyy-MM-ddTHH:mm:ss.SSSZ'},
                  strictParsing: true}}"
                         />
-				<Label text="{i18n>lblStatus}" class="" labelFor="cmbSddcStatus" />
-                        <ComboBox
-                            id="cmbSddcStatus"
-                            selectedKey="{/SddcStatus}"
-                            enabled="{/Active}"
-                            valueState="{parts: [{path: '/Active'},{path: '/Status1'}], formatter: '.formatter.fnUiStatus'}"
-                            
-                            selectionChange="runValidate"
-                            items="{
-                                    path : 'meta>/DomainValuesSet',
-                                    filters : [ { path : 'Fieldname', operator : 'EQ', value1 : 'SddcStatus'} ] }"
-                        >
-                            <core:ListItem key="{meta>Value}" text="{meta>Text}" />
-                        </ComboBox>
+                        <Label text="{i18n>lblFinalDate}" class="" labelFor="fldFinalDate" />
+                        <DatePicker
+                            id="fldFinalDate"
+                            enabled="{path: '/Active'}"
+                            change="runValidate"
+                            valueFormat="yyyyMMdd"
+                            displayFormat="dd.MM.yyyy"
+                            valueState="{parts: [{path: '/Active'},{path: '/Status6'}], formatter: '.formatter.fnUiStatus'}"
+                            value="{path:'/FinalDate',
+                 valueFormat:'yyyyMMdd',
+                 type:'sap.ui.model.type.Date',
+                 formatOptions: { style: 'medium',
+                 source: {pattern: 'yyyy-MM-ddTHH:mm:ss.SSSZ'},
+                 strictParsing: true}}"
+                        />
 				<Label text="{i18n>lblDokar}" visible="false" class="" labelFor="cmbDokart" />
                         <ComboBox visible="false"
                             id="cmbDokart"
@@ -92,22 +107,7 @@ controllerName="zprelimdoc.controller.DocDetail" xmlns:html="http://www.w3.org/1
                              filters : [ { path : 'Fieldname', operator : 'EQ', value1 : 'PlanPos'} ] }"
                         >
                             <core:ListItem key="{meta>Value}" text="{meta>Text}" />
-                        </ComboBox>
-                        <Label text="{i18n>lblFinalDate}" class="" labelFor="fldFinalDate" />
-                        <DatePicker
-                            id="fldFinalDate"
-                            enabled="{path: '/Active'}"
-                            change="runValidate"
-                            valueFormat="yyyyMMdd"
-                            displayFormat="dd.MM.yyyy"
-                            valueState="{parts: [{path: '/Active'},{path: '/Status6'}], formatter: '.formatter.fnUiStatus'}"
-                            value="{path:'/FinalDate',
-                 valueFormat:'yyyyMMdd',
-                 type:'sap.ui.model.type.Date',
-                 formatOptions: { style: 'medium',
-                 source: {pattern: 'yyyy-MM-ddTHH:mm:ss.SSSZ'},
-                 strictParsing: true}}"
-                        />
+                        </ComboBox>                        
                         <Label text="{i18n>lblPlansEfs}" visible="false" class="" labelFor="cmbPlansEfs" />
                         <ComboBox visible="false" 
                             id="cmbPlansEfs"
@@ -121,6 +121,8 @@ controllerName="zprelimdoc.controller.DocDetail" xmlns:html="http://www.w3.org/1
                         >
                             <core:ListItem key="{meta>Value}" text="{meta>Text}" />
                         </ComboBox>
+                        <Label text="{i18n>lblComment}" class="" labelFor="fldComment" />
+                        <TextArea id="fldComment" enabled="{/Active}" liveChange="runValidate" valueState="{parts: [{path: '/Active'},{path: '/Status10'}], formatter: '.formatter.fnUiStatus'}" value="{/DcComment}" width="100%" />
                         <Label text="{i18n>lblCustDocNo}" class="" labelFor="fldCustDocNo" />
                         <Input id="fldCustDocNo" enabled="{/Active}" maxLength="255" valueState="{parts: [{path: '/Active'},{path: '/Status8'}], formatter: '.formatter.fnUiStatus'}" value="{/CustomerDocno}" />
                         <Label text="{i18n>lblPenal}" class="" labelFor="cmbPenal" />
@@ -135,9 +137,7 @@ controllerName="zprelimdoc.controller.DocDetail" xmlns:html="http://www.w3.org/1
                              filters : [ { path : 'Fieldname', operator : 'EQ', value1 : 'Penal'} ] }"
                         >
                             <core:ListItem key="{meta>Value}" text="{meta>Text}" />
-                        </ComboBox>
-                        <Label text="{i18n>lblComment}" class="" labelFor="fldComment" />
-                        <TextArea id="fldComment" enabled="{/Active}" liveChange="runValidate" valueState="{parts: [{path: '/Active'},{path: '/Status10'}], formatter: '.formatter.fnUiStatus'}" value="{/DcComment}" width="100%" />
+                        </ComboBox>                        
 
 			</laf:content>
 		</laf:SimpleForm>
