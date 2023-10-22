@@ -111,6 +111,10 @@ sap.ui.define(
 
             var oProdModel = that.getView().getModel("prod");
 
+            if(evt.data.Vbeln === undefined && evt.data.Posnr === undefined){
+              return;
+            }
+
             oProdModel.read("/ITPChangeSet", {
               json: true,
                         filters: [ new sap.ui.model.Filter("SalesOrderID", sap.ui.model.FilterOperator.EQ, evt.data.Vbeln ),
@@ -133,21 +137,15 @@ sap.ui.define(
                 debugger;
               },
             });
-
-            // var oDocstat = evt.data.Docstat;
-
-
-
-            // if (!oDocstat || oDocstat.length == 0) {
-            //   that.onProfile({ load: true, save: false, Docstat: evt.data.Docstat, Vbeln: evt.data.Vbeln, Posnr: evt.data.Posnr, initial: true });
-            // } else {
-            //   that.onBeforeShowHandler({ Vbeln: evt.data.Vbeln, Posnr: evt.data.Posnr, Docstat: evt.data.Docstat });
-            // }
           },
           onAfterShow: function (evt) {
             debugger;
 
             var oUiModel = sap.ui.getCore().getModel("UIModel");
+
+            if(evt.data.Vbeln === undefined && evt.data.Posnr === undefined){
+              return;
+            }
 
             if (!oUiModel) {
               oUiModel = new sap.ui.model.json.JSONModel();
@@ -173,15 +171,6 @@ sap.ui.define(
               });
             }
 
-            // var oDocstat = evt.data.Docstat;
-
-            // if (!oDocstat || oDocstat.length == 0) {
-            //   that.onProfile({ load: true, save: false, Docstat: evt.data.Docstat, Vbeln: evt.data.Vbeln, Posnr: evt.data.Posnr, initial: true });
-            // } else {
-            //   that.onBeforeShowHandler({ Vbeln: evt.data.Vbeln, Posnr: evt.data.Posnr, Docstat: evt.data.Docstat });
-            // }
-
-            //sap.ui.core.BusyIndicator.hide();
             that.getView().setBusy(false);
             var oModel = evt.to.getModel();
           },
@@ -195,7 +184,72 @@ sap.ui.define(
       },
 
       _onRouteMatched: function (oEvent) {
-        this._orderId = oEvent.getParameter("arguments").orderId;
+
+        debugger;
+
+        var that = this;
+
+        let sVbeln = oEvent.getParameters().arguments.Vbeln;
+        let sPosnr = oEvent.getParameters().arguments.Posnr;
+        let sProfile = oEvent.getParameters().arguments.Profile;
+        let sDocstat = oEvent.getParameters().arguments.Docstat;
+
+        var mModel = new sap.ui.model.json.JSONModel();
+        mModel.setData({ Active: true });
+        that.getView().setModel(mModel, "meta");
+
+        var oProdModel = that.getView().getModel("prod");
+
+        oProdModel.read("/ITPChangeSet", {
+          json: true,
+                    filters: [ new sap.ui.model.Filter("SalesOrderID", sap.ui.model.FilterOperator.EQ, sVbeln ),
+                               new sap.ui.model.Filter("SalesOrderItem", sap.ui.model.FilterOperator.EQ, sPosnr)],
+          success: function (data) {
+             debugger;
+             if(!data){
+              mModel.setProperty("/ITPButton", false);
+             }
+             if(!data.results){
+              mModel.setProperty("/ITPButton", false);
+             }
+             if(data.results.length > 0){
+                mModel.setProperty("/ITPButton", true);
+             }else{
+                mModel.setProperty("/ITPButton", false);
+             }
+          },
+          error: function (error) {
+            debugger;
+          },
+        });
+
+
+        var oUiModel = sap.ui.getCore().getModel("UIModel");
+
+            if (!oUiModel) {
+              oUiModel = new sap.ui.model.json.JSONModel();
+              oUiModel.setData({ DetailsErrors: false, finalized: false });
+              sap.ui.getCore().setModel(oUiModel, "UIModel");
+            } else {
+              oUiModel.setProperty("/finalized", false);
+              oUiModel.setProperty("/saved", false);
+              oUiModel.setProperty("/hasChanges", false);
+            }
+
+            if (sProfile !== "") {
+              that.onProfileLoad({
+                profile_vbeln: sVbeln,
+                profile_posnr: sPosnr,
+                profile_name: sProfile,
+              });
+            } else {
+              that.onBeforeShowHandler({
+                Vbeln: sVbeln,
+                Posnr: sPosnr,
+                Docstat: sDocstat,
+              });
+            }
+
       },
 
       onBeforeShowHandler: function (oParams) {
@@ -842,6 +896,8 @@ sap.ui.define(
 
       onSave: function () {
         this.addCurrentDetails();
+
+        oMessagePopover.close();
 
         this.getView().setBusy(true);
 
