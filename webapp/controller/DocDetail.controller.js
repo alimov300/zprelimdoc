@@ -183,6 +183,7 @@ sap.ui.define([
       }
 
       var mdocArray = sap.ui.getCore().mdocArray;
+      var mdocArrayOld = sap.ui.getCore().mdocArrayOld;
       this.jModel = this.getView().getModel();
 
       var that = this;
@@ -197,6 +198,7 @@ sap.ui.define([
       if ($.grep(mdocArray, function (e) { return e.DocContent == that.jModel.getData().DocContent }).length == 0) {
         if (this.jModel.getData().DocContent) {
           mdocArray.push(JSON.parse(JSON.stringify(that.jModel.getData())));
+          mdocArrayOld.push(JSON.parse(JSON.stringify(that.jModel.getData())));
         }
       }
       else {
@@ -303,6 +305,7 @@ sap.ui.define([
       var jModel = this.getView().getModel();
 
       var mdocArray = sap.ui.getCore().mdocArray;
+      var mdocArrayOld = sap.ui.getCore().mdocArrayOld;
 
       var availModel = $.grep(mdocArray, function (e) { return e.DocContent == model.data.item.DocContent });
 

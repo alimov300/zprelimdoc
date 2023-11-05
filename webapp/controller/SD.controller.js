@@ -717,6 +717,7 @@ sap.ui.define([
       var bus = sap.ui.getCore().getEventBus();
 
       sap.ui.getCore().mdocArray = [];
+      sap.ui.getCore().mdocArrayOld = [];
 
  //     if(true){
 

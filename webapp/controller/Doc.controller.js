@@ -83,6 +83,9 @@ sap.ui.define(
         var jModel = new sap.ui.model.json.JSONModel();
         this.getView().setModel(jModel);
 
+        var jModelBkp = new sap.ui.model.json.JSONModel();
+        this.getView().setModel(jModelBkp, "DocListOld");
+
         this.getOwnerComponent().setModel(jModel, "DocList");
         var mModel = new sap.ui.model.json.JSONModel();
         mModel.setData({ Active: true, Checkboxes: true });
@@ -917,6 +920,7 @@ sap.ui.define(
         var sJson = "";
         var sdDocCont = [];
         var mdocArray = sap.ui.getCore().mdocArray;
+        var mdocArrayOld = sap.ui.getCore().mdocArrayOld;
 
         $.each(mdocArray, function (index, obj) {
           if (obj.PrelimDate) {
@@ -2042,6 +2046,7 @@ sap.ui.define(
               display_msg(oData);
 
               sap.ui.getCore().mdocArray.length = 0;
+              sap.ui.getCore().mdocArrayOld.length = 0;
 
               if (!oData.ROOT.CONTENT) {
                 return;
@@ -2085,6 +2090,7 @@ sap.ui.define(
                 data.SDDocCont_MetaSet.Vbeln = el.SDDOCCONT_METASET.Vbeln;
 
                 sap.ui.getCore().mdocArray.push(data);
+                sap.ui.getCore().mdocArrayOld.push(JSON.parse(JSON.stringify(data)));
 
                 $.each(
                   el.SDDOCCONT_TARGTSET.RESULTS,
@@ -2366,6 +2372,7 @@ sap.ui.define(
                 display_msg1(oData);
 
                 sap.ui.getCore().mdocArray.length = 0;
+                sap.ui.getCore().mdocArrayOld.length = 0;
 
                 if (!oData.ROOT.CONTENT) {
                   return;
@@ -2412,6 +2419,7 @@ sap.ui.define(
                   data.SDDocCont_MetaSet.Vbeln = el.SDDOCCONT_METASET.Vbeln;
 
                   sap.ui.getCore().mdocArray.push(data);
+                  sap.ui.getCore().mdocArrayOld.push(JSON.parse(JSON.stringify(data)));
 
                   $.each(
                     el.SDDOCCONT_TARGTSET.RESULTS,
@@ -2569,6 +2577,7 @@ sap.ui.define(
                 display_msg(oData);
 
                 sap.ui.getCore().mdocArray.length = 0;
+                sap.ui.getCore().mdocArrayOld.length = 0;
 
                 if (!oData.ROOT.CONTENT) {
                   return;
@@ -2615,6 +2624,7 @@ sap.ui.define(
                   data.SDDocCont_MetaSet.Vbeln = el.SDDOCCONT_METASET.Vbeln;
 
                   sap.ui.getCore().mdocArray.push(data);
+                  sap.ui.getCore().mdocArrayOld.push(JSON.parse(JSON.stringify(data)));
 
                   $.each(
                     el.SDDOCCONT_TARGTSET.RESULTS,
@@ -2683,6 +2693,8 @@ sap.ui.define(
               success: function (oData, Resp) {
                 that.getView().getModel().setData({});
                 that.getView().getModel().setData(oData);
+                
+                that.getView().getModel("DocListOld").setData(JSON.parse(JSON.stringify(oData)));
                 //that.getView().byId("docPanel").setHeight("100%");
 
                 var listControl = that.getView().byId("list");
@@ -2830,18 +2842,67 @@ sap.ui.define(
           .byId("btnProfileSave")
           .detachPress(that.onProfileSave, that);
       },
+
       onProfileCancel: function () {
         //this.onProfileLoad({skipCheck: true, NoProfile: true});
         //this.getView().byId("dlgProfile").close();
       },
 
       onBack: function () {
-        var bus = sap.ui.getCore().getEventBus();
+        debugger;
 
-        bus.publish("nav", "back", {
-          id: "PosList",
-          data: {},
+        var that = this;
+
+        const oDocList = this.getView().getModel();
+        const oDocListOld = this.getView().getModel("DocListOld");
+        const sDocList = JSON.stringify(oDocList.getData());
+        const sDocListOld = JSON.stringify(oDocListOld.getData());
+
+        var mdocArray = sap.ui.getCore().mdocArray;
+        var mdocArrayOld = sap.ui.getCore().mdocArrayOld;
+
+        if(sDocList !== sDocListOld || JSON.stringify(mdocArray) !== JSON.stringify(mdocArrayOld) ){
+          debugger;
+
+          sap.m.MessageBox.confirm("Die Daten wurden geändert. Wollen Sie zuerst speichern?", {
+            title: "Frage",                                    // default
+            onClose: null,                                       // default
+            styleClass: "",                                      // default
+            actions: [ sap.m.MessageBox.Action.OK,
+                       sap.m.MessageBox.Action.CANCEL ],         // default
+            emphasizedAction: sap.m.MessageBox.Action.OK,        // default
+            initialFocus: null,                                  // default
+            textDirection: sap.ui.core.TextDirection.Inherit,     // default
+
+            onClose: function(oAction){
+              if(oAction == sap.m.MessageBox.Action.OK){
+
+                that.onSave();
+                oDocListOld.setData(oDocList.getData());
+
+              }else{
+                var bus = sap.ui.getCore().getEventBus();
+
+                bus.publish("nav", "back", {
+                  id: "PosList",
+                  data: {},
+                });
+
+              }
+            }
         });
+        }else{
+
+          var bus = sap.ui.getCore().getEventBus();
+
+                bus.publish("nav", "back", {
+                  id: "PosList",
+                  data: {},
+                });
+
+        }
+
+        
       },
     });
   }
