@@ -1,13 +1,31 @@
-<mvc:View xmlns:u="sap.ui.unified" xmlns:core="sap.ui.core" 
-xmlns:commons="sap.ui.commons" xmlns:mvc="sap.ui.core.mvc" xmlns="sap.m" 
-xmlns:l="sap.ui.commons.layout" xmlns:la="sap.ui.layout" xmlns:laf="sap.ui.layout.form"  
-controllerName="zprelimdoc.controller.DocDetail" xmlns:html="http://www.w3.org/1999/xhtml" xmlns:l2="sap.ui.layout">
+<mvc:View xmlns:u="sap.ui.unified" 
+          xmlns:core="sap.ui.core" 
+        xmlns:commons="sap.ui.commons" 
+        xmlns:mvc="sap.ui.core.mvc" 
+        xmlns="sap.m" 
+        xmlns:l="sap.ui.commons.layout" 
+        xmlns:la="sap.ui.layout" 
+        xmlns:laf="sap.ui.layout.form"  
+        controllerName="zprelimdoc.controller.DocDetail" 
+        xmlns:html="http://www.w3.org/1999/xhtml" 
+        xmlns:l2="sap.ui.layout">
     <Label id="_IDGenLabel1dd" class="zPosition" text="{parts: [{path: '/DocContent'}], formatter: '.formatter.fnRemoveNullsExt'}" />
     <IconTabBar id="iconTabBar" class="sapUiResponsiveContentPadding">
         <items>
             <IconTabFilter id="tabGeneral" icon="sap-icon://detail-view" tooltip="{i18n>tabGeneral}">
-            	<!-- <VBox class="sapUiSmallMargin"> -->
-		<laf:SimpleForm id="SimpleFormDisplay354"
+<la:Splitter height="auto" orientation="Vertical">
+		<la:Splitter>
+			<la:layoutData>
+				<la:SplitterLayoutData size="auto" />
+			</la:layoutData>
+			<la:contentAreas>
+				<!-- <Button width="100%" text="Content 2">
+					<layoutData>
+						<la:SplitterLayoutData size="300px" />
+					</layoutData>
+				</Button> -->
+                <!-- <l2:VerticalLayout width="100%" class="gridWrapper"> -->
+                <laf:SimpleForm id="SimpleFormDisplay354"
 			editable="false"
 			layout="ResponsiveGridLayout"
 			title=""
@@ -140,397 +158,33 @@ controllerName="zprelimdoc.controller.DocDetail" xmlns:html="http://www.w3.org/1
                         </ComboBox>                        
 
 			</laf:content>
-		</laf:SimpleForm>
-	<!-- </VBox> -->
-                <!-- <l2:VerticalLayout width="100%" class="gridWrapper">
-                
-                    <l2:Grid containerQuery="true" hSpacing="0" defaultSpan="XL6 L6 M6 S6">
-                        <Label text="{i18n>lblStatus}" class="sapUiResponsiveMargin" labelFor="cmbSddcStatus" />
-                        <ComboBox
-                            id="cmbSddcStatus"
-                            selectedKey="{/SddcStatus}"
-                            enabled="{/Active}"
-                            valueState="{parts: [{path: '/Active'},{path: '/Status1'}], formatter: '.formatter.fnUiStatus'}"
-                            width="350px"
-                            selectionChange="runValidate"
-                            items="{
-                                    path : 'meta>/DomainValuesSet',
-                                    filters : [ { path : 'Fieldname', operator : 'EQ', value1 : 'SddcStatus'} ] }"
-                        >
-                            <core:ListItem key="{meta>Value}" text="{meta>Text}" />
-                        </ComboBox>////
-                    </l2:Grid>
-                    <l2:Grid containerQuery="true" hSpacing="0" defaultSpan="XL3 L3 M3 S3">
-                        <Label text="{i18n>lblDokar}" class="sapUiResponsiveMargin" labelFor="cmbDokart" />
-                        <ComboBox
-                            id="cmbDokart"
-                            selectedKey="{/Dokar}"
-                            selectionChange="runValidate"
-                            enabled="{/Active}"
-                            valueState="{parts: [{path: '/Active'},{path: '/Status2'}], formatter: '.formatter.fnUiStatus'}"
-                            items="{
-                   path : 'meta>/DomainValuesSet',
-                             filters : [ { path : 'Fieldname', operator : 'EQ', value1 : 'Dokar'} ] }"
-                        >
-                            <core:ListItem key="{meta>Value}" text="{meta>Value} - {meta>Text}" />
-                        </ComboBox>////
-
-                        <Label text="{i18n>lblPlansCre}" class="sapUiResponsiveMargin" labelFor="cmbPlansCre" />
-                        <ComboBox
-                            id="cmbPlansCre"
-                            selectedKey="{/PlansCre}"
-                            enabled="{/Active}"
-                            valueState="{parts: [{path: '/Active'},{path: '/Status3'}], formatter: '.formatter.fnUiStatus'}"
-                            selectionChange="runValidate"
-                            items="{
-                   path : 'meta>/DomainValuesSet',
-                             filters : [ { path : 'Fieldname', operator : 'EQ', value1 : 'PlanPos'} ] }"
-                        >
-                            <core:ListItem key="{meta>Value}" text="{meta>Text}" />
-                        </ComboBox>////
-                    </l2:Grid>
-                    <l2:Grid containerQuery="true" hSpacing="0" defaultSpan="XL3 L3 M3 S3">
-                        <Label text="{i18n>lblPrelimDate}" class="sapUiResponsiveMargin" labelFor="fldPrelimDate" />
-                        <DatePicker
-                            id="fldPrelimDate"
-                            enabled="{/Active}"
-                            change="runValidate"
-                            valueState="{parts: [{path: '/Active'},{path: '/Status4'}], formatter: '.formatter.fnUiStatus'}"
-                            valueFormat="yyyyMMdd"
-                            displayFormat="dd.MM.yyyy"
-                            value="{path:'/PrelimDate',
-                valueFormat:'yyyyMMdd', type:'sap.ui.model.type.Date',
-                 formatOptions: { style: 'medium',
-                 source: {pattern: 'yyyy-MM-ddTHH:mm:ss.SSSZ'},
-                 strictParsing: true}}"
-                        />////
-                        <Label text="{i18n>lblPlansIfs}" class="sapUiResponsiveMargin" labelFor="cmbPlansIfs" />
-                        <ComboBox
-                            id="cmbPlansIfs"
-                            selectedKey="{/PlansIfs}"
-                            valueState="{parts: [{path: '/Active'},{path: '/Status5'}], formatter: '.formatter.fnUiStatus'}"
-                            enabled="{/Active}"
-                            selectionChange="runValidate"
-                            items="{
-                   path : 'meta>/DomainValuesSet',
-                             filters : [ { path : 'Fieldname', operator : 'EQ', value1 : 'PlanPos'} ] }"
-                        >
-                            <core:ListItem key="{meta>Value}" text="{meta>Text}" />
-                        </ComboBox>////
-                    </l2:Grid>
-                    <l2:Grid containerQuery="true" hSpacing="0" defaultSpan="XL3 L3 M3 S3" />
-                    <l2:Grid containerQuery="true" hSpacing="0" defaultSpan="XL3 L3 M3 S3">
-                        <Label text="{i18n>lblFinalDate}" class="sapUiResponsiveMargin" labelFor="fldFinalDate" />
-                        <DatePicker
-                            id="fldFinalDate"
-                            enabled="{path: '/Active'}"
-                            change="runValidate"
-                            valueFormat="yyyyMMdd"
-                            displayFormat="dd.MM.yyyy"
-                            valueState="{parts: [{path: '/Active'},{path: '/Status6'}], formatter: '.formatter.fnUiStatus'}"
-                            value="{path:'/FinalDate',
-                 valueFormat:'yyyyMMdd',
-                 type:'sap.ui.model.type.Date',
-                 formatOptions: { style: 'medium',
-                 source: {pattern: 'yyyy-MM-ddTHH:mm:ss.SSSZ'},
-                 strictParsing: true}}"
-                        />
-                        <Label text="{i18n>lblPlansEfs}" class="sapUiResponsiveMargin" labelFor="cmbPlansEfs" />
-                        <ComboBox
-                            id="cmbPlansEfs"
-                            selectedKey="{/PlansEfs}"
-                            enabled="false"
-                            selectionChange="runValidate"
-                            valueState="{parts: [{path: '/Active'},{path: '/Status7'}], formatter: '.formatter.fnUiStatus'}"
-                            items="{
-                   path : 'meta>/DomainValuesSet',
-                             filters : [ { path : 'Fieldname', operator : 'EQ', value1 : 'PlanPos'} ] }"
-                        >
-                            <core:ListItem key="{meta>Value}" text="{meta>Text}" />
-                        </ComboBox>////
-                    </l2:Grid>
-                    <l2:Grid containerQuery="true" hSpacing="0" defaultSpan="XL3 L3 M3 S3">
-                        <Label text="{i18n>lblCustDocNo}" class="sapUiResponsiveMargin" labelFor="fldCustDocNo" />
-                        <Input id="fldCustDocNo" enabled="{/Active}" maxLength="255" valueState="{parts: [{path: '/Active'},{path: '/Status8'}], formatter: '.formatter.fnUiStatus'}" value="{/CustomerDocno}" />
-                        <Label text="{i18n>lblPenal}" class="sapUiResponsiveMargin" labelFor="cmbPenal" />
-                        <ComboBox
-                            id="cmbPenal"
-                            selectedKey="{/Penal}"
-                            enabled="{/Active}"
-                            selectionChange="runValidate"
-                            valueState="{parts: [{path: '/Active'},{path: '/Status9'}], formatter: '.formatter.fnUiStatus'}"
-                            items="{
-                   path : 'meta>/DomainValuesSet',
-                             filters : [ { path : 'Fieldname', operator : 'EQ', value1 : 'Penal'} ] }"
-                        >
-                            <core:ListItem key="{meta>Value}" text="{meta>Text}" />
-                        </ComboBox>////
-                    </l2:Grid>
-                    <l2:Grid containerQuery="true" hSpacing="0" defaultSpan="XL6 L6 M6 S6">
-                        <Label text="{i18n>lblComment}" class="sapUiResponsiveMargin" labelFor="fldComment" />
-                        <TextArea id="fldComment" enabled="{/Active}" liveChange="runValidate" valueState="{parts: [{path: '/Active'},{path: '/Status10'}], formatter: '.formatter.fnUiStatus'}" value="{/DcComment}" width="100%" />
-                    </l2:Grid>////-->
-                    <l2:VerticalLayout width="100%" class="gridWrapper">
-                    <l2:Grid containerQuery="true" hSpacing="0" defaultSpan="XL12 L12 M12 S12">
-                        <Table noDataText="No Profiles" id="Profiles">
-                            <items>
-                                <ColumnListItem type="Active" id="item0">
-                                    <cells>
-                                        <ComboBox enabled="{/Active}" xmlns="sap.m" id="cmbProfile1" selectedKey="{/SDDocCont_TemplSet/results/0/Template}" items="{path: 'templ1data>/results'}">
-                                            <core:Item key="{templ1data>Template}" text="{templ1data>TemplDescr}" />
-                                        </ComboBox>
-                                        <ComboBox enabled="{/Active}" xmlns="sap.m" id="cmbProfile2" selectedKey="{/SDDocCont_TemplSet/results/1/Template}" items="{path: 'templ2data>/results'}">
-                                            <core:Item key="{templ2data>Template}" text="{templ2data>TemplDescr}" />
-                                        </ComboBox>
-                                        <ComboBox enabled="{/Active}" xmlns="sap.m" id="cmbProfile3" selectedKey="{/SDDocCont_TemplSet/results/2/Template}" items="{path: 'templ3data>/results'}">
-                                            <core:Item key="{templ3data>Template}" text="{templ3data>TemplDescr}" />
-                                        </ComboBox>
-                                        <Text text="stext0" id="text0" />
-                                        <Text text="stext1" id="text1" />
-                                        <Text text="stext2" id="text2" />
-                                    </cells>
-                                </ColumnListItem>
-                            </items>
-                            <columns>
-                                <Column id="column0">
-                                    <header>
-                                        <Label text="{templateModel>/0/Title}" id="label0" />
-                                    </header>
-                                </Column>
-                                <Column id="column1">
-                                    <header>
-                                        <Label text="{templateModel>/1/Title}" id="label1" />
-                                    </header>
-                                </Column>
-                                <Column id="column2">
-                                    <header>
-                                        <Label text="{templateModel>/2/Title}" id="label2" />
-                                    </header>
-                                </Column>
-                            </columns>
-                        </Table>
-                    </l2:Grid>
-                </l2:VerticalLayout> 
-
-                <!-- <l:MatrixLayout id="mlGeneral">
-          <l:MatrixLayoutRow>
-            <l:MatrixLayoutCell>
-            <Label text="{i18n>lblStatus}" class="sapUiResponsiveMargin"
-                labelFor="cmbSddcStatus" />
-
-            </l:MatrixLayoutCell>
-            <l:MatrixLayoutCell colSpan="3">
-            <ComboBox id="cmbSddcStatus" selectedKey="{/SddcStatus}"
-                enabled="{/Active}"
-                valueState="{parts: [{path: '/Active'},{path: '/Status1'}], formatter: '.formatter.fnUiStatus'}"
-                width="350px"
-                selectionChange="runValidate"
-                items="{
-                   path : 'meta>/DomainValuesSet',
-                             filters : [ { path : 'Fieldname', operator : 'EQ', value1 : 'SddcStatus'} ] }">
-                <core:ListItem key="{meta>Value}" text="{meta>Text}" />
-              </ComboBox>
-
-            </l:MatrixLayoutCell>
-
-
-          </l:MatrixLayoutRow>
-          <l:MatrixLayoutRow>
-            <l:MatrixLayoutCell>
-            <Label text="{i18n>lblDokar}" class="sapUiResponsiveMargin"
-                labelFor="cmbDokart" />
-
-            </l:MatrixLayoutCell>
-            <l:MatrixLayoutCell>
-            </l:MatrixLayoutCell>
-            <l:MatrixLayoutCell>
-              <Label text="{i18n>lblPlansCre}" class="sapUiResponsiveMargin"
-                labelFor="cmbPlansCre" />
-            </l:MatrixLayoutCell>
-            <l:MatrixLayoutCell>
-              <ComboBox id="cmbPlansCre" selectedKey="{/PlansCre}"
-                enabled="{/Active}"
-                valueState="{parts: [{path: '/Active'},{path: '/Status3'}], formatter: '.formatter.fnUiStatus'}"
-                 selectionChange="runValidate"
-                items="{
-                   path : 'meta>/DomainValuesSet',
-                             filters : [ { path : 'Fieldname', operator : 'EQ', value1 : 'PlanPos'} ] }">
-                <core:ListItem key="{meta>Value}" text="{meta>Text}" />
-              </ComboBox>
-            </l:MatrixLayoutCell>
-          </l:MatrixLayoutRow>
-          <l:MatrixLayoutRow>
-            <l:MatrixLayoutCell>
-            <Label text="{i18n>lblPrelimDate}" class="sapUiResponsiveMargin"
-                labelFor="fldPrelimDate" />
-
-            </l:MatrixLayoutCell>
-            <l:MatrixLayoutCell>
-            <DatePicker id="fldPrelimDate"
-            enabled="{/Active}"
-            change="runValidate"
-            valueState="{parts: [{path: '/Active'},{path: '/Status4'}], formatter: '.formatter.fnUiStatus'}"
-                valueFormat="yyyyMMdd" displayFormat="dd.MM.yyyy"
-                value="{path:'/PrelimDate',
-                valueFormat:'yyyyMMdd', type:'sap.ui.model.type.Date',
-                 formatOptions: { style: 'medium',
-                 source: {pattern: 'yyyy-MM-ddTHH:mm:ss.SSSZ'},
-                 strictParsing: true}}" />
-
-            </l:MatrixLayoutCell>
-            <l:MatrixLayoutCell>
-              <Label text="{i18n>lblPlansIfs}" class="sapUiResponsiveMargin"
-                labelFor="cmbPlansIfs" />
-            </l:MatrixLayoutCell>
-            <l:MatrixLayoutCell>
-              <ComboBox id="cmbPlansIfs" selectedKey="{/PlansIfs}"
-              valueState="{parts: [{path: '/Active'},{path: '/Status5'}], formatter: '.formatter.fnUiStatus'}"
-                enabled="{/Active}"
-                selectionChange="runValidate"
-                items="{
-                   path : 'meta>/DomainValuesSet',
-                             filters : [ { path : 'Fieldname', operator : 'EQ', value1 : 'PlanPos'} ] }">
-                <core:ListItem key="{meta>Value}" text="{meta>Text}" />
-              </ComboBox>
-            </l:MatrixLayoutCell>
-          </l:MatrixLayoutRow>
-          <l:MatrixLayoutRow>
-            <l:MatrixLayoutCell>
-              <Label text="{i18n>lblFinalDate}" class="sapUiResponsiveMargin"
-                labelFor="fldFinalDate" />
-            </l:MatrixLayoutCell>
-            <l:MatrixLayoutCell>
-            <DatePicker id="fldFinalDate"
-            enabled="{path: '/Active'}"
-            change="runValidate"
-                valueFormat="yyyyMMdd" displayFormat="dd.MM.yyyy"
-                valueState="{parts: [{path: '/Active'},{path: '/Status6'}], formatter: '.formatter.fnUiStatus'}"
-                value="{path:'/FinalDate',
-                 valueFormat:'yyyyMMdd',
-                 type:'sap.ui.model.type.Date',
-                 formatOptions: { style: 'medium',
-                 source: {pattern: 'yyyy-MM-ddTHH:mm:ss.SSSZ'},
-                 strictParsing: true}}" />
-
-            </l:MatrixLayoutCell>
-            <l:MatrixLayoutCell>
-              <Label text="{i18n>lblPlansEfs}" class="sapUiResponsiveMargin"
-                labelFor="cmbPlansEfs" />
-            </l:MatrixLayoutCell>
-            <l:MatrixLayoutCell>
-              <ComboBox id="cmbPlansEfs" selectedKey="{/PlansEfs}"
-                enabled="false"
-                 selectionChange="runValidate"
-                 valueState="{parts: [{path: '/Active'},{path: '/Status7'}], formatter: '.formatter.fnUiStatus'}"
-                items="{
-                   path : 'meta>/DomainValuesSet',
-                             filters : [ { path : 'Fieldname', operator : 'EQ', value1 : 'PlanPos'} ] }">
-                <core:ListItem key="{meta>Value}" text="{meta>Text}" />
-              </ComboBox>
-            </l:MatrixLayoutCell>
-          </l:MatrixLayoutRow>
-
-          <l:MatrixLayoutRow>
-            <l:MatrixLayoutCell>
-              <Label text="{i18n>lblCustDocNo}" class="sapUiResponsiveMargin"
-                labelFor="fldCustDocNo" />
-            </l:MatrixLayoutCell>
-            <l:MatrixLayoutCell>
-              <Input id="fldCustDocNo" enabled="{/Active}"
-              maxLength="255"
-              valueState="{parts: [{path: '/Active'},{path: '/Status8'}], formatter: '.formatter.fnUiStatus'}"
-                value="{/CustomerDocno}"  />
-            </l:MatrixLayoutCell>
-            <l:MatrixLayoutCell>
-            <Label text="{i18n>lblPenal}" class="sapUiResponsiveMargin"
-                labelFor="cmbPenal" />
-
-            </l:MatrixLayoutCell>
-            <l:MatrixLayoutCell>
-            <ComboBox id="cmbPenal" selectedKey="{/Penal}"
-                enabled="{/Active}"
-                selectionChange="runValidate"
-                valueState="{parts: [{path: '/Active'},{path: '/Status9'}], formatter: '.formatter.fnUiStatus'}"
-                items="{
-                   path : 'meta>/DomainValuesSet',
-                             filters : [ { path : 'Fieldname', operator : 'EQ', value1 : 'Penal'} ] }">
-                <core:ListItem key="{meta>Value}" text="{meta>Text}" />
-              </ComboBox>
-
-            </l:MatrixLayoutCell>
-          </l:MatrixLayoutRow>
-
-          <l:MatrixLayoutRow>
-            <l:MatrixLayoutCell>
-            </l:MatrixLayoutCell>
-            <l:MatrixLayoutCell>
-            </l:MatrixLayoutCell>
-            <l:MatrixLayoutCell>
-            </l:MatrixLayoutCell>
-            <l:MatrixLayoutCell>
-            </l:MatrixLayoutCell>
-          </l:MatrixLayoutRow>
-
-          <l:MatrixLayoutRow>
-            <l:MatrixLayoutCell>
-              <Label text="{i18n>lblComment}" class="sapUiResponsiveMargin"
-                labelFor="fldComment" />
-            </l:MatrixLayoutCell>
-            <l:MatrixLayoutCell colSpan="3">
-              <TextArea id="fldComment" enabled="{/Active}"
-                liveChange="runValidate"
-                valueState="{parts: [{path: '/Active'},{path: '/Status10'}], formatter: '.formatter.fnUiStatus'}"
-                value="{/DcComment}" width="100%" />
-            </l:MatrixLayoutCell>
-          </l:MatrixLayoutRow>
-          <l:MatrixLayoutRow>
-          <l:MatrixLayoutCell colSpan="4">
-         <Table noDataText="No Profiles" id="Profiles">
-                <items>
-                    <ColumnListItem type="Active" id="item0">
-                        <cells>
-                            <ComboBox enabled="{/Active}" xmlns="sap.m" id="cmbProfile1" selectedKey="{/SDDocCont_TemplSet/results/0/Template}"
-                     items="{path: 'templ1data>/results'}">
-                     <core:Item key="{templ1data>Template}" text="{templ1data>TemplDescr}" />
-                            </ComboBox>
-                            <ComboBox enabled="{/Active}" xmlns="sap.m" id="cmbProfile2" selectedKey="{/SDDocCont_TemplSet/results/1/Template}"
-                     items="{path: 'templ2data>/results'}">
-                     <core:Item key="{templ2data>Template}" text="{templ2data>TemplDescr}" />
-                            </ComboBox>
-                            <ComboBox enabled="{/Active}" xmlns="sap.m" id="cmbProfile3" selectedKey="{/SDDocCont_TemplSet/results/2/Template}"
-                     items="{path: 'templ3data>/results'}">
-                     <core:Item key="{templ3data>Template}" text="{templ3data>TemplDescr}" />
-                            </ComboBox>
-                            <Text text="stext0" id="text0"/>
-                            <Text text="stext1" id="text1"/>
-                            <Text text="stext2" id="text2"/></cells>
-                    </ColumnListItem>
-                </items>
-                <columns>
-                    <Column id="column0">
-                        <header>
-                            <Label text="{templateModel>/0/Title}" id="label0"/>
-                        </header>
-                    </Column>
-                    <Column id="column1">
-                        <header>
-                            <Label text="{templateModel>/1/Title}" id="label1"/>
-                        </header>
-                    </Column>
-                    <Column id="column2">
-                        <header>
-                            <Label text="{templateModel>/2/Title}" id="label2"/>
-                        </header>
-                    </Column></columns>
-             </Table>
-
-        </l:MatrixLayoutCell>
-        </l:MatrixLayoutRow>
-        </l:MatrixLayout>   -->
-            </IconTabFilter>
-
-            <IconTabFilter id="tabCollection" icon="sap-icon://multi-select" tooltip="{i18n>tabCollection}">
-                <Label id="_IDGenLabel2" text="{i18n>txtTargetNr}" class="sapUiResponsiveMargin" labelFor="mslTarget" />
+		</laf:SimpleForm>                    
+                <!-- </l2:VerticalLayout> -->
+				<la:Splitter orientation="Vertical">
+					<!-- <Button width="100%" text="Content 3">
+						<layoutData>
+							<la:SplitterLayoutData size="auto" />
+						</layoutData>
+					</Button> -->
+                    <laf:SimpleForm id="SimpleFormDisplay355"
+			editable="false"
+			layout="ResponsiveGridLayout"
+			title=""
+			labelSpanXL="6"
+			labelSpanL="6"
+			labelSpanM="6"
+			labelSpanS="12"
+			adjustLabelSpan="true"
+			emptySpanXL="1"
+			emptySpanL="1"
+			emptySpanM="1"
+			emptySpanS="1"
+			columnsXL="6"
+			columnsL="6"
+			columnsM="6"
+			singleContainerFullSize="true" >
+			<laf:content>
+<Label id="_IDGenLabel2" text="{i18n>txtTargetNr}" class="" labelFor="mslTarget" />
 
                 <MultiComboBox id="mslTarget" enabled="{/Active}" items="{
                    path : 'meta>/DomainValuesSet',
@@ -538,7 +192,7 @@ controllerName="zprelimdoc.controller.DocDetail" xmlns:html="http://www.w3.org/1
                     <core:ListItem id="_IDGenListItem1" key="{meta>Value}" text="{parts: [{path: 'meta>Value'},{path: 'meta>Text'}], formatter: '.formatter.fnDocContAsDD'}" />
                 </MultiComboBox>
 
-                <Label id="_IDGenLabel3" text="{i18n>tabMatGroup}" class="sapUiResponsiveMargin" labelFor="mslMatGroup" />
+                <Label id="_IDGenLabel3" text="{i18n>tabMatGroup}" class="" labelFor="mslMatGroup" />
 
                 <MultiComboBox id="mslMatGroup" enabled="false" items="{
                    path : 'meta>/DomainValuesSet',
@@ -546,20 +200,44 @@ controllerName="zprelimdoc.controller.DocDetail" xmlns:html="http://www.w3.org/1
                     <core:ListItem id="_IDGenListItem2" key="{meta>Value}" text="{meta>Value} - {meta>Text}" />
                 </MultiComboBox>
 
-                <Label id="_IDGenLabel4" text="{i18n>lblKeyword1}" class="sapUiResponsiveMargin" labelFor="cmbKeyword1" />
+                <Label id="_IDGenLabel4" text="{i18n>lblKeyword1}" class="" labelFor="cmbKeyword1" />
 
                 <MultiComboBox id="cmbKeyword1" enabled="false">
                     <!--          <core:ListItem key="{meta>Value}" text="{meta>Value} - {meta>Text}" /> -->
                 </MultiComboBox>
 
-                <Label id="_IDGenLabel5" text="{i18n>lblKeyword2}" class="sapUiResponsiveMargin" labelFor="cmbKeyword2" />
+                <Label id="_IDGenLabel5" text="{i18n>lblKeyword2}" class="" labelFor="cmbKeyword2" />
                 <MultiComboBox id="cmbKeyword2" enabled="false">
                     <!--          <core:ListItem key="{meta>Value}" text="{meta>Value} - {meta>Text}" /> -->
                 </MultiComboBox>
-            </IconTabFilter>
+                    </laf:content>
+		</laf:SimpleForm>
+					<!-- <Button width="100%" text="Content 4">
+						<layoutData>
+							<la:SplitterLayoutData size="50%" />
+						</layoutData>
+					</Button> -->
 
-            <IconTabFilter id="tabLang" icon="sap-icon://globe" tooltip="{i18n>tabLang}">
-                <Label id="_IDGenLabel6" text="{i18n>txtLanguages}" class="sapUiResponsiveMargin" labelFor="mslLang" />
+					<laf:SimpleForm id="SimpleFormDisplay356"
+			editable="false"
+			layout="ResponsiveGridLayout"
+			title=""
+			labelSpanXL="6"
+			labelSpanL="6"
+			labelSpanM="6"
+			labelSpanS="12"
+			adjustLabelSpan="true"
+			emptySpanXL="1"
+			emptySpanL="1"
+			emptySpanM="1"
+			emptySpanS="1"
+			columnsXL="6"
+			columnsL="6"
+			columnsM="6"
+			singleContainerFullSize="true" >
+			<laf:content>
+
+                    <Label id="_IDGenLabel6" text="{i18n>txtLanguages}" class="" labelFor="mslLang" />
                 <MultiComboBox id="mslLang" enabled="{/Active}" items="{
             path : 'lang>/langItems',
             templateShareable : false
@@ -570,7 +248,7 @@ controllerName="zprelimdoc.controller.DocDetail" xmlns:html="http://www.w3.org/1
                     <!-- </core:Item> -->
                     <!-- </selectedKey> -->
                 </MultiComboBox>
-
+<Label text="" class="" labelFor="tblLang" />
                 <Table id="tblLang" visible="{lang>/isTopLevel}" class="sapUiResponsiveMargin zLangsTable" width="auto" items="{path: 'lang>/langAssignments',templateShareable: false}">
                     <headerToolbar>
                         <Toolbar id="_IDGenToolbar1">
@@ -623,7 +301,76 @@ controllerName="zprelimdoc.controller.DocDetail" xmlns:html="http://www.w3.org/1
                         </ColumnListItem>
                     </items>
                 </Table>
+                    </laf:content>
+		</laf:SimpleForm>
+				</la:Splitter>
+				
+			</la:contentAreas>
+		</la:Splitter>
+		<la:Splitter>
+			<la:layoutData>
+				<la:SplitterLayoutData size="50px" />
+			</la:layoutData>
+			<la:contentAreas>
+				<!-- <Button width="100%" text="Content 6">
+					<layoutData>
+						<la:SplitterLayoutData size="auto" />
+					</layoutData>
+				</Button> -->
+                <l2:VerticalLayout width="100%" class="gridWrapper">
+                    <!-- <l2:Grid containerQuery="true" hSpacing="0" defaultSpan="XL12 L12 M12 S12"> -->
+                        <Table noDataText="No Profiles" id="Profiles">
+                            <items>
+                                <ColumnListItem type="Active" id="item0">
+                                    <cells>
+                                        <ComboBox enabled="{/Active}" xmlns="sap.m" id="cmbProfile1" selectedKey="{/SDDocCont_TemplSet/results/0/Template}" items="{path: 'templ1data>/results'}">
+                                            <core:Item key="{templ1data>Template}" text="{templ1data>TemplDescr}" />
+                                        </ComboBox>
+                                        <ComboBox enabled="{/Active}" xmlns="sap.m" id="cmbProfile2" selectedKey="{/SDDocCont_TemplSet/results/1/Template}" items="{path: 'templ2data>/results'}">
+                                            <core:Item key="{templ2data>Template}" text="{templ2data>TemplDescr}" />
+                                        </ComboBox>
+                                        <ComboBox enabled="{/Active}" xmlns="sap.m" id="cmbProfile3" selectedKey="{/SDDocCont_TemplSet/results/2/Template}" items="{path: 'templ3data>/results'}">
+                                            <core:Item key="{templ3data>Template}" text="{templ3data>TemplDescr}" />
+                                        </ComboBox>
+                                        <Text text="stext0" id="text0" />
+                                        <Text text="stext1" id="text1" />
+                                        <Text text="stext2" id="text2" />
+                                    </cells>
+                                </ColumnListItem>
+                            </items>
+                            <columns>
+                                <Column id="column0">
+                                    <header>
+                                        <Label text="{templateModel>/0/Title}" id="label0" />
+                                    </header>
+                                </Column>
+                                <Column id="column1">
+                                    <header>
+                                        <Label text="{templateModel>/1/Title}" id="label1" />
+                                    </header>
+                                </Column>
+                                <Column id="column2">
+                                    <header>
+                                        <Label text="{templateModel>/2/Title}" id="label2" />
+                                    </header>
+                                </Column>
+                            </columns>
+                        </Table>
+                    <!-- </l2:Grid> -->
+                </l2:VerticalLayout> 
+			</la:contentAreas>
+		</la:Splitter>
+	</la:Splitter>
+		
             </IconTabFilter>
+
+            <!-- <IconTabFilter id="tabCollection" icon="sap-icon://multi-select" tooltip="{i18n>tabCollection}">
+                
+            </IconTabFilter>
+
+            <IconTabFilter id="tabLang" icon="sap-icon://globe" tooltip="{i18n>tabLang}">
+                
+            </IconTabFilter> -->
             <IconTabFilter id="tabMedia" visible="{/SDDocCont_MetaSet/Mdcntavail}" icon="sap-icon://it-system" tooltip="{i18n>tabMedia}">
                 <Table id="tblMedia" class="sapUiResponsiveMargin" width="auto" items="{/SDDocCont_MdcntSet/results}">
                     <headerToolbar>

@@ -105,6 +105,8 @@ sap.ui.define(
           onBeforeShow: function (evt) {
             debugger;
 
+            return;
+
             var mModel = new sap.ui.model.json.JSONModel();
             mModel.setData({ Active: true });
             that.getView().setModel(mModel, "meta");
@@ -1613,6 +1615,10 @@ sap.ui.define(
             var src = oEvent.getSource();
             var oModel = this.getView().getModel("listTemplates");
 
+            const oMetaModel = this.getView().getModel("meta");
+
+            oMetaModel.setProperty("/templateUrl","/sap/bc/zcomm/zdcont/read_template_data");
+
             var aSelected = [];
 
             if (!oModel) {
@@ -1670,6 +1676,130 @@ sap.ui.define(
                   docids: aSelected,
                 };
                 var rModel = that.getView().getModel("backend");
+                debugger;
+                rModel.callFunction("/SetRefTemplate", {
+                  method: "GET",
+                  urlParameters: {
+                    Vbeln: that.Vbeln,
+                    Posnr: that.Posnr,
+                    Vbeln_templ: sVbeln,
+                    Posnr_templ: sPosnr,
+                  },
+                  error: function (oData) {
+                    var oBundle = that
+                      .getView()
+                      .getModel("i18n")
+                      .getResourceBundle();
+                    var sMsg = "";
+                    try {
+                      var oResponse = JSON.parse(oData.response.body);
+                      sMsg = oResponse.error.message.value;
+                    } catch (e) {
+                      sMsg = oBundle.getText(
+                        "msgSDocNotFound",
+                        that.getView().byId("vbeln")
+                      );
+                    }
+                    var newMsgs = {
+                      messagesLength: 1,
+                      items: [
+                        {
+                          type: oBundle.getText("msgError"),
+                          title: oBundle.getText("msgErrorTitle"),
+                          description: sMsg,
+                          counter: 1,
+                        },
+                      ],
+                    };
+                    that.getView().getModel("msgModel").setData(newMsgs);
+                    that.handleMessagePopover();
+                  },
+                  success: function (oData, Resp) {},
+                });
+
+                //that.getView().byId("docPanel").setHeight("100%");
+
+                this.onProfileLoad({ skipCheck: true, sendData: oSendData });
+            }
+
+            $.each(
+              this.oTmplDialog.getAggregation("buttons"),
+              function (idx, obj) {
+                if (obj.mEventRegistry["press"]) {
+                  obj.mEventRegistry["press"].length = 0;
+                }
+              }
+            );
+
+            that.oTmplDialog.close();
+          };
+
+          var fnPressHandlerDate = function (oEvent) {
+            var src = oEvent.getSource();
+            var oModel = this.getView().getModel("listTemplates");
+
+            const oMetaModel = this.getView().getModel("meta");
+
+            oMetaModel.setProperty("/templateUrl","/sap/bc/zcomm/zdcont/read_template_data_with_dates");
+
+            var aSelected = [];
+
+            if (!oModel) {
+              that.setProfileValue("");
+              that.onBeforeShowHandler({
+                Vbeln: that.inputParams.Vbeln,
+                Posnr: that.inputParams.Posnr,
+                Docstat: that.inputParams.Docstat,
+                callback: that.onProfileLoad,
+              });
+
+              that.oTmplDialog.close();
+              return;
+            }
+
+            if (!oModel.getData()) {
+              that.setProfileValue("");
+              that.onBeforeShowHandler({
+                Vbeln: that.inputParams.Vbeln,
+                Posnr: that.inputParams.Posnr,
+                Docstat: that.inputParams.Docstat,
+                callback: that.onProfileLoad,
+              });
+
+              that.oTmplDialog.close();
+              return;
+            }
+            $.each(oModel.getData().results, function (idx, el) {
+              if (el.Selected) {
+                aSelected.push({ doccontent: el.DocContent });
+              }
+            });
+
+            switch (src.getProperty("type")) {
+              case "Reject":
+                that.setProfileValue("");
+                that.onBeforeShowHandler({
+                  Vbeln: that.Vbeln,
+                  Posnr: that.Posnr,
+                  Docstat: that.inputParams.Docstat,
+                  callback: that.onProfileLoad,
+                });
+
+                break;
+              case "Accept":
+                var sVbeln = that.getView().byId("fldDocument").getValue();
+                var sPosnr = that.getView().byId("fldPosition").getValue();
+
+                var oSendData = {
+                  key: {
+                    vbeln: that.Vbeln,
+                    posnr: that.Posnr,
+                  },
+                  template_key: { vbeln: sVbeln, posnr: sPosnr },
+                  docids: aSelected,
+                };
+                var rModel = that.getView().getModel("backend");
+                debugger;
                 rModel.callFunction("/SetRefTemplate", {
                   method: "GET",
                   urlParameters: {
@@ -1728,11 +1858,14 @@ sap.ui.define(
           };
 
           this.getView().byId("btnTemplateLoad").setVisible(oParams.load);
+          this.getView().byId("btnTemplateLoadDate").setVisible(oParams.load);
           if (oParams.Docstat === "") {
             this.getView().byId("btnTemplateLoad").attachPress(fnPressHandler, this);
+            this.getView().byId("btnTemplateLoadDate").attachPress(fnPressHandlerDate, this);
           } else {
             //this.getView().byId("btnTemplateLoad").attachPress(this.onTemplateLoad, this);
             this.getView().byId("btnTemplateLoad").attachPress(fnPressHandler, this);
+            this.getView().byId("btnTemplateLoadDate").attachPress(fnPressHandlerDate, this);
           }
 
           this.getView().byId("btnTemplateCancel").attachPress(fnPressHandler, this);
@@ -2084,6 +2217,10 @@ sap.ui.define(
           sProfile = that.getView().byId("fldProfileName").getValue();
         }
 
+        if(oParams.sendData && oParams.sendData.template_key){
+          sProfile = "TEMPLATE";
+        }
+
         sap.ui.getCore().sProfile = sProfile;
 
         var rModel = that.getView().getModel("backend");
@@ -2169,6 +2306,7 @@ sap.ui.define(
               });
             }
 
+            debugger;
             that.onTemplate({
               load: true,
               save: false,
@@ -2177,11 +2315,18 @@ sap.ui.define(
               Posnr: oParams.Posnr,
               initial: true,
             });
-            break;
+            debugger;
+
+            const sTemplateUrl = that.getView().getModel("meta").getProperty("/templateUrl");
+
+            if(sTemplateUrl == "" || !sTemplateUrl){
+              return;
+            }
 
             $.ajax({
               type: "POST",
-              url: "/sap/bc/zcomm/zdcont/read_template_data",
+              // url: "/sap/bc/zcomm/zdcont/read_template_data",
+              url: sTemplateUrl,
               data: JSON.stringify(oLocalParams.sendData),
               error: function (oData) {
                 var oBundle = that

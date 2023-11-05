@@ -35,6 +35,7 @@
       </l:VerticalLayout>
 
       <buttons>
+         <Button id="btnTemplateLoadDate" type="Accept" text="{i18n>btnLoadDate}" />
          <Button id="btnTemplateLoad" type="Accept" text="{i18n>btnLoad}" />
 <!--          <Button id="btnProfileSave" text="{i18n>btnSave}"  press="onProfileSave"/> -->
          <Button id="btnTemplateCancel" type="Reject" text="{i18n>btnClose}"  press="onTemplateCancel"/>

@@ -47,6 +47,7 @@
   },
   "sap.ui": {
     "technology": "UI5",
+    "fullWidth": true,
     "icons": {
       "icon": "",
       "favIcon": "",
@@ -65,7 +66,7 @@
     "config" : { "fullWidth": true },
     "flexEnabled": true,
     "dependencies": {
-      "minUI5Version": "1.71.50",
+      "minUI5Version": "1.119.2",
       "libs": {
         "sap.m": {},
         "sap.ui.core": {},
@@ -122,6 +123,7 @@
         "async": true,
         "path": "zprelimdoc.view",
         "controlAggregation": "pages",
+        "clearControlAggregation": false,
         "controlId": "app",
         "bypassed": {
           "target": "notFound"

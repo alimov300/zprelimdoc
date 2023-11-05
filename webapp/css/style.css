@@ -20,3 +20,14 @@ span.zPosition {
 button.zNoBorder span {
     border: 0px;
 }
+
+button.yellowButton span.sapMBtnInner.sapMBtnEmphasized{
+	background-color: #d1c40a;
+    border-color: #d1cf0a;
+}
+
+button.blueButton span.sapMBtnInner{
+	background-color: #0a6ed1;
+    border-color: #0a6ed1;
+	color: white;
+}

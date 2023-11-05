@@ -6,7 +6,7 @@ metadata:
 type: application
 framework:
   name: SAPUI5
-  version: 1.76.0
+  version: 1.119.2
   libraries:
     - name: sap.m
     - name: sap.ui.core
@@ -32,7 +32,7 @@ server:
         backend:
           - path: /sap
             url: http://10.99.99.30:8000
-            client: '100'
+            client: "100"
     - name: sap-fe-mockserver
       beforeMiddleware: csp
       configuration:

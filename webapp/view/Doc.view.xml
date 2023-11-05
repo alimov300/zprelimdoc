@@ -15,7 +15,7 @@
         <headerToolbar>
             <OverflowToolbar width="100%" id="tlbar1">
                 <content>
-                    <Button text="{i18n>btnBack}" type="Back" width="100px" id="btnBack" press="onBack" />
+                    <Button text="{i18n>btnBack}" type="Back" width="100px" class="blueButton" id="btnBack" press="onBack" />
                     <Button text="{i18n>btnProfileMaint}" id="btnProfile" enabled="{meta>/Active}" press="onProfileClick" icon="sap-icon://personnel-view" />
                     <ToggleButton id="idFiltersOn" icon="sap-icon://filter" text="{i18n>lblFilterButton}" press="setFiltersOn" />
                     <ToggleButton id="idCheckboxFilters" icon="sap-icon://sys-enter" text="{i18n>lblCheckBoxFilter}" pressed="{path:'meta>/Checkboxes', formatter:'.formatter.fnCheckedButton'}" press="setCheckFilters" />
@@ -25,7 +25,7 @@
                     <Label id="_IDGenLabel3a" text="{path: 'DocList>/results/1/Posnr', formatter:'.formatter.fnRemoveZeros'}" visible="{path:'DocList>/results/1/Posnr',formatter:'.formatter.fnNoAllZeros'}" />
                     <Label id="_IDGenLabel4" text="{path:'meta>/Profile',formatter:'.formatter.fnProfile'}" />
                     <ToolbarSpacer id="_IDGenToolbarSpacer2" />
-                    <Button text="{i18n>btnITP}" id="btnITP" visible="{meta>/ITPButton}" type="Emphasized" press="onUpdateITP" icon="sap-icon://copy" />
+                    <Button text="{i18n>btnITP}" id="btnITP" class="yellowButton" type="Emphasized" visible="{meta>/ITPButton}" press="onUpdateITP" icon="sap-icon://copy" />
                     <Button text="{i18n>btnComplete}" id="btnComplete" enabled="{meta>/Active}" press="onComplete" icon="sap-icon://complete" />
                     <Button text="{i18n>btnSave}" id="btnSave" enabled="{meta>/Active}" press="onSave" icon="sap-icon://save" />
 					<Button id="_IDGenButton1" icon="sap-icon://message-popup" text="{msgModel>/messagesLength}" type="Emphasized" press="handleMessagePopoverPress" />
