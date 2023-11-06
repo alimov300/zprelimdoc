@@ -2849,8 +2849,6 @@ sap.ui.define(
       },
 
       onBack: function () {
-        debugger;
-
         var that = this;
 
         const oDocList = this.getView().getModel();
@@ -2858,10 +2856,79 @@ sap.ui.define(
         const sDocList = JSON.stringify(oDocList.getData());
         const sDocListOld = JSON.stringify(oDocListOld.getData());
 
-        var mdocArray = sap.ui.getCore().mdocArray;
-        var mdocArrayOld = sap.ui.getCore().mdocArrayOld;
+        const cMdocArray = sap.ui.getCore().mdocArray;
+        const cMdocArrayOld = sap.ui.getCore().mdocArrayOld;
 
-        if(sDocList !== sDocListOld || JSON.stringify(mdocArray) !== JSON.stringify(mdocArrayOld) ){
+        let aMdoc = [];
+        let aMdocOld = [];
+
+        debugger;
+
+        $.each(cMdocArray, function (idx, obj) {
+          aMdoc.push({Active : obj.Active,
+            CustomerDocno : obj.CustomerDocno,
+            DcComment : obj.DcComment,
+            DcOption : obj.DcOption,
+            DcSelected : obj.DcSelected,
+            DocContent : obj.DocContent,
+            Dokar : obj.Dokar,
+            FinalDate : obj.FinalDate,
+            Keyword1 : obj.Keyword1,
+            Keyword2 : obj.Keyword2,
+            Penal : obj.Penal,
+            PlansCre : obj.PlansCre, 
+            PlansEfs : obj.PlansEfs,
+            PlansIfs : obj.PlansIfs,
+            Posnr : obj.Posnr,
+            PrelimDate : obj.PrelimDate,
+            SddcStatus : obj.SddcStatus,
+            Status1 : obj.Status1,
+            Status2 : obj.Status2,
+            Status3 : obj.Status3,
+            Status4 : obj.Status4,
+            Status5 : obj.Status5,
+            Status6 : obj.Status6,
+            Status7 : obj.Status7,
+            Status8 : obj.Status8,
+            Status9 : obj.Status9,
+            Status10 : obj.Status10,
+            TemplVisited : obj.TemplVisited,
+            Vbeln : obj.Vbeln });
+        });
+
+        $.each(cMdocArrayOld, function (idx, obj) {
+          aMdocOld.push({Active : obj.Active,
+            CustomerDocno : obj.CustomerDocno,
+            DcComment : obj.DcComment,
+            DcOption : obj.DcOption,
+            DcSelected : obj.DcSelected,
+            DocContent : obj.DocContent,
+            Dokar : obj.Dokar,
+            FinalDate : obj.FinalDate,
+            Keyword1 : obj.Keyword1,
+            Keyword2 : obj.Keyword2,
+            Penal : obj.Penal,
+            PlansCre : obj.PlansCre, 
+            PlansEfs : obj.PlansEfs,
+            PlansIfs : obj.PlansIfs,
+            Posnr : obj.Posnr,
+            PrelimDate : obj.PrelimDate,
+            SddcStatus : obj.SddcStatus,
+            Status1 : obj.Status1,
+            Status2 : obj.Status2,
+            Status3 : obj.Status3,
+            Status4 : obj.Status4,
+            Status5 : obj.Status5,
+            Status6 : obj.Status6,
+            Status7 : obj.Status7,
+            Status8 : obj.Status8,
+            Status9 : obj.Status9,
+            Status10 : obj.Status10,
+            TemplVisited : obj.TemplVisited,
+            Vbeln : obj.Vbeln });
+        });
+
+        if(sDocList !== sDocListOld || JSON.stringify(aMdoc) !== JSON.stringify(aMdocOld) ){
           debugger;
 
           sap.m.MessageBox.confirm("Die Daten wurden geändert. Wollen Sie zuerst speichern?", {
