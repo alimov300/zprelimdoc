@@ -920,7 +920,7 @@ sap.ui.define(
         var sJson = "";
         var sdDocCont = [];
         var mdocArray = sap.ui.getCore().mdocArray;
-        var mdocArrayOld = sap.ui.getCore().mdocArrayOld;
+        //var mdocArrayOld = sap.ui.getCore().mdocArrayOld;
 
         $.each(mdocArray, function (index, obj) {
           if (obj.PrelimDate) {
@@ -1018,6 +1018,15 @@ sap.ui.define(
             }
           },
         });
+
+        const oDocList = this.getView().getModel();
+        const oDocListOld = this.getView().getModel("DocListOld");
+
+        //const cMdocArray = sap.ui.getCore().mdocArray;
+        //const cMdocArrayOld = sap.ui.getCore().mdocArrayOld;
+        
+        oDocListOld.setData(oDocList.getData());
+        sap.ui.getCore().mdocArrayOld = sap.ui.getCore().mdocArray;
 
         //  TODO Save Langus
       },
@@ -2931,23 +2940,25 @@ sap.ui.define(
         if(sDocList !== sDocListOld || JSON.stringify(aMdoc) !== JSON.stringify(aMdocOld) ){
           debugger;
 
-          sap.m.MessageBox.confirm("Die Daten wurden geändert. Wollen Sie zuerst speichern?", {
-            title: "Frage",                                    // default
+          sap.m.MessageBox.confirm("Die Daten wurden verändert. Sollen die Änderungen gesichert werden?", {
+            title: "Änderungen",                                    // default
             onClose: null,                                       // default
             styleClass: "",                                      // default
-            actions: [ sap.m.MessageBox.Action.OK,
+            actions: [ sap.m.MessageBox.Action.YES,
+                       sap.m.MessageBox.Action.NO,
                        sap.m.MessageBox.Action.CANCEL ],         // default
             emphasizedAction: sap.m.MessageBox.Action.OK,        // default
             initialFocus: null,                                  // default
             textDirection: sap.ui.core.TextDirection.Inherit,     // default
 
             onClose: function(oAction){
-              if(oAction == sap.m.MessageBox.Action.OK){
+              if(oAction == sap.m.MessageBox.Action.YES){
 
                 that.onSave();
-                oDocListOld.setData(oDocList.getData());
+                //oDocListOld.setData(oDocList.getData());
+                //sap.ui.getCore().mdocArrayOld = sap.ui.getCore().mdocArray;
 
-              }else{
+              }else if(oAction == sap.m.MessageBox.Action.NO){
                 var bus = sap.ui.getCore().getEventBus();
 
                 bus.publish("nav", "back", {
