@@ -29,21 +29,27 @@
 			editable="false"
 			layout="ResponsiveGridLayout"
 			title=""
-			labelSpanXL="6"
-			labelSpanL="6"
+			labelSpanXL="4"
+			labelSpanL="4"
 			labelSpanM="6"
 			labelSpanS="12"
-			adjustLabelSpan="true"
-			emptySpanXL="1"
-			emptySpanL="1"
+			adjustLabelSpan="false"
+			emptySpanXL="0"
+			emptySpanL="0"
 			emptySpanM="1"
 			emptySpanS="1"
-			columnsXL="6"
-			columnsL="6"
+			columnsXL="1"
+			columnsL="1"
 			columnsM="6"
 			singleContainerFullSize="true" >
 			<laf:content>
-            	<Label text="{i18n>lblStatus}" class="" labelFor="cmbSddcStatus" />
+            <!-- <Panel><content> -->
+            <!-- <la:HorizontalLayout> -->
+            	<Label text="{i18n>lblStatus}" class="" labelFor="cmbSddcStatus">
+                <layoutData>
+						<la:GridData span="XL12 L12 M12 S12" />
+					</layoutData>
+                </Label>
                         <ComboBox
                             id="cmbSddcStatus"
                             selectedKey="{/SddcStatus}"
@@ -56,8 +62,17 @@
                                     filters : [ { path : 'Fieldname', operator : 'EQ', value1 : 'SddcStatus'} ] }"
                         >
                             <core:ListItem key="{meta>Value}" text="{meta>Text}" />
+                            <layoutData>
+						<la:GridData span="XL12 L12 M12 S12" />
+					</layoutData>
                         </ComboBox>
-                <Label text="{i18n>lblPrelimDate}" class="" labelFor="fldPrelimDate" />
+                        <!-- </la:HorizontalLayout>
+                        <la:HorizontalLayout> -->
+                <Label text="{i18n>lblPrelimDate}" class="" labelFor="fldPrelimDate" >
+                <layoutData>
+						<la:GridData span="XL1 L12 M12 S12" />
+					</layoutData>
+                </Label>
                         <DatePicker
                             id="fldPrelimDate"
                             enabled="{/Active}"
@@ -70,8 +85,15 @@
                  formatOptions: { style: 'medium',
                  source: {pattern: 'yyyy-MM-ddTHH:mm:ss.SSSZ'},
                  strictParsing: true}}"
-                        />
-                        <Label text="{i18n>lblFinalDate}" class="" labelFor="fldFinalDate" />
+                        > <layoutData>
+						<la:GridData span="XL12 L12 M12 S12" />
+					</layoutData></DatePicker>
+                        <!-- </la:HorizontalLayout> -->
+                        <Label text="{i18n>lblFinalDate}" class="" labelFor="fldFinalDate" >
+                        <layoutData>
+						<la:GridData span="XL12 L12 M12 S12" />
+					</layoutData>
+                        </Label>
                         <DatePicker
                             id="fldFinalDate"
                             enabled="{path: '/Active'}"
@@ -85,8 +107,14 @@
                  formatOptions: { style: 'medium',
                  source: {pattern: 'yyyy-MM-ddTHH:mm:ss.SSSZ'},
                  strictParsing: true}}"
-                        />
-				<Label text="{i18n>lblDokar}" visible="false" class="" labelFor="cmbDokart" />
+                        > <layoutData>
+						<la:GridData span="XL12 L12 M12 S12" />
+					</layoutData></DatePicker>
+				<Label text="{i18n>lblDokar}" visible="false" class="" labelFor="cmbDokart" >
+                <layoutData>
+						<la:GridData span="XL12 L12 M12 S12" />
+					</layoutData>
+                </Label>
                         <ComboBox visible="false"
                             id="cmbDokart"
                             selectedKey="{/Dokar}"
@@ -98,8 +126,15 @@
                              filters : [ { path : 'Fieldname', operator : 'EQ', value1 : 'Dokar'} ] }"
                         >
                             <core:ListItem key="{meta>Value}" text="{meta>Value} - {meta>Text}" />
+                             <layoutData>
+						<la:GridData span="XL12 L12 M12 S12" />
+					</layoutData>
                         </ComboBox>
-				<Label text="{i18n>lblPlansCre}" class="" labelFor="cmbPlansCre" />
+				<Label text="{i18n>lblPlansCre}" class="" labelFor="cmbPlansCre" >
+                <layoutData>
+						<la:GridData span="XL12 L12 M12 S12" />
+					</layoutData>
+                </Label>
                         <ComboBox
                             id="cmbPlansCre"
                             selectedKey="{/PlansCre}"
@@ -111,9 +146,16 @@
                              filters : [ { path : 'Fieldname', operator : 'EQ', value1 : 'PlanPos'} ] }"
                         >
                             <core:ListItem key="{meta>Value}" text="{meta>Text}" />
+                             <layoutData>
+						<la:GridData span="XL12 L12 M12 S12" />
+					</layoutData>
                         </ComboBox>
 				
-                        <Label text="{i18n>lblPlansIfs}" class="" labelFor="cmbPlansIfs" />
+                        <Label text="{i18n>lblPlansIfs}" class="" labelFor="cmbPlansIfs" >
+                        <layoutData>
+						<la:GridData span="XL12 L12 M12 S12" />
+					</layoutData>
+                        </Label>
                         <ComboBox
                             id="cmbPlansIfs"
                             selectedKey="{/PlansIfs}"
@@ -125,8 +167,15 @@
                              filters : [ { path : 'Fieldname', operator : 'EQ', value1 : 'PlanPos'} ] }"
                         >
                             <core:ListItem key="{meta>Value}" text="{meta>Text}" />
+                             <layoutData>
+						<la:GridData span="XL12 L12 M12 S12" />
+					</layoutData>
                         </ComboBox>                        
-                        <Label text="{i18n>lblPlansEfs}" visible="false" class="" labelFor="cmbPlansEfs" />
+                        <Label text="{i18n>lblPlansEfs}" visible="false" class="" labelFor="cmbPlansEfs" >
+                        <layoutData>
+						<la:GridData span="XL12 L12 M12 S12" />
+					</layoutData>
+                        </Label>
                         <ComboBox visible="false" 
                             id="cmbPlansEfs"
                             selectedKey="{/PlansEfs}"
@@ -138,12 +187,35 @@
                              filters : [ { path : 'Fieldname', operator : 'EQ', value1 : 'PlanPos'} ] }"
                         >
                             <core:ListItem key="{meta>Value}" text="{meta>Text}" />
+                             <layoutData>
+						<la:GridData span="XL12 L12 M12 S12" />
+					</layoutData>
                         </ComboBox>
-                        <Label text="{i18n>lblComment}" class="" labelFor="fldComment" />
-                        <TextArea id="fldComment" enabled="{/Active}" liveChange="runValidate" valueState="{parts: [{path: '/Active'},{path: '/Status10'}], formatter: '.formatter.fnUiStatus'}" value="{/DcComment}" width="100%" />
-                        <Label text="{i18n>lblCustDocNo}" class="" labelFor="fldCustDocNo" />
-                        <Input id="fldCustDocNo" enabled="{/Active}" maxLength="255" valueState="{parts: [{path: '/Active'},{path: '/Status8'}], formatter: '.formatter.fnUiStatus'}" value="{/CustomerDocno}" />
-                        <Label text="{i18n>lblPenal}" class="" labelFor="cmbPenal" />
+                        <Label text="{i18n>lblComment}" class="" labelFor="fldComment" >
+                        <layoutData>
+						<la:GridData span="XL12 L12 M12 S12" />
+					</layoutData>
+                        </Label>
+                        <TextArea id="fldComment" enabled="{/Active}" liveChange="runValidate" valueState="{parts: [{path: '/Active'},{path: '/Status10'}], formatter: '.formatter.fnUiStatus'}" value="{/DcComment}" width="100%">
+                         <layoutData>
+						<la:GridData span="XL12 L12 M12 S12" />
+					</layoutData>
+                        </TextArea>
+                        <Label text="{i18n>lblCustDocNo}" class="" labelFor="fldCustDocNo" >
+                        <layoutData>
+						<la:GridData span="XL12 L12 M12 S12" />
+					</layoutData>
+                        </Label>
+                        <Input id="fldCustDocNo" enabled="{/Active}" maxLength="255" valueState="{parts: [{path: '/Active'},{path: '/Status8'}], formatter: '.formatter.fnUiStatus'}" value="{/CustomerDocno}" >
+                         <layoutData>
+						<la:GridData span="XL12 L12 M12 S12" />
+					</layoutData>
+                    </Input>
+                        <Label text="{i18n>lblPenal}" class="" labelFor="cmbPenal" >
+                        <layoutData>
+						<la:GridData span="XL12 L12 M12 S12" />
+					</layoutData>
+                        </Label>
                         <ComboBox
                             id="cmbPenal"
                             selectedKey="{/Penal}"
@@ -155,23 +227,21 @@
                              filters : [ { path : 'Fieldname', operator : 'EQ', value1 : 'Penal'} ] }"
                         >
                             <core:ListItem key="{meta>Value}" text="{meta>Text}" />
+                             <layoutData>
+						<la:GridData span="XL12 L12 M12 S12" />
+					</layoutData>
                         </ComboBox>                        
 
 			</laf:content>
 		</laf:SimpleForm>                    
-                <!-- </l2:VerticalLayout> -->
 				<la:Splitter orientation="Vertical">
-					<!-- <Button width="100%" text="Content 3">
-						<layoutData>
-							<la:SplitterLayoutData size="auto" />
-						</layoutData>
-					</Button> -->
-                    <laf:SimpleForm id="SimpleFormDisplay355"
+
+                    <!-- <laf:SimpleForm id="SimpleFormDisplay355"
 			editable="false"
 			layout="ResponsiveGridLayout"
 			title=""
-			labelSpanXL="6"
-			labelSpanL="6"
+			labelSpanXL="4"
+			labelSpanL="4"
 			labelSpanM="6"
 			labelSpanS="12"
 			adjustLabelSpan="true"
@@ -179,11 +249,12 @@
 			emptySpanL="1"
 			emptySpanM="1"
 			emptySpanS="1"
-			columnsXL="6"
-			columnsL="6"
+			columnsXL="7"
+			columnsL="7"
 			columnsM="6"
 			singleContainerFullSize="true" >
-			<laf:content>
+			<laf:content> -->
+            <Panel><content>
 <Label id="_IDGenLabel2" text="{i18n>txtTargetNr}" class="" labelFor="mslTarget" />
 
                 <MultiComboBox id="mslTarget" enabled="{/Active}" items="{
@@ -210,20 +281,21 @@
                 <MultiComboBox id="cmbKeyword2" enabled="false">
                     <!--          <core:ListItem key="{meta>Value}" text="{meta>Value} - {meta>Text}" /> -->
                 </MultiComboBox>
-                    </laf:content>
-		</laf:SimpleForm>
+                </content></Panel>
+                    <!-- </laf:content>
+		</laf:SimpleForm> -->
 					<!-- <Button width="100%" text="Content 4">
 						<layoutData>
 							<la:SplitterLayoutData size="50%" />
 						</layoutData>
 					</Button> -->
 
-					<laf:SimpleForm id="SimpleFormDisplay356"
+					<!-- <laf:SimpleForm id="SimpleFormDisplay356"
 			editable="false"
 			layout="ResponsiveGridLayout"
 			title=""
-			labelSpanXL="6"
-			labelSpanL="6"
+			labelSpanXL="2"
+			labelSpanL="2"
 			labelSpanM="6"
 			labelSpanS="12"
 			adjustLabelSpan="true"
@@ -231,12 +303,13 @@
 			emptySpanL="1"
 			emptySpanM="1"
 			emptySpanS="1"
-			columnsXL="6"
-			columnsL="6"
-			columnsM="6"
+			columnsXL="9"
+			columnsL="9"
+			columnsM="7"
 			singleContainerFullSize="true" >
-			<laf:content>
-
+			<laf:content> -->
+<Panel>
+<content>
                     <Label id="_IDGenLabel6" text="{i18n>txtLanguages}" class="" labelFor="mslLang" />
                 <MultiComboBox id="mslLang" enabled="{/Active}" items="{
             path : 'lang>/langItems',
@@ -249,6 +322,7 @@
                     <!-- </selectedKey> -->
                 </MultiComboBox>
 <Label text="" class="" labelFor="tblLang" />
+
                 <Table id="tblLang" visible="{lang>/isTopLevel}" class="sapUiResponsiveMargin zLangsTable" width="auto" items="{path: 'lang>/langAssignments',templateShareable: false}">
                     <headerToolbar>
                         <Toolbar id="_IDGenToolbar1">
@@ -301,8 +375,10 @@
                         </ColumnListItem>
                     </items>
                 </Table>
-                    </laf:content>
-		</laf:SimpleForm>
+                </content>
+            </Panel>
+                    <!-- </laf:content>
+		</laf:SimpleForm> -->
 				</la:Splitter>
 				
 			</la:contentAreas>

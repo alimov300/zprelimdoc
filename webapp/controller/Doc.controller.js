@@ -706,16 +706,34 @@ sap.ui.define(
             that
           );
           that.getView().addDependent(that.oITPDialog);
+
+          //this.getView().byId("btnITP").setVisible(oParams.load);
+          //if (oParams.Docstat === "") {
+            this.getView().byId("btnITPLoad").attachPress(this.onITPListPress, this);
+          //} else {
+          //  this.getView().byId("btnITPLoad").attachPress(fnPressHandler, this);
+          //}
+
+          this.getView().byId("btnITPCancel").attachPress(function(){that.oITPDialog.close();}, this);
+
         }
 
+        var oBundle = that.getView().getModel("i18n").getResourceBundle();
+
+        debugger;
+        const sCreate = oBundle.getText("lblCreate");
+        const sUpdate = oBundle.getText("lblUpdate");
+        const sDelete = oBundle.getText("lblDelete");
 
         var oTemplate = new sap.m.ColumnListItem({
             cells: [
               new sap.m.Label({ text: "{= +${prod>DocContent} }" }),
               new sap.m.Label({ text: "{prod>DocContentDescr}" }),
-              new sap.m.Label({ text: "{ path: 'prod>ReleaseTimestamp',type: 'sap.ui.model.type.DateTime',formatOptions: {pattern: 'yyyy-MM-dd HH:mm' } }" }),
+              new sap.m.Label({ text: "{ path: 'prod>ReleaseTimestamp',type: 'sap.ui.model.type.DateTime',formatOptions: {pattern: 'dd-MM-yyyy HH:mm' } }" }),
               //new sap.m.Label({ text: "{ path: 'prod>ReleaseTime' }" }),
-              new sap.ui.core.Icon({ src: "{= ${prod>ModifyState} === 'C' ? 'sap-icon://create' :  ${prod>ModifyState} === 'U' ? 'sap-icon://edit' : 'sap-icon://delete'  }" }),
+              new sap.ui.core.Icon({ src: "{= ${prod>ModifyState} === 'C' ? 'sap-icon://create' :  ${prod>ModifyState} === 'U' ? 'sap-icon://edit' : 'sap-icon://delete'  }",
+                                      alt: "test",
+                                      tooltip: "{= ${prod>ModifyState} === 'C' ? '" + sCreate +  "' :  ${prod>ModifyState} === 'U' ? '"+ sUpdate +"' : '"+ sDelete +"'  }" }),
             ],
             type: "Active",
             press: function (evt) {
@@ -813,15 +831,7 @@ sap.ui.define(
             that.oITPDialog.close();
           };
 
-          //this.getView().byId("btnITP").setVisible(oParams.load);
-          //if (oParams.Docstat === "") {
-            this.getView().byId("btnITPLoad").attachPress(this.onITPListPress, this);
-          //} else {
-          //  this.getView().byId("btnITPLoad").attachPress(fnPressHandler, this);
-          //}
-
-          this.getView().byId("btnITPCancel").attachPress(function(){that.oITPDialog.close();}, this);
-
+    
         that.oITPDialog.open();
 
       },
