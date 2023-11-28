@@ -106,8 +106,7 @@ sap.ui.define(
 
         this.getView().addEventDelegate({
           onBeforeShow: function (evt) {
-            debugger;
-
+            
             return;
 
             var mModel = new sap.ui.model.json.JSONModel();
@@ -125,7 +124,7 @@ sap.ui.define(
                         filters: [ new sap.ui.model.Filter("SalesOrderID", sap.ui.model.FilterOperator.EQ, evt.data.Vbeln ),
                                    new sap.ui.model.Filter("SalesOrderItem", sap.ui.model.FilterOperator.EQ, evt.data.Posnr)],
               success: function (data) {
-                 debugger;
+                 
                  if(!data){
                   mModel.setProperty("/ITPButton", false);
                  }
@@ -139,12 +138,17 @@ sap.ui.define(
                  }
               },
               error: function (error) {
-                debugger;
+                
               },
             });
           },
           onAfterShow: function (evt) {
-            debugger;
+
+            var oMetaModel = that.getView().getModel("meta");
+            oMetaModel.setProperty("/Vbeln",evt.data.Vbeln);
+            oMetaModel.setProperty("/Posnr",evt.data.Posnr);
+            oMetaModel.setProperty("/Profile",evt.data.Profile);
+            oMetaModel.setProperty("/Docstat",evt.data.Docstat);
 
             var oUiModel = sap.ui.getCore().getModel("UIModel");
 
@@ -190,7 +194,7 @@ sap.ui.define(
 
       _onRouteMatched: function (oEvent) {
 
-        debugger;
+        
 
         var that = this;
 
@@ -210,7 +214,7 @@ sap.ui.define(
                     filters: [ new sap.ui.model.Filter("SalesOrderID", sap.ui.model.FilterOperator.EQ, sVbeln ),
                                new sap.ui.model.Filter("SalesOrderItem", sap.ui.model.FilterOperator.EQ, sPosnr)],
           success: function (data) {
-             debugger;
+             
              if(!data){
               mModel.setProperty("/ITPButton", false);
              }
@@ -224,7 +228,7 @@ sap.ui.define(
              }
           },
           error: function (error) {
-            debugger;
+            
           },
         });
 
@@ -692,7 +696,7 @@ sap.ui.define(
       },
 
       onUpdateITP : function(){
-        debugger;
+        
 
         var that = this;
 
@@ -707,12 +711,7 @@ sap.ui.define(
           );
           that.getView().addDependent(that.oITPDialog);
 
-          //this.getView().byId("btnITP").setVisible(oParams.load);
-          //if (oParams.Docstat === "") {
-            this.getView().byId("btnITPLoad").attachPress(this.onITPListPress, this);
-          //} else {
-          //  this.getView().byId("btnITPLoad").attachPress(fnPressHandler, this);
-          //}
+          this.getView().byId("btnITPLoad").attachPress(this.onITPListPress, this);
 
           this.getView().byId("btnITPCancel").attachPress(function(){that.oITPDialog.close();}, this);
 
@@ -720,7 +719,7 @@ sap.ui.define(
 
         var oBundle = that.getView().getModel("i18n").getResourceBundle();
 
-        debugger;
+        
         const sCreate = oBundle.getText("lblCreate");
         const sUpdate = oBundle.getText("lblUpdate");
         const sDelete = oBundle.getText("lblDelete");
@@ -765,7 +764,7 @@ sap.ui.define(
 
 
         var fnPressHandler = function (oEvent) {
-          debugger;
+        
         var src = oEvent.getSource();
         var oModel = this.getView().getModel("listTemplates");
 
@@ -836,7 +835,10 @@ sap.ui.define(
 
       },
 
-      onITPListPress : function (evt) {        
+      onITPListPress : function (evt) {      
+        debugger;  
+        let that = this;
+
 
         let aSelected = [];
 
@@ -859,11 +861,22 @@ sap.ui.define(
           oProdModel.create("/SalesItemChangeKeySet", oITP, {
             method: "POST",
             success() {
-              debugger;
+              
               // const oSalesItem = aSalesItems.find(
               //   (el) => el.SalesOrderItem === oSalesOrder.SalesOrderItem
               // ) || { ItpState: "" };
               // if (oSalesItem.ItpState === "") oCtrl.onToggleRelease();
+
+              that.oITPDialog.close();
+
+              var oMetaModel = that.getView().getModel("meta");
+
+              that.getView().getController().getRouter().navTo("docList", {
+                Vbeln: oMetaModel.getProperty("/Vbeln"),
+                Posnr: oMetaModel.getProperty("/Posnr"),
+                Docstat: oMetaModel.getProperty("/Profile"),
+                Profile: oMetaModel.getProperty("/Docstat")
+                });
   
               MessageToast.show("Saved"
                 // oLangModel
@@ -872,7 +885,7 @@ sap.ui.define(
               );
             },
             error() {
-              debugger;
+              
             },
           });
 
@@ -887,7 +900,7 @@ sap.ui.define(
         const oParent = oModel.getObject(sPath);
 
         $.each(oList.getItems(), function (idx, el) {
-          debugger;
+          
           let zPath = el.getBindingContextPath();
           if(sPath !== zPath){
 
@@ -1546,7 +1559,7 @@ sap.ui.define(
 
             var listControl = that.getView().byId("list");
             var aItems = listControl.getItems();
-            debugger;
+            
             //              var firstItem;
             //
             //              if(aItems.length == 0){
@@ -1580,7 +1593,7 @@ sap.ui.define(
       },
 
       onTemplate: function (oParams) {
-        debugger;
+        
         var that = this;
 
         var oView = this.getView();
@@ -1699,7 +1712,7 @@ sap.ui.define(
                   docids: aSelected,
                 };
                 var rModel = that.getView().getModel("backend");
-                debugger;
+                
                 rModel.callFunction("/SetRefTemplate", {
                   method: "GET",
                   urlParameters: {
@@ -1822,7 +1835,7 @@ sap.ui.define(
                   docids: aSelected,
                 };
                 var rModel = that.getView().getModel("backend");
-                debugger;
+                
                 rModel.callFunction("/SetRefTemplate", {
                   method: "GET",
                   urlParameters: {
@@ -2331,7 +2344,7 @@ sap.ui.define(
               });
             }
 
-            debugger;
+            
             that.onTemplate({
               load: true,
               save: false,
@@ -2340,7 +2353,7 @@ sap.ui.define(
               Posnr: oParams.Posnr,
               initial: true,
             });
-            debugger;
+            
 
             const sTemplateUrl = that.getView().getModel("meta").getProperty("/templateUrl");
 
@@ -2881,7 +2894,7 @@ sap.ui.define(
         let aMdoc = [];
         let aMdocOld = [];
 
-        debugger;
+        
 
         $.each(cMdocArray, function (idx, obj) {
           aMdoc.push({Active : obj.Active,
@@ -2948,7 +2961,7 @@ sap.ui.define(
         });
 
         if(sDocList !== sDocListOld || JSON.stringify(aMdoc) !== JSON.stringify(aMdocOld) ){
-          debugger;
+          
 
           sap.m.MessageBox.confirm("Die Daten wurden verändert. Sollen die Änderungen gesichert werden?", {
             title: "Änderungen",                                    // default

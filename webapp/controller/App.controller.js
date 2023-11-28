@@ -36,6 +36,8 @@ sap.ui.define([
 		navToDetails: function(channelId, eventId, data) {
 			var that = this;
 
+			debugger;
+
             this.core.mdocArray = [];
 		    var oModel = that.app.getModel();
 //		    var dModel = sap.ui.getCore().getModel("DStore");

@@ -374,7 +374,7 @@ sap.ui.define([
       var bus = sap.ui.getCore().getEventBus();
       let oSrc = oParams.getSource();
       //let sVal = oSrc.getModel("backend").getProperty(oSrc.getBindingContextPath());
-      debugger;
+      
 
       let sVal = this.getView().byId("fldProfileName").getValue();
       let oData = this.oDialog.data("position");

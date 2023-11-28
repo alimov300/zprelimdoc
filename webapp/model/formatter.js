@@ -19,7 +19,7 @@ sap.ui.define([], function () {
 		},
 		
 		fnTemplate : function(oValue){
-			debugger;
+			
 			if(oValue === "TEMPLATE"){
 				return 'Erstellen mit Vorlage';
 			}
