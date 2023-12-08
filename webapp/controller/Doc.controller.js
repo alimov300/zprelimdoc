@@ -874,8 +874,8 @@ sap.ui.define(
               that.getView().getController().getRouter().navTo("docList", {
                 Vbeln: oMetaModel.getProperty("/Vbeln"),
                 Posnr: oMetaModel.getProperty("/Posnr"),
-                Docstat: "",//oMetaModel.getProperty("/Profile"),
-                Profile: ""//oMetaModel.getProperty("/Docstat")
+                Docstat: "",//oMetaModel.getProperty("/Docstat"),
+                Profile: oMetaModel.getProperty("/Profile")
                 });
   
               MessageToast.show("Saved"
