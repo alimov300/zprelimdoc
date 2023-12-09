@@ -11,7 +11,7 @@
     xmlns:html="http://www.w3.org/1999/xhtml"
 	id="idDoc"
 >
-    <Panel headerText="Dokumente" id="docPanel" height="auto">
+    <Panel headerText="Dokumente" id="docPanel" class="zHeightPanel">
         <headerToolbar>
             <OverflowToolbar width="100%" id="tlbar1">
                 <content>
@@ -35,7 +35,7 @@
 
         </headerToolbar>
     </Panel>
-    <SplitContainer id="SplitContDemo" initialDetail="idDocDetail" initialMaster="_IDGenVerticalLayout1dPage">
+    <SplitContainer id="SplitContDemo" initialDetail="idDocDetail" initialMaster="_IDGenVerticalLayout1ePage" class="zHeightSplit">
         <detailPages>
             <!-- <Page id="detail" title="Detail 1" backgroundDesign="Solid" showNavButton="{= !${device>/system/desktop} }" navButtonPress=".onPressDetailBack">
                 <Label text="Detail page 1" class="sapUiTinyMarginEnd" />
@@ -55,11 +55,11 @@
                     </RadioButtonGroup>
                 </VBox>
             </Page> -->
-            <mvc:XMLView id="idDocDetail" viewName="zprelimdoc.view.DocDetail" height="100%" />
+            <mvc:XMLView id="idDocDetail" viewName="zprelimdoc.view.DocDetail" />
         </detailPages>
         <masterPages>
-			<Page id="_IDGenVerticalLayout1dPage">
-            <l:VerticalLayout id="_IDGenVerticalLayout1d" width="100%">
+			<Page id="_IDGenVerticalLayout1dPage" style="zHeightPage">
+            <l:VerticalLayout id="_IDGenVerticalLayout1d" width="100%" height="90%" class="zHeightVlayout">
                 <l:content>
                     <f:SimpleForm id="filterform1" visible="false" class="sapUiNoMargin zFilter">
                         <l:HorizontalLayout id="_IDGenHorizontalLayout1">
@@ -83,7 +83,8 @@
                             </MultiComboBox>
                         </l:HorizontalLayout>
                     </f:SimpleForm>
-                    <List id="list" items="{DocList>/results}" noDataText="" mode="SingleSelectMaster" growing="true" growingScrollToLoad="true" growingThreshold="999" selectionChange="OnListItemPressed" updateFinished="onUpdateFinished">
+                    <List id="list" items="{DocList>/results}" noDataText="" mode="SingleSelectMaster" growing="true" class="zHeightList" 
+                        growingScrollToLoad="true" growingThreshold="999" selectionChange="OnListItemPressed" updateFinished="onUpdateFinished">
                         <infoToolbar>
                             <Toolbar active="true" id="filterBar" design="Solid" visible="true" press="onOpenViewSettings">
                                 <Title id="filterBarLabel" text="Dokumente" />

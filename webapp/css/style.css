@@ -31,3 +31,7 @@ button.blueButton span.sapMBtnInner{
     border-color: #0a6ed1;
 	color: white;
 }
+
+div.zHeightSplit {
+	height: 90%;
+}
