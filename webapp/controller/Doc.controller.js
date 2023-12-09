@@ -871,12 +871,18 @@ sap.ui.define(
 
               var oMetaModel = that.getView().getModel("meta");
 
-              that.getView().getController().getRouter().navTo("docList", {
-                Vbeln: oMetaModel.getProperty("/Vbeln"),
-                Posnr: oMetaModel.getProperty("/Posnr"),
-                Docstat: "",//oMetaModel.getProperty("/Docstat"),
-                Profile: oMetaModel.getProperty("/Profile")
+              that.onProfileLoad({
+                profile_name : oMetaModel.getProperty("/Profile"),
+                profile_posnr : oMetaModel.getProperty("/Posnr"), 
+                profile_vbeln : oMetaModel.getProperty("/Vbeln")
                 });
+
+              // that.getView().getController().getRouter().navTo("docList", {
+              //   Vbeln: oMetaModel.getProperty("/Vbeln"),
+              //   Posnr: oMetaModel.getProperty("/Posnr"),
+              //   Docstat: "",//oMetaModel.getProperty("/Docstat"),
+              //   Profile: oMetaModel.getProperty("/Profile")
+              //   });
   
               MessageToast.show("Saved"
                 // oLangModel
