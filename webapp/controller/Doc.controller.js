@@ -2984,11 +2984,16 @@ sap.ui.define(
               if(oAction == sap.m.MessageBox.Action.YES){
 
                 that.onSave();
-                //oDocListOld.setData(oDocList.getData());
-                //sap.ui.getCore().mdocArrayOld = sap.ui.getCore().mdocArray;
+
+                const bus = sap.ui.getCore().getEventBus();
+
+                bus.publish("nav", "back", {
+                  id: "PosList",
+                  data: {},
+                });
 
               }else if(oAction == sap.m.MessageBox.Action.NO){
-                var bus = sap.ui.getCore().getEventBus();
+                const bus = sap.ui.getCore().getEventBus();
 
                 bus.publish("nav", "back", {
                   id: "PosList",
