@@ -1016,6 +1016,7 @@ sap.ui.define(
           },
           success: function (res) {
             console.log("save completed.");
+            let bErrorsfound = false;
             var msg = JSON.parse(res);
 
             if (msg.RETVAL.RETURN.length > 0) {
@@ -1026,9 +1027,12 @@ sap.ui.define(
               };
               $.each(msg.RETVAL.RETURN, function (idx, el) {
                 var sMsg = el.TEXT;
-                var sMsgType = oBundle.getText("msgError");
+                var sMsgType = oBundle.getText("msgError");                
                 if (el.TYPE == "I") {
                   sMsgType = oBundle.getText("msgSuccess");
+                  bErrorsfound = false;
+                }else{
+                  bErrorsfound = true;
                 }
                 newMsgs.items.push({
                   type: sMsgType,
@@ -1041,40 +1045,46 @@ sap.ui.define(
               that.getView().getModel("msgModel").setData(newMsgs);
               that.getView().setBusy(false);
               that.handleMessagePopover();
-            }else{
-              // without error messages  - success and check if we need go back
-              sap.ui
-              .getCore()
-              .getModel("UIModel")
-              .setProperty("/hasChanges", false);
-              sap.ui.getCore().getModel("UIModel").setProperty("/saved", true);
+            }
 
-              if(oParams.WithBack){
-                const bus = sap.ui.getCore().getEventBus();
+              // without error messages  - success and check if we need go back
+              if(bErrorsfound === false ){
+                sap.ui
+                .getCore()
+                .getModel("UIModel")
+                .setProperty("/hasChanges", false);
+                sap.ui.getCore().getModel("UIModel").setProperty("/saved", true);
+
+                if(oParams.WithBack){
+                  const bus = sap.ui.getCore().getEventBus();
   
                   bus.publish("nav", "back", {
                     id: "PosList",
                     data: {},
                   });
   
-              }
+                }
 
+                const oDocList = this.getView().getModel();
+                const oDocListOld = this.getView().getModel("DocListOld");
+        
+                //const cMdocArray = sap.ui.getCore().mdocArray;
+                //const cMdocArrayOld = sap.ui.getCore().mdocArrayOld;
+                
+                oDocListOld.setData(oDocList.getData());
+                sap.ui.getCore().mdocArrayOld = sap.ui.getCore().mdocArray;
             }
+            
+
+            
 
             
 
             //resolve(saved);
-          },
+          }
         });
 
-        const oDocList = this.getView().getModel();
-        const oDocListOld = this.getView().getModel("DocListOld");
 
-        //const cMdocArray = sap.ui.getCore().mdocArray;
-        //const cMdocArrayOld = sap.ui.getCore().mdocArrayOld;
-        
-        oDocListOld.setData(oDocList.getData());
-        sap.ui.getCore().mdocArrayOld = sap.ui.getCore().mdocArray;
 
         //  TODO Save Langus
       },
