@@ -181,6 +181,7 @@ sap.ui.define(
             }
 
             that.getView().setBusy(false);
+            that.getView().getModel("msgModel").setData([]);
             var oModel = evt.to.getModel();
           },
         });
@@ -928,7 +929,7 @@ sap.ui.define(
 
       },
 
-      onSave: function () {
+      onSave: function (oParams) {
         this.addCurrentDetails();
 
         oMessagePopover.close();
@@ -1010,16 +1011,12 @@ sap.ui.define(
 
 
             that.handleMessagePopover();
+
+            //reject(saved);
           },
           success: function (res) {
             console.log("save completed.");
             var msg = JSON.parse(res);
-
-            sap.ui
-              .getCore()
-              .getModel("UIModel")
-              .setProperty("/hasChanges", false);
-            sap.ui.getCore().getModel("UIModel").setProperty("/saved", true);
 
             if (msg.RETVAL.RETURN.length > 0) {
               var oBundle = that.getView().getModel("i18n").getResourceBundle();
@@ -1044,7 +1041,29 @@ sap.ui.define(
               that.getView().getModel("msgModel").setData(newMsgs);
               that.getView().setBusy(false);
               that.handleMessagePopover();
+            }else{
+              // without error messages  - success and check if we need go back
+              sap.ui
+              .getCore()
+              .getModel("UIModel")
+              .setProperty("/hasChanges", false);
+              sap.ui.getCore().getModel("UIModel").setProperty("/saved", true);
+
+              if(oParams.WithBack){
+                const bus = sap.ui.getCore().getEventBus();
+  
+                  bus.publish("nav", "back", {
+                    id: "PosList",
+                    data: {},
+                  });
+  
+              }
+
             }
+
+            
+
+            //resolve(saved);
           },
         });
 
@@ -2983,14 +3002,9 @@ sap.ui.define(
             onClose: function(oAction){
               if(oAction == sap.m.MessageBox.Action.YES){
 
-                that.onSave();
+                that.onSave({WithBack: true});
 
-                const bus = sap.ui.getCore().getEventBus();
-
-                bus.publish("nav", "back", {
-                  id: "PosList",
-                  data: {},
-                });
+                
 
               }else if(oAction == sap.m.MessageBox.Action.NO){
                 const bus = sap.ui.getCore().getEventBus();
