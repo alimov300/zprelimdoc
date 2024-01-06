@@ -1,478 +1,733 @@
-<mvc:View xmlns:u="sap.ui.unified" 
-          xmlns:core="sap.ui.core" 
-        xmlns:commons="sap.ui.commons" 
-        xmlns:mvc="sap.ui.core.mvc" 
-        xmlns="sap.m" 
-        xmlns:l="sap.ui.commons.layout" 
-        xmlns:la="sap.ui.layout" 
-        xmlns:laf="sap.ui.layout.form"  
-        controllerName="zprelimdoc.controller.DocDetail" 
-        xmlns:html="http://www.w3.org/1999/xhtml" 
-        xmlns:l2="sap.ui.layout">
-    <Label id="_IDGenLabel1dd" class="zPosition" text="{parts: [{path: '/DocContent'}], formatter: '.formatter.fnRemoveNullsExt'}" />
-    <IconTabBar id="iconTabBar" class="sapUiResponsiveContentPadding">
+<mvc:View
+    xmlns:u="sap.ui.unified"
+    xmlns:core="sap.ui.core"
+    xmlns:commons="sap.ui.commons"
+    xmlns:mvc="sap.ui.core.mvc"
+    xmlns="sap.m"
+    xmlns:l="sap.ui.commons.layout"
+    xmlns:la="sap.ui.layout"
+    xmlns:laf="sap.ui.layout.form"
+    controllerName="zprelimdoc.controller.DocDetail"
+    xmlns:html="http://www.w3.org/1999/xhtml"
+    xmlns:l2="sap.ui.layout"
+>
+    <Label
+        id="_IDGenLabel1dd"
+        class="zPosition"
+        text="{parts: [{path: '/DocContent'}], formatter: '.formatter.fnRemoveNullsExt'}"
+    />
+    <IconTabBar
+        id="iconTabBar"
+        class="sapUiResponsiveContentPadding"
+    >
         <items>
-            <IconTabFilter id="tabGeneral" icon="sap-icon://detail-view" tooltip="{i18n>tabGeneral}">
-<la:Splitter height="auto" orientation="Vertical">
-		<la:Splitter>
-			<la:layoutData>
-				<la:SplitterLayoutData size="auto" />
-			</la:layoutData>
-			<la:contentAreas>
-				<!-- <Button width="100%" text="Content 2">
-					<layoutData>
-						<la:SplitterLayoutData size="300px" />
-					</layoutData>
-				</Button> -->
-                <!-- <l2:VerticalLayout width="100%" class="gridWrapper"> -->
-                <laf:SimpleForm id="SimpleFormDisplay354"
-			editable="false"
-			layout="ResponsiveGridLayout"
-			title=""
-			labelSpanXL="4"
-			labelSpanL="4"
-			labelSpanM="6"
-			labelSpanS="12"
-			adjustLabelSpan="false"
-			emptySpanXL="0"
-			emptySpanL="0"
-			emptySpanM="1"
-			emptySpanS="1"
-			columnsXL="1"
-			columnsL="1"
-			columnsM="6"
-			singleContainerFullSize="true" >
-			<laf:content>
-            <!-- <Panel><content> -->
-            <!-- <la:HorizontalLayout> -->
-            	<Label text="{i18n>lblStatus}" class="" labelFor="cmbSddcStatus">
-                <layoutData>
-						<la:GridData span="XL12 L12 M12 S12" />
-					</layoutData>
-                </Label>
-                        <ComboBox
-                            id="cmbSddcStatus"
-                            selectedKey="{/SddcStatus}"
-                            enabled="{/Active}"
-                            valueState="{parts: [{path: '/Active'},{path: '/Status1'}], formatter: '.formatter.fnUiStatus'}"
-                            
-                            selectionChange="runValidate"
-                            items="{
+            <IconTabFilter
+                id="tabGeneral"
+                icon="sap-icon://detail-view"
+                tooltip="{i18n>tabGeneral}"
+            >
+                <la:Splitter id="_IDGenSplitter4"
+                    height="90%"
+                    orientation="Vertical"
+                >
+                    <la:Splitter id="_IDGenSplitter2" height="auto">
+                        <la:layoutData>
+                            <la:SplitterLayoutData id="_IDGenSplitterLayoutData1" size="auto"/>
+                        </la:layoutData>
+                        <la:contentAreas>
+                            <laf:SimpleForm
+                                id="SimpleFormDisplay354"
+                                editable="false"
+                                layout="ResponsiveGridLayout"
+                                title=""
+                                labelSpanXL="4"
+                                labelSpanL="4"
+                                labelSpanM="6"
+                                labelSpanS="12"
+                                adjustLabelSpan="false"
+                                emptySpanXL="0"
+                                emptySpanL="0"
+                                emptySpanM="1"
+                                emptySpanS="1"
+                                columnsXL="1"
+                                columnsL="1"
+                                columnsM="6"
+                                singleContainerFullSize="true">
+                                <laf:content>
+                                    <Label
+                                        text="{i18n>lblStatus}"
+                                        class=""
+                                        labelFor="cmbSddcStatus"
+                                    >
+                                        <layoutData>
+                                            <la:GridData
+                                                span="XL12 L12 M12 S12"
+                                            />
+                                        </layoutData>
+                                    </Label>
+                                    <ComboBox
+                                        id="cmbSddcStatus"
+                                        selectedKey="{/SddcStatus}"
+                                        enabled="{/Active}"
+                                        valueState="{parts: [{path: '/Active'},{path: '/Status1'}], formatter: '.formatter.fnUiStatus'}"
+                                        selectionChange="runValidate"
+                                        items="{
                                     path : 'meta>/DomainValuesSet',
                                     filters : [ { path : 'Fieldname', operator : 'EQ', value1 : 'SddcStatus'} ] }"
-                        >
-                            <core:ListItem key="{meta>Value}" text="{meta>Text}" />
-                            <layoutData>
-						<la:GridData span="XL12 L12 M12 S12" />
-					</layoutData>
-                        </ComboBox>
-                        <!-- </la:HorizontalLayout>
-                        <la:HorizontalLayout> -->
-                <Label text="{i18n>lblPrelimDate}" class="" labelFor="fldPrelimDate" >
-                <layoutData>
-						<la:GridData span="XL1 L12 M12 S12" />
-					</layoutData>
-                </Label>
-                        <DatePicker
-                            id="fldPrelimDate"
-                            enabled="{/Active}"
-                            change="runValidate"
-                            valueState="{parts: [{path: '/Active'},{path: '/Status4'}], formatter: '.formatter.fnUiStatus'}"
-                            valueFormat="yyyyMMdd"
-                            displayFormat="dd.MM.yyyy"
-                            value="{path:'/PrelimDate',
-                valueFormat:'yyyyMMdd', type:'sap.ui.model.type.Date',
-                 formatOptions: { style: 'medium',
-                 source: {pattern: 'yyyy-MM-ddTHH:mm:ss.SSSZ'},
-                 strictParsing: true}}"
-                        > <layoutData>
-						<la:GridData span="XL12 L12 M12 S12" />
-					</layoutData></DatePicker>
-                        <!-- </la:HorizontalLayout> -->
-                        <Label text="{i18n>lblFinalDate}" class="" labelFor="fldFinalDate" >
-                        <layoutData>
-						<la:GridData span="XL12 L12 M12 S12" />
-					</layoutData>
-                        </Label>
-                        <DatePicker
-                            id="fldFinalDate"
-                            enabled="{path: '/Active'}"
-                            change="runValidate"
-                            valueFormat="yyyyMMdd"
-                            displayFormat="dd.MM.yyyy"
-                            valueState="{parts: [{path: '/Active'},{path: '/Status6'}], formatter: '.formatter.fnUiStatus'}"
-                            value="{path:'/FinalDate',
-                 valueFormat:'yyyyMMdd',
-                 type:'sap.ui.model.type.Date',
-                 formatOptions: { style: 'medium',
-                 source: {pattern: 'yyyy-MM-ddTHH:mm:ss.SSSZ'},
-                 strictParsing: true}}"
-                        > <layoutData>
-						<la:GridData span="XL12 L12 M12 S12" />
-					</layoutData></DatePicker>
-				<Label text="{i18n>lblDokar}" visible="false" class="" labelFor="cmbDokart" >
-                <layoutData>
-						<la:GridData span="XL12 L12 M12 S12" />
-					</layoutData>
-                </Label>
-                        <ComboBox visible="false"
-                            id="cmbDokart"
-                            selectedKey="{/Dokar}"
-                            selectionChange="runValidate"
-                            enabled="{/Active}"
-                            valueState="{parts: [{path: '/Active'},{path: '/Status2'}], formatter: '.formatter.fnUiStatus'}"
-                            items="{
-                   path : 'meta>/DomainValuesSet',
-                             filters : [ { path : 'Fieldname', operator : 'EQ', value1 : 'Dokar'} ] }"
-                        >
-                            <core:ListItem key="{meta>Value}" text="{meta>Value} - {meta>Text}" />
-                             <layoutData>
-						<la:GridData span="XL12 L12 M12 S12" />
-					</layoutData>
-                        </ComboBox>
-				<Label text="{i18n>lblPlansCre}" class="" labelFor="cmbPlansCre" >
-                <layoutData>
-						<la:GridData span="XL12 L12 M12 S12" />
-					</layoutData>
-                </Label>
-                        <ComboBox
-                            id="cmbPlansCre"
-                            selectedKey="{/PlansCre}"
-                            enabled="{/Active}"
-                            valueState="{parts: [{path: '/Active'},{path: '/Status3'}], formatter: '.formatter.fnUiStatus'}"
-                            selectionChange="runValidate"
-                            items="{
-                   path : 'meta>/DomainValuesSet',
-                             filters : [ { path : 'Fieldname', operator : 'EQ', value1 : 'PlanPos'} ] }"
-                        >
-                            <core:ListItem key="{meta>Value}" text="{meta>Text}" />
-                             <layoutData>
-						<la:GridData span="XL12 L12 M12 S12" />
-					</layoutData>
-                        </ComboBox>
-				
-                        <Label text="{i18n>lblPlansIfs}" class="" labelFor="cmbPlansIfs" >
-                        <layoutData>
-						<la:GridData span="XL12 L12 M12 S12" />
-					</layoutData>
-                        </Label>
-                        <ComboBox
-                            id="cmbPlansIfs"
-                            selectedKey="{/PlansIfs}"
-                            valueState="{parts: [{path: '/Active'},{path: '/Status5'}], formatter: '.formatter.fnUiStatus'}"
-                            enabled="{/Active}"
-                            selectionChange="runValidate"
-                            items="{
-                   path : 'meta>/DomainValuesSet',
-                             filters : [ { path : 'Fieldname', operator : 'EQ', value1 : 'PlanPos'} ] }"
-                        >
-                            <core:ListItem key="{meta>Value}" text="{meta>Text}" />
-                             <layoutData>
-						<la:GridData span="XL12 L12 M12 S12" />
-					</layoutData>
-                        </ComboBox>                        
-                        <Label text="{i18n>lblPlansEfs}" visible="false" class="" labelFor="cmbPlansEfs" >
-                        <layoutData>
-						<la:GridData span="XL12 L12 M12 S12" />
-					</layoutData>
-                        </Label>
-                        <ComboBox visible="false" 
-                            id="cmbPlansEfs"
-                            selectedKey="{/PlansEfs}"
-                            enabled="false"
-                            selectionChange="runValidate"
-                            valueState="{parts: [{path: '/Active'},{path: '/Status7'}], formatter: '.formatter.fnUiStatus'}"
-                            items="{
-                   path : 'meta>/DomainValuesSet',
-                             filters : [ { path : 'Fieldname', operator : 'EQ', value1 : 'PlanPos'} ] }"
-                        >
-                            <core:ListItem key="{meta>Value}" text="{meta>Text}" />
-                             <layoutData>
-						<la:GridData span="XL12 L12 M12 S12" />
-					</layoutData>
-                        </ComboBox>
-                        <Label text="{i18n>lblComment}" class="" labelFor="fldComment" >
-                        <layoutData>
-						<la:GridData span="XL12 L12 M12 S12" />
-					</layoutData>
-                        </Label>
-                        <TextArea id="fldComment" enabled="{/Active}" liveChange="runValidate" valueState="{parts: [{path: '/Active'},{path: '/Status10'}], formatter: '.formatter.fnUiStatus'}" value="{/DcComment}" width="100%">
-                         <layoutData>
-						<la:GridData span="XL12 L12 M12 S12" />
-					</layoutData>
-                        </TextArea>
-                        <Label text="{i18n>lblCustDocNo}" class="" labelFor="fldCustDocNo" >
-                        <layoutData>
-						<la:GridData span="XL12 L12 M12 S12" />
-					</layoutData>
-                        </Label>
-                        <Input id="fldCustDocNo" enabled="{/Active}" maxLength="255" valueState="{parts: [{path: '/Active'},{path: '/Status8'}], formatter: '.formatter.fnUiStatus'}" value="{/CustomerDocno}" >
-                         <layoutData>
-						<la:GridData span="XL12 L12 M12 S12" />
-					</layoutData>
-                    </Input>
-                        <Label text="{i18n>lblPenal}" class="" labelFor="cmbPenal" >
-                        <layoutData>
-						<la:GridData span="XL12 L12 M12 S12" />
-					</layoutData>
-                        </Label>
-                        <ComboBox
-                            id="cmbPenal"
-                            selectedKey="{/Penal}"
-                            enabled="{/Active}"
-                            selectionChange="runValidate"
-                            valueState="{parts: [{path: '/Active'},{path: '/Status9'}], formatter: '.formatter.fnUiStatus'}"
-                            items="{
-                   path : 'meta>/DomainValuesSet',
-                             filters : [ { path : 'Fieldname', operator : 'EQ', value1 : 'Penal'} ] }"
-                        >
-                            <core:ListItem key="{meta>Value}" text="{meta>Text}" />
-                             <layoutData>
-						<la:GridData span="XL12 L12 M12 S12" />
-					</layoutData>
-                        </ComboBox>                        
+                                    >
+                                        <core:ListItem
+                                            key="{meta>Value}"
+                                            text="{meta>Text}"
+                                        />
+                                        <layoutData>
+                                            <la:GridData
+                                                span="XL12 L12 M12 S12"
+                                            />
+                                        </layoutData>
+                                    </ComboBox>
+                                    <Label
+                                        text="{i18n>lblPrelimDate}"
+                                        class=""
+                                        labelFor="fldPrelimDate"
+                                    >
+                                        <layoutData>
+                                            <la:GridData
+                                                span="XL1 L12 M12 S12"
+                                            />
+                                        </layoutData>
+                                    </Label>
+                                    <DatePicker
+                                        id="fldPrelimDate"
+                                        enabled="{/Active}"
+                                        change="runValidate"
+                                        valueState="{parts: [{path: '/Active'},{path: '/Status4'}], formatter: '.formatter.fnUiStatus'}"
+                                        valueFormat="yyyyMMdd"
+                                        displayFormat="dd.MM.yyyy"
+                                        value="{path:'/PrelimDate',
+                                              valueFormat:'yyyyMMdd', type:'sap.ui.model.type.Date',
+                                                formatOptions: { style: 'medium',
+                                                source: {pattern: 'yyyy-MM-ddTHH:mm:ss.SSSZ'},
+                                                strictParsing: true}}">
+                                        <layoutData>
+                                            <la:GridData
+                                                span="XL12 L12 M12 S12"
+                                            />
+                                        </layoutData>
+                                    </DatePicker>
+                                    <Label
+                                        text="{i18n>lblFinalDate}"
+                                        class=""
+                                        labelFor="fldFinalDate"
+                                    >
+                                        <layoutData>
+                                            <la:GridData
+                                                span="XL12 L12 M12 S12"
+                                            />
+                                        </layoutData>
+                                    </Label>
+                                    <DatePicker
+                                        id="fldFinalDate"
+                                        enabled="{path: '/Active'}"
+                                        change="runValidate"
+                                        valueFormat="yyyyMMdd"
+                                        displayFormat="dd.MM.yyyy"
+                                        valueState="{parts: [{path: '/Active'},{path: '/Status6'}], formatter: '.formatter.fnUiStatus'}"
+                                        value="{path:'/FinalDate',
+                                        valueFormat:'yyyyMMdd',
+                                        type:'sap.ui.model.type.Date',
+                                        formatOptions: { style: 'medium',
+                                        source: {pattern: 'yyyy-MM-ddTHH:mm:ss.SSSZ'},
+                                        strictParsing: true}}">
+                                        <layoutData>
+                                            <la:GridData
+                                                span="XL12 L12 M12 S12"
+                                            />
+                                        </layoutData>
+                                    </DatePicker>
+                                    <Label
+                                        text="{i18n>lblDokar}"
+                                        visible="false"
+                                        class=""
+                                        labelFor="cmbDokart"
+                                    >
+                                        <layoutData>
+                                            <la:GridData
+                                                span="XL12 L12 M12 S12"
+                                            />
+                                        </layoutData>
+                                    </Label>
+                                    <ComboBox
+                                        visible="false"
+                                        id="cmbDokart"
+                                        selectedKey="{/Dokar}"
+                                        selectionChange="runValidate"
+                                        enabled="{/Active}"
+                                        valueState="{parts: [{path: '/Active'},{path: '/Status2'}], formatter: '.formatter.fnUiStatus'}"
+                                        items="{
+                                            path : 'meta>/DomainValuesSet',
+                                            filters : [ { path : 'Fieldname', operator : 'EQ', value1 : 'Dokar'} ] }">
+                                        <core:ListItem
+                                            key="{meta>Value}"
+                                            text="{meta>Value} - {meta>Text}"
+                                        />
+                                        <layoutData>
+                                            <la:GridData
+                                                span="XL12 L12 M12 S12"
+                                            />
+                                        </layoutData>
+                                    </ComboBox>
+                                    <Label
+                                        text="{i18n>lblPlansCre}"
+                                        class=""
+                                        labelFor="cmbPlansCre"
+                                    >
+                                        <layoutData>
+                                            <la:GridData
+                                                span="XL12 L12 M12 S12"
+                                            />
+                                        </layoutData>
+                                    </Label>
+                                    <ComboBox
+                                        id="cmbPlansCre"
+                                        selectedKey="{/PlansCre}"
+                                        enabled="{/Active}"
+                                        valueState="{parts: [{path: '/Active'},{path: '/Status3'}], formatter: '.formatter.fnUiStatus'}"
+                                        selectionChange="runValidate"
+                                        items="{
+                                                path : 'meta>/DomainValuesSet',
+                                                filters : [ { path : 'Fieldname', operator : 'EQ', value1 : 'PlanPos'} ] }" >
+                                        <core:ListItem
+                                            key="{meta>Value}"
+                                            text="{meta>Text}"
+                                        />
+                                        <layoutData>
+                                            <la:GridData
+                                                span="XL12 L12 M12 S12"
+                                            />
+                                        </layoutData>
+                                    </ComboBox>
 
-			</laf:content>
-		</laf:SimpleForm>                    
-				<la:Splitter orientation="Vertical">
+                                    <Label
+                                        text="{i18n>lblPlansIfs}"
+                                        class=""
+                                        labelFor="cmbPlansIfs"
+                                    >
+                                        <layoutData>
+                                            <la:GridData
+                                                span="XL12 L12 M12 S12"
+                                            />
+                                        </layoutData>
+                                    </Label>
+                                    <ComboBox
+                                        id="cmbPlansIfs"
+                                        selectedKey="{/PlansIfs}"
+                                        valueState="{parts: [{path: '/Active'},{path: '/Status5'}], formatter: '.formatter.fnUiStatus'}"
+                                        enabled="{/Active}"
+                                        selectionChange="runValidate"
+                                        items="{
+                                                path : 'meta>/DomainValuesSet',
+                                                filters : [ { path : 'Fieldname', operator : 'EQ', value1 : 'PlanPos'} ] }" >
+                                        <core:ListItem
+                                            key="{meta>Value}"
+                                            text="{meta>Text}"
+                                        />
+                                        <layoutData>
+                                            <la:GridData
+                                                span="XL12 L12 M12 S12"
+                                            />
+                                        </layoutData>
+                                    </ComboBox>
+                                    <Label
+                                        text="{i18n>lblPlansEfs}"
+                                        visible="false"
+                                        class=""
+                                        labelFor="cmbPlansEfs"
+                                    >
+                                        <layoutData>
+                                            <la:GridData
+                                                span="XL12 L12 M12 S12"
+                                            />
+                                        </layoutData>
+                                    </Label>
+                                    <ComboBox
+                                        visible="false"
+                                        id="cmbPlansEfs"
+                                        selectedKey="{/PlansEfs}"
+                                        enabled="false"
+                                        selectionChange="runValidate"
+                                        valueState="{parts: [{path: '/Active'},{path: '/Status7'}], formatter: '.formatter.fnUiStatus'}"
+                                        items="{
+                                                path : 'meta>/DomainValuesSet',
+                                                filters : [ { path : 'Fieldname', operator : 'EQ', value1 : 'PlanPos'} ] }">
+                                        <core:ListItem
+                                            key="{meta>Value}"
+                                            text="{meta>Text}"
+                                        />
+                                        <layoutData>
+                                            <la:GridData
+                                                span="XL12 L12 M12 S12"
+                                            />
+                                        </layoutData>
+                                    </ComboBox>
+                                    <Label
+                                        text="{i18n>lblComment}"
+                                        class=""
+                                        labelFor="fldComment"
+                                    >
+                                        <layoutData>
+                                            <la:GridData
+                                                span="XL12 L12 M12 S12"
+                                            />
+                                        </layoutData>
+                                    </Label>
+                                    <TextArea
+                                        id="fldComment"
+                                        enabled="{/Active}"
+                                        liveChange="runValidate"
+                                        valueState="{parts: [{path: '/Active'},{path: '/Status10'}], formatter: '.formatter.fnUiStatus'}"
+                                        value="{/DcComment}"
+                                        width="100%"
+                                    >
+                                        <layoutData>
+                                            <la:GridData
+                                                span="XL12 L12 M12 S12"
+                                            />
+                                        </layoutData>
+                                    </TextArea>
+                                    <Label
+                                        text="{i18n>lblCustDocNo}"
+                                        class=""
+                                        labelFor="fldCustDocNo"
+                                    >
+                                        <layoutData>
+                                            <la:GridData
+                                                span="XL12 L12 M12 S12"
+                                            />
+                                        </layoutData>
+                                    </Label>
+                                    <Input
+                                        id="fldCustDocNo"
+                                        enabled="{/Active}"
+                                        maxLength="255"
+                                        valueState="{parts: [{path: '/Active'},{path: '/Status8'}], formatter: '.formatter.fnUiStatus'}"
+                                        value="{/CustomerDocno}"
+                                    >
+                                        <layoutData>
+                                            <la:GridData
+                                                span="XL12 L12 M12 S12"
+                                            />
+                                        </layoutData>
+                                    </Input>
+                                    <Label
+                                        text="{i18n>lblPenal}"
+                                        class=""
+                                        labelFor="cmbPenal"
+                                    >
+                                        <layoutData>
+                                            <la:GridData
+                                                span="XL12 L12 M12 S12"
+                                            />
+                                        </layoutData>
+                                    </Label>
+                                    <ComboBox
+                                        id="cmbPenal"
+                                        selectedKey="{/Penal}"
+                                        enabled="{/Active}"
+                                        selectionChange="runValidate"
+                                        valueState="{parts: [{path: '/Active'},{path: '/Status9'}], formatter: '.formatter.fnUiStatus'}"
+                                        items="{
+                                                path : 'meta>/DomainValuesSet',
+                                                filters : [ { path : 'Fieldname', operator : 'EQ', value1 : 'Penal'} ] }">
+                                        <core:ListItem
+                                            key="{meta>Value}"
+                                            text="{meta>Text}"
+                                        />
+                                        <layoutData>
+                                            <la:GridData
+                                                span="XL12 L12 M12 S12"
+                                            />
+                                        </layoutData>
+                                    </ComboBox>
+                                </laf:content>
+                            </laf:SimpleForm>
+                            <la:Splitter
+                                id="_IDGenSplitter1"
+                                orientation="Vertical">
+                                <Panel>
+                                    <content>
+                                        <Label
+                                            id="_IDGenLabel2"
+                                            text="{i18n>txtTargetNr}"
+                                            class=""
+                                            labelFor="mslTarget"
+                                        />
 
-                    <!-- <laf:SimpleForm id="SimpleFormDisplay355"
-			editable="false"
-			layout="ResponsiveGridLayout"
-			title=""
-			labelSpanXL="4"
-			labelSpanL="4"
-			labelSpanM="6"
-			labelSpanS="12"
-			adjustLabelSpan="true"
-			emptySpanXL="1"
-			emptySpanL="1"
-			emptySpanM="1"
-			emptySpanS="1"
-			columnsXL="7"
-			columnsL="7"
-			columnsM="6"
-			singleContainerFullSize="true" >
-			<laf:content> -->
-            <Panel><content>
-<Label id="_IDGenLabel2" text="{i18n>txtTargetNr}" class="" labelFor="mslTarget" />
-
-                <MultiComboBox id="mslTarget" enabled="{/Active}" items="{
-                   path : 'meta>/DomainValuesSet',
-                             filters : [ { path: 'Fieldname', operator : 'EQ', value1 : 'DocContent'} ] }">
-                    <core:ListItem id="_IDGenListItem1" key="{meta>Value}" text="{parts: [{path: 'meta>Value'},{path: 'meta>Text'}], formatter: '.formatter.fnDocContAsDD'}" />
-                </MultiComboBox>
-
-                <Label id="_IDGenLabel3" text="{i18n>tabMatGroup}" class="" labelFor="mslMatGroup" />
-
-                <MultiComboBox id="mslMatGroup" enabled="false" items="{
-                   path : 'meta>/DomainValuesSet',
-                             filters : [ { path: 'Fieldname', operator : 'EQ', value1 : 'Matkl'} ] }">
-                    <core:ListItem id="_IDGenListItem2" key="{meta>Value}" text="{meta>Value} - {meta>Text}" />
-                </MultiComboBox>
-
-                <Label id="_IDGenLabel4" text="{i18n>lblKeyword1}" class="" labelFor="cmbKeyword1" />
-
-                <MultiComboBox id="cmbKeyword1" enabled="false">
-                    <!--          <core:ListItem key="{meta>Value}" text="{meta>Value} - {meta>Text}" /> -->
-                </MultiComboBox>
-
-                <Label id="_IDGenLabel5" text="{i18n>lblKeyword2}" class="" labelFor="cmbKeyword2" />
-                <MultiComboBox id="cmbKeyword2" enabled="false">
-                    <!--          <core:ListItem key="{meta>Value}" text="{meta>Value} - {meta>Text}" /> -->
-                </MultiComboBox>
-                </content></Panel>
-                    <!-- </laf:content>
-		</laf:SimpleForm> -->
-					<!-- <Button width="100%" text="Content 4">
-						<layoutData>
-							<la:SplitterLayoutData size="50%" />
-						</layoutData>
-					</Button> -->
-
-					<!-- <laf:SimpleForm id="SimpleFormDisplay356"
-			editable="false"
-			layout="ResponsiveGridLayout"
-			title=""
-			labelSpanXL="2"
-			labelSpanL="2"
-			labelSpanM="6"
-			labelSpanS="12"
-			adjustLabelSpan="true"
-			emptySpanXL="1"
-			emptySpanL="1"
-			emptySpanM="1"
-			emptySpanS="1"
-			columnsXL="9"
-			columnsL="9"
-			columnsM="7"
-			singleContainerFullSize="true" >
-			<laf:content> -->
-<Panel>
-<content>
-                    <Label id="_IDGenLabel6" text="{i18n>txtLanguages}" class="" labelFor="mslLang" />
-                <MultiComboBox id="mslLang" enabled="{/Active}" items="{
-            path : 'lang>/langItems',
-            templateShareable : false
-        }">
-                    <core:Item id="_IDGenItem1" key="{lang>Value}" text="{lang>Text}" />
-                    <!-- <selectedKey> -->
-                    <!-- <core:Item key="{lang>key}" > -->
-                    <!-- </core:Item> -->
-                    <!-- </selectedKey> -->
-                </MultiComboBox>
-<Label text="" class="" labelFor="tblLang" />
-
-                <Table id="tblLang" visible="{lang>/isTopLevel}" class="sapUiResponsiveMargin zLangsTable" width="auto" items="{path: 'lang>/langAssignments',templateShareable: false}">
-                    <headerToolbar>
-                        <Toolbar id="_IDGenToolbar1">
-                            <Title id="_IDGenTitle1" text="" />
-                            <ToolbarSpacer id="_IDGenToolbarSpacer1" />
-                            <Button id="_IDGenButton1" icon="sap-icon://sys-last-page" enabled="{/Active}" text="{i18n>btnDerive}" press="deriveLanguages" />
-                        </Toolbar>
-                    </headerToolbar>
-                    <columns>
-                        <Column id="_IDGenColumn1" width="10%" vAlign="Middle">
-                            <CheckBox id="_IDGenCheckbox1" select="onAllLanguSelection" />
-                        </Column>
-                        <Column id="_IDGenColumn2" width="100px" vAlign="Middle">
-                            <Text id="_IDGenText1dd" text="{i18n>txtAssignment}" />
-                        </Column>
-                        <Column id="_IDGenColumn3" width="50%" vAlign="Middle">
-                            <Text id="_IDGenText2dd" text="" />
-                        </Column>
-                        <Column id="_IDGenColumn4" width="40%" vAlign="Middle">
-                            <Text id="_IDGenText3dd" text="{i18n>txtLanguages}" />
-                        </Column>
-                    </columns>
-                    <items>
-                        <ColumnListItem id="_IDGenColumnListItem1" type="Navigation" vAlign="Middle">
-                            <cells>
-                                <CheckBox id="_IDGenCheckbox2" selected="{lang>Selected}" enabled="{/Active}" />
-                                <Text id="_IDGenText4dd" text="{path: 'lang>DocContent', formatter: '.formatter.fnDocContentFormatter'}" />
-                                <Text id="_IDGenText5dd" text="{lang>Text}" />
-                                <MultiInput
-                                    id="_IDGenMultiInput1dd"
-                                    showValueHelp="false"
-                                    tokens="{
-                 path : 'lang>Langs',
-                 templateShareable : false
-                 }"
-                                    tokenUpdate="onTokensUpdateNew"
-                                    enabled="{/Active}"
-                                    suggestionItems="{path:'lang>/allItems',
-                                 templateShareable : false,
-                                sorter: {path:'Text'}}"
-                                    showSuggestion="true"
-                                    enableMultiLineMode="{lang>fldFalse}"
+                                        <MultiComboBox
+                                            id="mslTarget"
+                                            enabled="{/Active}"
+                                            items="{
+                                                path : 'meta>/DomainValuesSet',
+                                                filters : [ { path: 'Fieldname', operator : 'EQ', value1 : 'DocContent'} ] }">
+                                            <core:ListItem
+                                                id="_IDGenListItem1"
+                                                key="{meta>Value}"
+                                                text="{parts: [{path: 'meta>Value'},{path: 'meta>Text'}], formatter: '.formatter.fnDocContAsDD'}"
+                                            />
+                                        </MultiComboBox>
+                                        <Label
+                                            id="_IDGenLabel3"
+                                            text="{i18n>tabMatGroup}"
+                                            class=""
+                                            labelFor="mslMatGroup"
+                                        />
+                                        <MultiComboBox
+                                            id="mslMatGroup"
+                                            enabled="false"
+                                            items="{
+                                                path : 'meta>/DomainValuesSet',
+                                                filters : [ { path: 'Fieldname', operator : 'EQ', value1 : 'Matkl'} ] }">
+                                            <core:ListItem
+                                                id="_IDGenListItem2"
+                                                key="{meta>Value}"
+                                                text="{meta>Value} - {meta>Text}"
+                                            />
+                                        </MultiComboBox>
+                                        <Label
+                                            id="_IDGenLabel4"
+                                            text="{i18n>lblKeyword1}"
+                                            class=""
+                                            labelFor="cmbKeyword1"
+                                        />
+                                        <MultiComboBox
+                                            id="cmbKeyword1"
+                                            enabled="false"
+                                        >
+                                        </MultiComboBox>
+                                        <Label
+                                            id="_IDGenLabel5"
+                                            text="{i18n>lblKeyword2}"
+                                            class=""
+                                            labelFor="cmbKeyword2"
+                                        />
+                                        <MultiComboBox
+                                            id="cmbKeyword2"
+                                            enabled="false"
+                                        >
+                                        </MultiComboBox>
+                                    </content>
+                                </Panel>
+                                <Panel>
+                                    <content>
+                                        <Label
+                                            id="_IDGenLabel6"
+                                            text="{i18n>txtLanguages}"
+                                            class=""
+                                            labelFor="mslLang"
+                                        />
+                                        <MultiComboBox
+                                            id="mslLang"
+                                            enabled="{/Active}"
+                                            items="{
+                                                path : 'lang>/langItems',
+                                                templateShareable : false
+                                                }">
+                                            <core:Item
+                                                id="_IDGenItem1"
+                                                key="{lang>Value}"
+                                                text="{lang>Text}"
+                                            />
+                                        </MultiComboBox>
+                                        <Label
+                                            text=""
+                                            class=""
+                                            labelFor="tblLang" />
+                                        <Table
+                                            id="tblLang"
+                                            visible="{lang>/isTopLevel}"
+                                            class="sapUiResponsiveMargin zLangsTable"
+                                            width="auto"
+                                            items="{path: 'lang>/langAssignments',templateShareable: false}">
+                                            <headerToolbar>
+                                                <Toolbar id="_IDGenToolbar1">
+                                                    <Title
+                                                        id="_IDGenTitle1"
+                                                        text=""
+                                                    />
+                                                    <ToolbarSpacer
+                                                        id="_IDGenToolbarSpacer1"
+                                                    />
+                                                    <Button
+                                                        id="_IDGenButton1"
+                                                        icon="sap-icon://sys-last-page"
+                                                        enabled="{/Active}"
+                                                        text="{i18n>btnDerive}"
+                                                        press="deriveLanguages"
+                                                    />
+                                                </Toolbar>
+                                            </headerToolbar>
+                                            <columns>
+                                                <Column
+                                                    id="_IDGenColumn1"
+                                                    width="10%"
+                                                    vAlign="Middle"
+                                                >
+                                                    <CheckBox
+                                                        id="_IDGenCheckbox1"
+                                                        select="onAllLanguSelection"
+                                                    />
+                                                </Column>
+                                                <Column
+                                                    id="_IDGenColumn2"
+                                                    width="100px"
+                                                    vAlign="Middle"
+                                                >
+                                                    <Text
+                                                        id="_IDGenText1dd"
+                                                        text="{i18n>txtAssignment}"
+                                                    />
+                                                </Column>
+                                                <Column
+                                                    id="_IDGenColumn3"
+                                                    width="50%"
+                                                    vAlign="Middle">
+                                                    <Text
+                                                        id="_IDGenText2dd"
+                                                        text=""
+                                                    />
+                                                </Column>
+                                                <Column
+                                                    id="_IDGenColumn4"
+                                                    width="40%"
+                                                    vAlign="Middle">
+                                                    <Text
+                                                        id="_IDGenText3dd"
+                                                        text="{i18n>txtLanguages}"
+                                                    />
+                                                </Column>
+                                            </columns>
+                                            <items>
+                                                <ColumnListItem
+                                                    id="_IDGenColumnListItem1"
+                                                    type="Navigation"
+                                                    vAlign="Middle"
+                                                >
+                                                    <cells>
+                                                        <CheckBox
+                                                            id="_IDGenCheckbox2"
+                                                            selected="{lang>Selected}"
+                                                            enabled="{/Active}"
+                                                        />
+                                                        <Text
+                                                            id="_IDGenText4dd"
+                                                            text="{path: 'lang>DocContent', formatter: '.formatter.fnDocContentFormatter'}"
+                                                        />
+                                                        <Text
+                                                            id="_IDGenText5dd"
+                                                            text="{lang>Text}"
+                                                        />
+                                                        <MultiInput
+                                                            id="_IDGenMultiInput1dd"
+                                                            showValueHelp="false"
+                                                            tokens="{
+                                                                path : 'lang>Langs',
+                                                                templateShareable : false
+                                                                }"
+                                                            tokenUpdate="onTokensUpdateNew"
+                                                            enabled="{/Active}"
+                                                            suggestionItems="{path:'lang>/allItems',
+                                                                templateShareable : false,
+                                                                sorter: {path:'Text'}}"
+                                                            showSuggestion="true"
+                                                            enableMultiLineMode="{lang>fldFalse}"
+                                                        >
+                                                            <core:ListItem
+                                                                id="_IDGenListItem3"
+                                                                key="{lang>Value}"
+                                                                additionalText="{lang>fldTrue}"
+                                                                text="{lang>Text}"
+                                                                enabled="{/Active}"
+                                                            />
+                                                            <tokens>
+                                                                <Token
+                                                                    id="_IDGenToken1"
+                                                                    key="{lang>Value}"
+                                                                    editable="{lang>fldTrue}"
+                                                                    text="{lang>Text}"
+                                                                />
+                                                            </tokens>
+                                                        </MultiInput>
+                                                    </cells>
+                                                </ColumnListItem>
+                                            </items>
+                                        </Table>
+                                    </content>
+                                </Panel>
+                            </la:Splitter>
+                        </la:contentAreas>
+                    </la:Splitter>
+                    <la:Splitter id="_IDGenSplitter3">
+                        <la:layoutData>
+                            <la:SplitterLayoutData id="_IDGenSplitterLayoutData2" size="80px" />
+                        </la:layoutData>
+                        <la:contentAreas>
+                            <l2:VerticalLayout
+                                width="100%"
+                                class="gridWrapper"
+                            >
+                                <Table
+                                    noDataText="No Profiles"
+                                    id="Profiles"
                                 >
-                                    <core:ListItem id="_IDGenListItem3" key="{lang>Value}" additionalText="{lang>fldTrue}" text="{lang>Text}" enabled="{/Active}" />
-                                    <tokens>
-                                        <Token id="_IDGenToken1" key="{lang>Value}" editable="{lang>fldTrue}" text="{lang>Text}" />
-                                    </tokens>
-                                </MultiInput>
-                            </cells>
-                        </ColumnListItem>
-                    </items>
-                </Table>
-                </content>
-            </Panel>
-                    <!-- </laf:content>
-		</laf:SimpleForm> -->
-				</la:Splitter>
-				
-			</la:contentAreas>
-		</la:Splitter>
-		<la:Splitter>
-			<la:layoutData>
-				<la:SplitterLayoutData size="50px" />
-			</la:layoutData>
-			<la:contentAreas>
-				<!-- <Button width="100%" text="Content 6">
-					<layoutData>
-						<la:SplitterLayoutData size="auto" />
-					</layoutData>
-				</Button> -->
-                <l2:VerticalLayout width="100%" class="gridWrapper">
-                    <!-- <l2:Grid containerQuery="true" hSpacing="0" defaultSpan="XL12 L12 M12 S12"> -->
-                        <Table noDataText="No Profiles" id="Profiles">
-                            <items>
-                                <ColumnListItem type="Active" id="item0">
-                                    <cells>
-                                        <ComboBox enabled="{/Active}" xmlns="sap.m" id="cmbProfile1" selectedKey="{/SDDocCont_TemplSet/results/0/Template}" items="{path: 'templ1data>/results'}">
-                                            <core:Item key="{templ1data>Template}" text="{templ1data>TemplDescr}" />
-                                        </ComboBox>
-                                        <ComboBox enabled="{/Active}" xmlns="sap.m" id="cmbProfile2" selectedKey="{/SDDocCont_TemplSet/results/1/Template}" items="{path: 'templ2data>/results'}">
-                                            <core:Item key="{templ2data>Template}" text="{templ2data>TemplDescr}" />
-                                        </ComboBox>
-                                        <ComboBox enabled="{/Active}" xmlns="sap.m" id="cmbProfile3" selectedKey="{/SDDocCont_TemplSet/results/2/Template}" items="{path: 'templ3data>/results'}">
-                                            <core:Item key="{templ3data>Template}" text="{templ3data>TemplDescr}" />
-                                        </ComboBox>
-                                        <Text text="stext0" id="text0" />
-                                        <Text text="stext1" id="text1" />
-                                        <Text text="stext2" id="text2" />
-                                    </cells>
-                                </ColumnListItem>
-                            </items>
-                            <columns>
-                                <Column id="column0">
-                                    <header>
-                                        <Label text="{templateModel>/0/Title}" id="label0" />
-                                    </header>
-                                </Column>
-                                <Column id="column1">
-                                    <header>
-                                        <Label text="{templateModel>/1/Title}" id="label1" />
-                                    </header>
-                                </Column>
-                                <Column id="column2">
-                                    <header>
-                                        <Label text="{templateModel>/2/Title}" id="label2" />
-                                    </header>
-                                </Column>
-                            </columns>
-                        </Table>
-                    <!-- </l2:Grid> -->
-                </l2:VerticalLayout> 
-			</la:contentAreas>
-		</la:Splitter>
-	</la:Splitter>
-		
+                                    <items>
+                                        <ColumnListItem
+                                            type="Active"
+                                            id="item0"
+                                        >
+                                            <cells>
+                                                <ComboBox
+                                                    enabled="{/Active}"
+                                                    xmlns="sap.m"
+                                                    id="cmbProfile1"
+                                                    selectedKey="{/SDDocCont_TemplSet/results/0/Template}"
+                                                    items="{path: 'templ1data>/results'}"
+                                                >
+                                                    <core:Item
+                                                        key="{templ1data>Template}"
+                                                        text="{templ1data>TemplDescr}"
+                                                    />
+                                                </ComboBox>
+                                                <ComboBox
+                                                    enabled="{/Active}"
+                                                    xmlns="sap.m"
+                                                    id="cmbProfile2"
+                                                    selectedKey="{/SDDocCont_TemplSet/results/1/Template}"
+                                                    items="{path: 'templ2data>/results'}"
+                                                >
+                                                    <core:Item
+                                                        key="{templ2data>Template}"
+                                                        text="{templ2data>TemplDescr}"
+                                                    />
+                                                </ComboBox>
+                                                <ComboBox
+                                                    enabled="{/Active}"
+                                                    xmlns="sap.m"
+                                                    id="cmbProfile3"
+                                                    selectedKey="{/SDDocCont_TemplSet/results/2/Template}"
+                                                    items="{path: 'templ3data>/results'}"
+                                                >
+                                                    <core:Item
+                                                        key="{templ3data>Template}"
+                                                        text="{templ3data>TemplDescr}"
+                                                    />
+                                                </ComboBox>
+                                                <Text
+                                                    text="stext0"
+                                                    id="text0"
+                                                />
+                                                <Text
+                                                    text="stext1"
+                                                    id="text1"
+                                                />
+                                                <Text
+                                                    text="stext2"
+                                                    id="text2"
+                                                />
+                                            </cells>
+                                        </ColumnListItem>
+                                    </items>
+                                    <columns>
+                                        <Column id="column0">
+                                            <header>
+                                                <Label
+                                                    text="{templateModel>/0/Title}"
+                                                    id="label0"
+                                                />
+                                            </header>
+                                        </Column>
+                                        <Column id="column1">
+                                            <header>
+                                                <Label
+                                                    text="{templateModel>/1/Title}"
+                                                    id="label1"
+                                                />
+                                            </header>
+                                        </Column>
+                                        <Column id="column2">
+                                            <header>
+                                                <Label
+                                                    text="{templateModel>/2/Title}"
+                                                    id="label2"
+                                                />
+                                            </header>
+                                        </Column>
+                                    </columns>
+                                </Table>
+                            </l2:VerticalLayout>
+                        </la:contentAreas>
+                    </la:Splitter>
+                </la:Splitter>
             </IconTabFilter>
-
-            <!-- <IconTabFilter id="tabCollection" icon="sap-icon://multi-select" tooltip="{i18n>tabCollection}">
-                
-            </IconTabFilter>
-
-            <IconTabFilter id="tabLang" icon="sap-icon://globe" tooltip="{i18n>tabLang}">
-                
-            </IconTabFilter> -->
-            <IconTabFilter id="tabMedia" visible="{/SDDocCont_MetaSet/Mdcntavail}" icon="sap-icon://it-system" tooltip="{i18n>tabMedia}">
-                <Table id="tblMedia" class="sapUiResponsiveMargin" width="auto" items="{/SDDocCont_MdcntSet/results}">
+            <IconTabFilter
+                id="tabMedia"
+                visible="{/SDDocCont_MetaSet/Mdcntavail}"
+                icon="sap-icon://it-system"
+                tooltip="{i18n>tabMedia}" >
+                <Table
+                    id="tblMedia"
+                    class="sapUiResponsiveMargin"
+                    width="auto"
+                    items="{/SDDocCont_MdcntSet/results}" >
                     <headerToolbar>
                         <Toolbar id="_IDGenToolbar2">
-                            <Title id="_IDGenTitle2" text="{i18n>tabMedia}" />
+                            <Title
+                                id="_IDGenTitle2"
+                                text="{i18n>tabMedia}"
+                            />
                             <ToolbarSpacer id="_IDGenToolbarSpacer2" />
-                            <Button id="_IDGenButton2" icon="sap-icon://add" enabled="{/Active}" text="{i18n>txtRow}" press="addMdcntRow" />
+                            <Button
+                                id="_IDGenButton2"
+                                icon="sap-icon://add"
+                                enabled="{/Active}"
+                                text="{i18n>txtRow}"
+                                press="addMdcntRow"
+                            />
                         </Toolbar>
                     </headerToolbar>
                     <columns>
                         <Column id="_IDGenColumn5">
-                            <Text id="_IDGenText6" text="{i18n>colDocKind}" />
+                            <Text
+                                id="_IDGenText6"
+                                text="{i18n>colDocKind}"
+                            />
                         </Column>
                         <Column id="_IDGenColumn6">
-                            <Text id="_IDGenText7" text="{i18n>colMdCount}" />
+                            <Text
+                                id="_IDGenText7"
+                                text="{i18n>colMdCount}"
+                            />
                         </Column>
                         <Column id="_IDGenColumn7">
-                            <Text id="_IDGenText8" text="{i18n>colLangu}" />
+                            <Text
+                                id="_IDGenText8"
+                                text="{i18n>colLangu}"
+                            />
                         </Column>
                         <Column id="_IDGenColumn8">
-                            <Text id="_IDGenText9" text="{i18n>colMedium}" />
+                            <Text
+                                id="_IDGenText9"
+                                text="{i18n>colMedium}"
+                            />
                         </Column>
-                        <Column id="_IDGenColumn9" width="50px" />
+                        <Column
+                            id="_IDGenColumn9"
+                            width="50px"
+                        />
                     </columns>
                     <items>
-                        <ColumnListItem id="_IDGenColumnListItem2" type="Navigation">
+                        <ColumnListItem
+                            id="_IDGenColumnListItem2"
+                            type="Navigation"
+                        >
                             <cells>
                                 <ComboBox
                                     id="_IDGenComboBox1"
@@ -483,10 +738,19 @@
                          templateShareable: false,
                                    filters : [ { path : 'Fieldname', operator : 'EQ', value1 : 'DocKind'} ] }"
                                 >
-                                    <core:ListItem id="_IDGenListItem4" key="{meta>Value}" text="{meta>Text}" />
+                                    <core:ListItem
+                                        id="_IDGenListItem4"
+                                        key="{meta>Value}"
+                                        text="{meta>Text}"
+                                    />
                                 </ComboBox>
 
-                                <Input id="_IDGenInput1" enabled="{/Active}" change="validateNumber" value="{ path: 'MdCount', type:'sap.ui.model.type.Integer' }" />
+                                <Input
+                                    id="_IDGenInput1"
+                                    enabled="{/Active}"
+                                    change="validateNumber"
+                                    value="{ path: 'MdCount', type:'sap.ui.model.type.Integer' }"
+                                />
                                 <ComboBox
                                     id="_IDGenComboBox2"
                                     selectedKey="{Langu}"
@@ -496,7 +760,11 @@
                          templateShareable: false,
                                    filters : [ { path : 'Fieldname', operator : 'EQ', value1 : 'Lang'} ] }"
                                 >
-                                    <core:ListItem id="_IDGenListItem5" key="{meta>Value}" text="{meta>Text}" />
+                                    <core:ListItem
+                                        id="_IDGenListItem5"
+                                        key="{meta>Value}"
+                                        text="{meta>Text}"
+                                    />
                                 </ComboBox>
                                 <ComboBox
                                     id="_IDGenComboBox3"
@@ -507,9 +775,19 @@
                          templateShareable: false,
                                    filters : [ { path : 'Fieldname', operator : 'EQ', value1 : 'Medium'} ] }"
                                 >
-                                    <core:ListItem id="_IDGenListItem6" key="{meta>Value}" text="{meta>Text}" />
+                                    <core:ListItem
+                                        id="_IDGenListItem6"
+                                        key="{meta>Value}"
+                                        text="{meta>Text}"
+                                    />
                                 </ComboBox>
-                                <Button id="_IDGenButton3" icon="sap-icon://delete" enabled="{/Active}" press="deleteMdcntRow" type="Reject" />
+                                <Button
+                                    id="_IDGenButton3"
+                                    icon="sap-icon://delete"
+                                    enabled="{/Active}"
+                                    press="deleteMdcntRow"
+                                    type="Reject"
+                                />
                             </cells>
                         </ColumnListItem>
                     </items>
