@@ -40,7 +40,7 @@ sap.ui.define([
 
             this.core.mdocArray = [];
 		    var oModel = that.app.getModel();
-//		    var dModel = sap.ui.getCore().getModel("DStore");
+//		    var dModel = sap.ui.getCore().getModel("DStore"); t
 //		    dModel.setData({ "docList": [], "changedDocs": [] });
 		    
 			//this.getRouter().navTo("doc");
