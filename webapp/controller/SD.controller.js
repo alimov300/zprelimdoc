@@ -372,7 +372,7 @@ sap.ui.define([
     onProfileLoad: function (oParams) {
 
       var bus = sap.ui.getCore().getEventBus();
-      let oSrc = oParams.getSource();
+      //let oSrc = oParams.getSource();
       //let sVal = oSrc.getModel("backend").getProperty(oSrc.getBindingContextPath());
       
 
@@ -466,7 +466,9 @@ sap.ui.define([
           }
           sap.ui.getCore().sProfile = oData.Profile;
 
-          mModel.setData(oData);
+          mModel.setProperty("/Active",oData.Active );
+          mModel.setProperty("/Checkboxes",oData.Checkboxes );
+          mModel.setProperty("/Profile",oData.Profile );
 
           if (that.Noinit) {
             var emptyArr = {
@@ -519,23 +521,30 @@ sap.ui.define([
 
               success: function (oData, Resp) {
                 that.getView().getModel().setData(oData);
-                that.getOwnerComponent().getModel("DocList").setData({});
-                that.getOwnerComponent().getModel("DocList").setData(oData);
-                var oList = that.getView().byId("list");
-                if (!oList.getAggregation("items")) {
-                  oList.bindItems(
-                    "DocList>/results",
-                    that.getView().byId("listItem")
-                  );
+                if(that.getOwnerComponent().getModel("DocList")){
+                  that.getOwnerComponent().getModel("DocList").setData({});
+                  that.getOwnerComponent().getModel("DocList").setData(oData);
                 }
-                that
+                var oList = that.getView().byId("list");
+                if(oList){
+                  if (!oList.getAggregation("items")) {
+                    oList.bindItems(
+                      "DocList>/results",
+                      that.getView().byId("listItem")
+                    );
+                  }
+
+                  that
                   .getOwnerComponent()
                   .getModel("DocList")
                   .updateBindings(true);
-                that.getView().byId("list").refreshItems();
+                  that.getView().byId("list").refreshItems();
+
+                }
+                
                 //that.getView().byId("docPanel").setHeight("100%");
 
-                if (!that.Noinit) {
+                if (!that.Noinit && that.readLangInfo) {
                   that.readLangInfo(rModel, that);
                 }
                 if (fn) {
