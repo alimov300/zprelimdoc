@@ -35,7 +35,7 @@
 
         </headerToolbar>
     </Panel>
-    <SplitContainer id="SplitContDemo" initialDetail="idDocDetail" initialMaster="_IDGenVerticalLayout1ePage" class="zHeightSplit">
+    <SplitContainer id="SplitContDemo"  class="zHeightSplit">
         <detailPages>
             <!-- <Page id="detail" title="Detail 1" backgroundDesign="Solid" showNavButton="{= !${device>/system/desktop} }" navButtonPress=".onPressDetailBack">
                 <Label text="Detail page 1" class="sapUiTinyMarginEnd" />
@@ -59,7 +59,7 @@
         </detailPages>
         <masterPages>
 			<Page id="_IDGenVerticalLayout1dPage" style="zHeightPage">
-            <l:VerticalLayout id="_IDGenVerticalLayout1d" width="100%" height="90%" class="zHeightVlayout">
+            <l:VerticalLayout id="_IDGenVerticalLayout1d" width="100%" class="zHeightVlayout">
                 <l:content>
                     <f:SimpleForm id="filterform1" visible="false" class="sapUiNoMargin zFilter">
                         <l:HorizontalLayout id="_IDGenHorizontalLayout1">

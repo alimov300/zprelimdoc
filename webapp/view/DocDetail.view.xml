@@ -26,13 +26,12 @@
                 icon="sap-icon://detail-view"
                 tooltip="{i18n>tabGeneral}"
             >
-                <la:Splitter id="_IDGenSplitter4"
-                    height="90%"
+                <la:Splitter id="_IDGenSplitter4"                     
                     orientation="Vertical"
                 >
-                    <la:Splitter id="_IDGenSplitter2" height="auto">
+                    <la:Splitter id="_IDGenSplitter2" height="600px" class="spl2">
                         <la:layoutData>
-                            <la:SplitterLayoutData id="_IDGenSplitterLayoutData1" size="auto"/>
+                            <la:SplitterLayoutData id="_IDGenSplitterLayoutData1" size="auto" class="spl2a"/>
                         </la:layoutData>
                         <la:contentAreas>
                             <laf:SimpleForm
@@ -352,7 +351,7 @@
                             </laf:SimpleForm>
                             <la:Splitter
                                 id="_IDGenSplitter1"
-                                orientation="Vertical">
+                                orientation="Vertical" class="spl2b">
                                 <Panel>
                                     <content>
                                         <Label

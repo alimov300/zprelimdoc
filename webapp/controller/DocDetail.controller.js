@@ -198,7 +198,9 @@ sap.ui.define([
       if ($.grep(mdocArray, function (e) { return e.DocContent == that.jModel.getData().DocContent }).length == 0) {
         if (this.jModel.getData().DocContent) {
           mdocArray.push(JSON.parse(JSON.stringify(that.jModel.getData())));
-          mdocArrayOld.push(JSON.parse(JSON.stringify(that.jModel.getData())));
+          if(mdocArrayOld){
+            mdocArrayOld.push(JSON.parse(JSON.stringify(that.jModel.getData())));
+          }
         }
       }
       else {
@@ -305,7 +307,7 @@ sap.ui.define([
       var jModel = this.getView().getModel();
 
       var mdocArray = sap.ui.getCore().mdocArray;
-      var mdocArrayOld = sap.ui.getCore().mdocArrayOld;
+      //var mdocArrayOld = sap.ui.getCore().mdocArrayOld;
 
       var availModel = $.grep(mdocArray, function (e) { return e.DocContent == model.data.item.DocContent });
 
@@ -672,6 +674,23 @@ sap.ui.define([
             }
           });
 
+        sap.ui.getCore().mdocArrayOld = sap.ui.getCore().mdocArray;
+
+        let iHeight = 0;
+        if( typeof( window.innerWidth ) == 'number' ) {
+          //Non-IE
+          iHeight = window.innerHeight;
+        } else if( document.documentElement && ( document.documentElement.clientWidth || document.documentElement.clientHeight ) ) {
+          //IE 6+ in 'standards compliant mode'
+          iHeight = document.documentElement.clientHeight;
+        } else if( document.body && ( document.body.clientWidth || document.body.clientHeight ) ) {
+          //IE 4 compatible
+          iHeight = document.body.clientHeight;
+        }
+
+        iHeight = $("div.spl2 > div.sapUiLoSplitterBar").height() + 95;
+
+        this.getView().byId("_IDGenSplitter4").setHeight( iHeight + "px");
 
         var bus = sap.ui.getCore().getEventBus();
         var bFinalized = sap.ui.getCore().getModel("UIModel").getProperty("/finalized");

@@ -2133,10 +2133,12 @@ sap.ui.define(
                 data.SDDocCont_MatklSet = {};
                 data.SDDocCont_MdcntSet = {};
                 data.SDDocCont_TargtSet = {};
+                data.SDDocCont_InspIdSet = {};
 
                 data.SDDocCont_MatklSet.results = el.SDDOCCONT_MATKLSET.RESULTS;
                 data.SDDocCont_MdcntSet.results = el.SDDOCCONT_MDCNTSET.RESULTS;
                 data.SDDocCont_TargtSet.results = el.SDDOCCONT_TARGTSET.RESULTS;
+                data.SDDocCont_TargtSet.results = el.SDDOCCONT_INSPIDSET.RESULTS;
 
                 data.SDDocCont_MetaSet = {};
                 data.SDDocCont_MetaSet.Active = el.SDDOCCONT_METASET.Active;
@@ -2459,6 +2461,7 @@ sap.ui.define(
                   data.SDDocCont_MatklSet = {};
                   data.SDDocCont_MdcntSet = {};
                   data.SDDocCont_TargtSet = {};
+                  data.SDDocCont_InspIdSet = {};
 
                   data.SDDocCont_MatklSet.results =
                     el.SDDOCCONT_MATKLSET.RESULTS;
@@ -2466,6 +2469,8 @@ sap.ui.define(
                     el.SDDOCCONT_MDCNTSET.RESULTS;
                   data.SDDocCont_TargtSet.results =
                     el.SDDOCCONT_TARGTSET.RESULTS;
+                  data.SDDocCont_InspIdSet.results =
+                    el.SDDOCCONT_INSPIDSET.RESULTS;
 
                   data.SDDocCont_MetaSet = {};
                   data.SDDocCont_MetaSet.Active = true; //el.SDDOCCONT_METASET.Active;
@@ -2664,6 +2669,7 @@ sap.ui.define(
                   data.SDDocCont_MatklSet = {};
                   data.SDDocCont_MdcntSet = {};
                   data.SDDocCont_TargtSet = {};
+                  data.SDDocCont_InspIdSet = {};
 
                   data.SDDocCont_MatklSet.results =
                     el.SDDOCCONT_MATKLSET.RESULTS;
@@ -2671,6 +2677,8 @@ sap.ui.define(
                     el.SDDOCCONT_MDCNTSET.RESULTS;
                   data.SDDocCont_TargtSet.results =
                     el.SDDOCCONT_TARGTSET.RESULTS;
+                  data.SDDocCont_InspIdSet.results =
+                    el.SDDOCCONT_INSPIDSET.RESULTS;
 
                   data.SDDocCont_MetaSet = {};
                   data.SDDocCont_MetaSet.Active = el.SDDOCCONT_METASET.Active;
@@ -2949,16 +2957,16 @@ sap.ui.define(
             Posnr : obj.Posnr,
             PrelimDate : obj.PrelimDate,
             SddcStatus : obj.SddcStatus,
-            // Status1 : obj.Status1,
-            // Status2 : obj.Status2,
-            // Status3 : obj.Status3,
-            // Status4 : obj.Status4,
-            // Status5 : obj.Status5,
-            // Status6 : obj.Status6,
-            // Status7 : obj.Status7,
-            // Status8 : obj.Status8,
-            // Status9 : obj.Status9,
-            // Status10 : obj.Status10,
+            Status1 : obj.Status1,
+            Status2 : obj.Status2,
+            Status3 : obj.Status3,
+            Status4 : obj.Status4,
+            Status5 : obj.Status5,
+            Status6 : obj.Status6,
+            Status7 : obj.Status7,
+            Status8 : obj.Status8,
+            Status9 : obj.Status9,
+            Status10 : obj.Status10,
             TemplVisited : obj.TemplVisited,
             Vbeln : obj.Vbeln });
         });
@@ -2981,16 +2989,16 @@ sap.ui.define(
             Posnr : obj.Posnr,
             PrelimDate : obj.PrelimDate,
             SddcStatus : obj.SddcStatus,
-            // Status1 : obj.Status1,
-            // Status2 : obj.Status2,
-            // Status3 : obj.Status3,
-            // Status4 : obj.Status4,
-            // Status5 : obj.Status5,
-            // Status6 : obj.Status6,
-            // Status7 : obj.Status7,
-            // Status8 : obj.Status8,
-            // Status9 : obj.Status9,
-            // Status10 : obj.Status10,
+            Status1 : "None",
+            Status2 : "None",
+            Status3 : "None",
+            Status4 : "None",
+            Status5 : "None",
+            Status6 : "None",
+            Status7 : "None",
+            Status8 : "None",
+            Status9 : "None",
+            Status10 : "None",
             TemplVisited : obj.TemplVisited,
             Vbeln : obj.Vbeln });
         });
