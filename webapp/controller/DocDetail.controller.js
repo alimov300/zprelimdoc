@@ -674,7 +674,7 @@ sap.ui.define([
             }
           });
 
-        sap.ui.getCore().mdocArrayOld = sap.ui.getCore().mdocArray;
+        sap.ui.getCore().mdocArrayOld = JSON.parse(JSON.stringify(sap.ui.getCore().mdocArray));
 
         let iHeight = 0;
         if( typeof( window.innerWidth ) == 'number' ) {

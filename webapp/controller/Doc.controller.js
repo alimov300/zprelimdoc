@@ -1065,14 +1065,14 @@ sap.ui.define(
   
                 }
 
-                const oDocList = this.getView().getModel();
-                const oDocListOld = this.getView().getModel("DocListOld");
+                const oDocList = that.getView().getModel();
+                const oDocListOld = that.getView().getModel("DocListOld");
         
                 //const cMdocArray = sap.ui.getCore().mdocArray;
                 //const cMdocArrayOld = sap.ui.getCore().mdocArrayOld;
                 
                 oDocListOld.setData(oDocList.getData());
-                sap.ui.getCore().mdocArrayOld = sap.ui.getCore().mdocArray;
+                sap.ui.getCore().mdocArrayOld = JSON.parse(JSON.stringify(sap.ui.getCore().mdocArray));
             }
             
 
