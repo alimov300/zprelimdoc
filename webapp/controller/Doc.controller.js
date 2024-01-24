@@ -934,7 +934,7 @@ sap.ui.define(
 
         oMessagePopover.close();
 
-        this.getView().setBusy(true);
+        
 
         var bDetailErrors = sap.ui
           .getCore()
@@ -943,6 +943,8 @@ sap.ui.define(
         if (bDetailErrors) {
           return;
         }
+
+        this.getView().setBusy(true);
 
         var docListModel = this.getView().getModel();
         var that = this;
