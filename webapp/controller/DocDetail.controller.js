@@ -1216,7 +1216,13 @@ sap.ui.define([
         });
 
         oInspId.setSelectedKeys(aInspId);
+
+        //if(ds.SDDocCont_InspIdSet.InspIdAvaliable){
+          oInspId.setVisible(ds.SDDocCont_InspIdSet.InspIdAvaliable);
+          this.getView().byId("_IDGenLabel5id").setVisible(ds.SDDocCont_InspIdSet.InspIdAvaliable);
+        //}
       }
+
     },
 
     resetFormLayout: function () {
