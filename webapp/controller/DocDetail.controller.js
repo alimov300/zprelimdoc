@@ -716,7 +716,7 @@ sap.ui.define([
 
         this.oModel.read(sObjectPath, {
           urlParameters: {
-            "$expand": "SDDocCont_MdcntSet,SDDocCont_MatklSet,SDDocCont_TargtSet,SDDocCont_MetaSet"
+            "$expand": "SDDocCont_MdcntSet,SDDocCont_MatklSet,SDDocCont_TargtSet,SDDocCont_MetaSet,SDDocCont_InspIdSet"
           },
           json: true,
           success: function (data) {
@@ -1201,6 +1201,21 @@ sap.ui.define([
         });
 
         oKey2.setSelectedKeys(aKey2);
+      }
+
+      var oInspId = this.getView().byId("cmbInspId");
+        oInspId.destroyItems();
+
+      if (oInspId) {
+        var aInspId = ds.SDDocCont_InspIdSet.InspIdInfo.split(";");
+        $.each(aInspId, function (idx, el) {
+          var oNewItem = new sap.ui.core.Item(idx);
+          oNewItem.setKey(el);
+          oNewItem.setText(el);
+          oInspId.insertItem(oNewItem);
+        });
+
+        oInspId.setSelectedKeys(aInspId);
       }
     },
 

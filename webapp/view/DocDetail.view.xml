@@ -413,6 +413,17 @@
                                             enabled="false"
                                         >
                                         </MultiComboBox>
+                                        <Label
+                                            id="_IDGenLabel5id"
+                                            text="{i18n>lblInspId}"
+                                            class=""
+                                            labelFor="cmbInspId"
+                                        />
+                                        <MultiComboBox
+                                            id="cmbInspId"
+                                            enabled="false"
+                                        >
+                                        </MultiComboBox>
                                     </content>
                                 </Panel>
                                 <Panel>
