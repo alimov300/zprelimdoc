@@ -1092,13 +1092,16 @@ sap.ui.define(
       },
 
       handleMessagePopover: function () {
-        oMessagePopover.rerender();
+        // oMessagePopover.rerender();
         oMessagePopover.close();
-        oMessagePopover.toggle(this.getView().byId("_IDGenButton1"));
+        var oData = this.getView().getModel('msgModel').getData();
+        if(oData.messagesLength > 0){
+          oMessagePopover.toggle(this.getView().byId("_IDGenButton1"));
+        }
       },
 
       handleMessagePopoverPress: function (oEvent) {
-        oMessagePopover.rerender();
+        // oMessagePopover.rerender();
         oMessagePopover.close();
         oMessagePopover.toggle(oEvent.getSource());
       },
@@ -2443,7 +2446,12 @@ sap.ui.define(
                 display_msg1(oData);
 
                 sap.ui.getCore().mdocArray.length = 0;
-                sap.ui.getCore().mdocArrayOld.length = 0;
+                try {
+                  sap.ui.getCore().mdocArrayOld.length = 0;
+                } catch (error) {
+                  
+                }
+                
 
                 if (!oData.ROOT.CONTENT) {
                   return;
@@ -2471,8 +2479,10 @@ sap.ui.define(
                     el.SDDOCCONT_MDCNTSET.RESULTS;
                   data.SDDocCont_TargtSet.results =
                     el.SDDOCCONT_TARGTSET.RESULTS;
-                  data.SDDocCont_InspIdSet.results =
-                    el.SDDOCCONT_INSPIDSET.RESULTS;
+                  if(el.SDDOCCONT_INSPIDSET){
+                    data.SDDocCont_InspIdSet.results =
+                      el.SDDOCCONT_INSPIDSET.RESULTS;
+                  }
 
                   data.SDDocCont_MetaSet = {};
                   data.SDDocCont_MetaSet.Active = true; //el.SDDOCCONT_METASET.Active;
@@ -2493,7 +2503,9 @@ sap.ui.define(
                   data.SDDocCont_MetaSet.Vbeln = el.SDDOCCONT_METASET.Vbeln;
 
                   sap.ui.getCore().mdocArray.push(data);
-                  sap.ui.getCore().mdocArrayOld.push(JSON.parse(JSON.stringify(data)));
+                  if(sap.ui.getCore().mdocArrayOld){
+                    sap.ui.getCore().mdocArrayOld.push(JSON.parse(JSON.stringify(data)));
+                  }
 
                   $.each(
                     el.SDDOCCONT_TARGTSET.RESULTS,
@@ -2554,7 +2566,10 @@ sap.ui.define(
               };
 
               that.getView().getModel("msgModel").setData(newMsgs);
-              that.handleMessagePopover();
+              setTimeout(() => {
+                that.handleMessagePopover();
+              }, "1000");
+              
             }
             function check_filters(fn) {
               that.setCheckFilters();
@@ -2651,7 +2666,12 @@ sap.ui.define(
                 display_msg(oData);
 
                 sap.ui.getCore().mdocArray.length = 0;
-                sap.ui.getCore().mdocArrayOld.length = 0;
+                try {
+                  sap.ui.getCore().mdocArrayOld.length = 0;
+                } catch (error) {
+                  
+                }
+                
 
                 if (!oData.ROOT.CONTENT) {
                   return;

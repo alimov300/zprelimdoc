@@ -1206,7 +1206,7 @@ sap.ui.define([
       var oInspId = this.getView().byId("cmbInspId");
         oInspId.destroyItems();
 
-      if (oInspId) {
+      if (oInspId && ds.SDDocCont_InspIdSet.InspIdInfo) {
         var aInspId = ds.SDDocCont_InspIdSet.InspIdInfo.split(";");
         $.each(aInspId, function (idx, el) {
           var oNewItem = new sap.ui.core.Item(idx);
