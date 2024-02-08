@@ -727,25 +727,72 @@ sap.ui.define([
 
       sap.ui.getCore().mdocArray = [];
       sap.ui.getCore().mdocArrayOld = [];
+      const oController = this;
 
- //     if(true){
+      var rModel = this.getView().getModel("backend");
 
-        if(oSrc.getSource().getBindingContext().getModel().getObject(oSrc.getSource().getBindingContext().getPath()).Docstat !== ""){
+      let sVbeln = oSrc.getSource().getBindingContext().getModel().getObject(oSrc.getSource().getBindingContext().getPath()).Vbeln;
+      let sPosnr = oSrc.getSource().getBindingContext().getModel().getObject(oSrc.getSource().getBindingContext().getPath()).Posnr;
+      let sDocstat = oSrc.getSource().getBindingContext().getModel().getObject(oSrc.getSource().getBindingContext().getPath()).Docstat;
+
+      rModel.callFunction("/GetMode", {
+        method: "GET",
+        urlParameters: {
+          Vbeln: sVbeln,
+          Posnr: sPosnr
+        },
+        error: function (oData) {
+          // var oBundle = that.getView().getModel("i18n").getResourceBundle();
+          // var sMsg = "";
+          // try {
+          //   var oResponse = JSON.parse(oData.response.body);
+          //   sMsg = oResponse.error.message.value;
+          // } catch (e) {
+          //   sMsg = ""; //oBundle.getText("msgSDocNotFound", that.getView().byId("vbeln"));
+          // }
+          // var newMsgs = {
+          //   messagesLength: 1,
+          //   items: [
+          //     {
+          //       type: oBundle.getText("msgError"),
+          //       title: oBundle.getText("msgErrorTitle"),
+          //       description: sMsg,
+          //       //subtitle: 'Example of subtitle',
+          //       counter: 1,
+          //     },
+          //   ],
+          // };
+          // that.getView().getModel("msgModel").setData(newMsgs);
+          // that.handleMessagePopover();
+        },
+
+        success: function (oData, Resp) {
+
+          if (sDocstat !== "") {
             bus.publish("nav", "to", {
               id: "DocPage",
               data: {
-                Vbeln: oSrc.getSource().getBindingContext().getModel().getObject(oSrc.getSource().getBindingContext().getPath()).Vbeln,
-                Posnr: oSrc.getSource().getBindingContext().getModel().getObject(oSrc.getSource().getBindingContext().getPath()).Posnr,
-                Docstat: oSrc.getSource().getBindingContext().getModel().getObject(oSrc.getSource().getBindingContext().getPath()).Docstat
+                Vbeln: sVbeln,
+                Posnr: sPosnr,
+                Docstat: sDocstat,
+                Profile: Resp.data.Profile
               }
             });
-      }else{
-        this.onProfile({
-          Vbeln: oSrc.getSource().getBindingContext().getModel().getObject(oSrc.getSource().getBindingContext().getPath()).Vbeln,
-          Posnr: oSrc.getSource().getBindingContext().getModel().getObject(oSrc.getSource().getBindingContext().getPath()).Posnr,
-          Docstat: oSrc.getSource().getBindingContext().getModel().getObject(oSrc.getSource().getBindingContext().getPath()).Docstat
-        });
-      }
+          } else {
+            oController.onProfile({
+              Vbeln: sVbeln,
+              Posnr: sPosnr,
+              Docstat: sDocstat,
+              Profile: Resp.data.Profile
+            });
+          }
+
+        }
+      });
+
+ //     if(true){
+
+
     }
   });
 });

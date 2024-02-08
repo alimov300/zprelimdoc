@@ -144,6 +144,8 @@ sap.ui.define(
           },
           onAfterShow: function (evt) {
 
+            var that = evt.to.getController();
+
             var oMetaModel = that.getView().getModel("meta");
             oMetaModel.setProperty("/Vbeln",evt.data.Vbeln);
             oMetaModel.setProperty("/Posnr",evt.data.Posnr);
@@ -193,9 +195,7 @@ sap.ui.define(
         oBus.subscribe("msg", "display", this.onDisplayMsg, this);
       },
 
-      _onRouteMatched: function (oEvent) {
-
-        
+      _onRouteMatched: function (oEvent) {       
 
         var that = this;
 
@@ -260,16 +260,14 @@ sap.ui.define(
               });
             }
 
-      },
+            var that = this;
 
-      onBeforeShowHandler: function (oParams) {
-        var that = this;
+        // var fn = oParams.callback;
 
-        var fn = oParams.callback;
-        that.Vbeln = oParams.Vbeln;
-        that.Posnr = oParams.Posnr;
-        that.Docstat = oParams.Docstat;
-        that.Noinit = oParams.Noinit;
+        that.Vbeln = sVbeln;
+        that.Posnr = sPosnr;
+        that.Docstat = sDocstat;
+       // that.Noinit = oParams.Noinit;
 
         var oUiModel = sap.ui.getCore().getModel("UIModel");
 
@@ -288,8 +286,8 @@ sap.ui.define(
         rModel.callFunction("/GetMode", {
           method: "GET",
           urlParameters: {
-            Vbeln: oParams.Vbeln,
-            Posnr: oParams.Posnr,
+            Vbeln: that.Vbeln,
+            Posnr: that.Posnr,
           },
           error: function (oData) {
             var oBundle = that.getView().getModel("i18n").getResourceBundle();
@@ -383,9 +381,9 @@ sap.ui.define(
               rModel.callFunction("/GetDocList", {
                 method: "GET",
                 urlParameters: {
-                  Vbeln: oParams.Vbeln,
-                  Posnr: oParams.Posnr,
-                  DcProfile: "",
+                  Vbeln: that.Vbeln,
+                  Posnr: that.Posnr,
+                  DcProfile: '',
                 },
 
                 success: function (oData, Resp) {
@@ -409,9 +407,9 @@ sap.ui.define(
                   if (!that.Noinit) {
                     that.readLangInfo(rModel, that);
                   }
-                  if (fn) {
-                    fn.call(that, { skipCheck: true });
-                  }
+                  // if (fn) {
+                  //   fn.call(that, { skipCheck: true });
+                  // }
 
                   if (that.Docstat == "ZDO1") {
                     that.setCheckFilters();
@@ -423,6 +421,11 @@ sap.ui.define(
           },
           async: false,
         });
+
+      },
+
+      onBeforeShowHandler: function (oParams) {
+        
       },
 
       onFilter1: function (oEvt) {

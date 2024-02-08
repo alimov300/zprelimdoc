@@ -21,6 +21,12 @@ button.zNoBorder span {
     border: 0px;
 }
 
+button.zNoBorder {
+    width: 100%;
+	margin-left: 0px !important;
+}
+
+
 button.yellowButton span.sapMBtnInner.sapMBtnEmphasized{
 	background-color: #d1c40a;
     border-color: #d1cf0a;

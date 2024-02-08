@@ -1036,6 +1036,8 @@ sap.ui.define([
         //            oFlg = true;
         //          }
         //        });
+
+
         //        if(oFlg){
         //          return;
         //        }
@@ -1521,14 +1523,14 @@ sap.ui.define([
 
           jModel.setProperty("/Status5", sap.ui.core.ValueState.None);
 
-          if (this.getView().byId("cmbPlansEfs").getValue() == "") {
-            jModel.setProperty("/Status7", sap.ui.core.ValueState.Error);
-            sString = oBundle.getText("msgValidateExtern");
-          } else {
-            jModel.setProperty("/Status7", sap.ui.core.ValueState.None);
-            sString = "";
-          }
-          sMsg += " " + sString;
+          // if (this.getView().byId("cmbPlansEfs").getValue() == "") {
+          //   jModel.setProperty("/Status7", sap.ui.core.ValueState.Error);
+          //   sString = oBundle.getText("msgValidateExtern");
+          // } else {
+          jModel.setProperty("/Status7", sap.ui.core.ValueState.None);
+          //   sString = "";
+          // }
+          // sMsg += " " + sString;
 
           jModel.setProperty("/Status8", sap.ui.core.ValueState.None);
           jModel.setProperty("/Status9", sap.ui.core.ValueState.None);
@@ -1632,14 +1634,14 @@ sap.ui.define([
           jModel.setProperty("/Status5", sap.ui.core.ValueState.None);
           jModel.setProperty("/Status6", sap.ui.core.ValueState.None);
 
-          if (this.getView().byId("cmbPlansEfs").getValue() == "") {
-            jModel.setProperty("/Status7", sap.ui.core.ValueState.Error);
-            sString = oBundle.getText("msgValidateExtern");
-          } else {
-            jModel.setProperty("/Status7", sap.ui.core.ValueState.None);
-            sString = "";
-          }
-          sMsg += " " + sString;
+          // if (this.getView().byId("cmbPlansEfs").getValue() == "") {
+          //   jModel.setProperty("/Status7", sap.ui.core.ValueState.Error);
+          //   sString = oBundle.getText("msgValidateExtern");
+          // } else {
+          jModel.setProperty("/Status7", sap.ui.core.ValueState.None);
+          //   sString = "";
+          // }
+          // sMsg += " " + sString;
 
           jModel.setProperty("/Status8", sap.ui.core.ValueState.None);
           jModel.setProperty("/Status9", sap.ui.core.ValueState.None);
