@@ -54,7 +54,6 @@ sap.ui.define([
 		navBack: function() {
 
 			this.onNavBack();
-
 		},
 		
 
