@@ -55,14 +55,7 @@ sap.ui.define([
 
 		navBack: function() {
 
-<<<<<<< HEAD
 			this.onNavBack();
-=======
-      this.core.mdocArray = [];
-      var oModel = that.app.getModel();
-      //		    var dModel = sap.ui.getCore().getModel("DStore"); test
-      //		    dModel.setData({ "docList": [], "changedDocs": [] });
->>>>>>> afaf684 (t)
 
 		},
 		
