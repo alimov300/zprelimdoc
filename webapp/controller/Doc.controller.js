@@ -168,6 +168,10 @@ sap.ui.define(
               oUiModel.setProperty("/hasChanges", false);
             }
 
+            if (evt.data.Profile == "ANTOS") {
+              return;
+            }
+
             if (evt.data.Profile !== "") {
               that.onProfileLoad({
                 profile_vbeln: evt.data.Vbeln,
@@ -2702,8 +2706,10 @@ sap.ui.define(
                     el.SDDOCCONT_MDCNTSET.RESULTS;
                   data.SDDocCont_TargtSet.results =
                     el.SDDOCCONT_TARGTSET.RESULTS;
-                  data.SDDocCont_InspIdSet.results =
-                    el.SDDOCCONT_INSPIDSET.RESULTS;
+                  if(el.SDDOCCONT_INSPIDSET){
+                      data.SDDocCont_InspIdSet.results =
+                        el.SDDOCCONT_INSPIDSET.RESULTS;
+                  }
 
                   data.SDDocCont_MetaSet = {};
                   data.SDDocCont_MetaSet.Active = el.SDDOCCONT_METASET.Active;
