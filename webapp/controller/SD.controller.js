@@ -691,18 +691,22 @@ sap.ui.define([
           that.oDialog.close();
         }
 
-      if(bNewDialog){
+      //if(bNewDialog){
 
+      if(true){
         // this.getView().byId("btnProfileLoad").setVisible(oParams.load);
         if (false) {
           this.getView().byId("btnProfileLoad").attachPress(fnPressHandler, this);
         } else {
+          this.getView().byId("btnProfileLoad").detachPress(this.onProfileLoad, this);
           this.getView().byId("btnProfileLoad").attachPress(this.onProfileLoad, this);
         }
 
+        this.getView().byId("btnProfileCancel").detachPress(fnPressHandler, this);
         this.getView().byId("btnProfileCancel").attachPress(fnPressHandler, this);
 
         this.getView().byId("btnProfileSave").setVisible(false);
+        this.getView().byId("btnProfileSave").detachPress(this.onProfileSave, this);
         this.getView().byId("btnProfileSave").attachPress(this.onProfileSave, this);
       }
 

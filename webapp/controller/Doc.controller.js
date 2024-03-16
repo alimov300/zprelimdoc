@@ -271,7 +271,9 @@ sap.ui.define(
         that.Vbeln = sVbeln;
         that.Posnr = sPosnr;
         that.Docstat = sDocstat;
-       // that.Noinit = oParams.Noinit;
+        if(sProfile == 'ANTOS'){
+          that.Noinit = true;//oParams.Noinit;
+        }   
 
         var oUiModel = sap.ui.getCore().getModel("UIModel");
 
@@ -374,9 +376,10 @@ sap.ui.define(
               if (!that.Noinit) {
                 that.readLangInfo(rModel, that);
               }
-              if (fn) {
-                fn.call(that, { skipCheck: true });
-              }
+
+              //if (fn) {
+              //  fn.call(that, { skipCheck: true });
+              //}
 
               if (that.Docstat == "ZDO1") {
                 that.setCheckFilters();
@@ -2046,6 +2049,8 @@ sap.ui.define(
             var aResults = data.ROOT.CONTENT.DOCLIST.RESULTS;
 
             var oModelData = that.getView().getModel("DocList").getData();
+            that.getView().getModel("DocListOld").setData(JSON.parse(JSON.stringify({"results" : aResults})));
+
             oModelData.results = aResults;
             that.getView().getModel("DocList").setData(oModelData);
           }
@@ -2591,6 +2596,8 @@ sap.ui.define(
               var aResults = data.ROOT.CONTENT.DOCLIST.RESULTS;
 
               var oModelData = that.getView().getModel("DocList").getData();
+
+              that.getView().getModel("DocListOld").setData(JSON.parse(JSON.stringify({results: aResults})));
               oModelData.results = aResults;
               that.getView().getModel("DocList").setData(oModelData);
             }
@@ -2730,7 +2737,9 @@ sap.ui.define(
                   data.SDDocCont_MetaSet.Vbeln = el.SDDOCCONT_METASET.Vbeln;
 
                   sap.ui.getCore().mdocArray.push(data);
-                  sap.ui.getCore().mdocArrayOld.push(JSON.parse(JSON.stringify(data)));
+                  if(sap.ui.getCore().mdocArrayOld){
+                    sap.ui.getCore().mdocArrayOld.push(JSON.parse(JSON.stringify(data)));
+                  }
 
                   $.each(
                     el.SDDOCCONT_TARGTSET.RESULTS,
@@ -2971,39 +2980,7 @@ sap.ui.define(
         
 
         $.each(cMdocArray, function (idx, obj) {
-          aMdoc.push({Active : obj.Active,
-            CustomerDocno : obj.CustomerDocno,
-            DcComment : obj.DcComment,
-            DcOption : obj.DcOption,
-            DcSelected : obj.DcSelected,
-            DocContent : obj.DocContent,
-            Dokar : obj.Dokar,
-            FinalDate : obj.FinalDate,
-            Keyword1 : obj.Keyword1,
-            Keyword2 : obj.Keyword2,
-            Penal : obj.Penal,
-            PlansCre : obj.PlansCre, 
-            PlansEfs : obj.PlansEfs,
-            PlansIfs : obj.PlansIfs,
-            Posnr : obj.Posnr,
-            PrelimDate : obj.PrelimDate,
-            SddcStatus : obj.SddcStatus,
-            Status1 : obj.Status1,
-            Status2 : obj.Status2,
-            Status3 : obj.Status3,
-            Status4 : obj.Status4,
-            Status5 : obj.Status5,
-            Status6 : obj.Status6,
-            Status7 : obj.Status7,
-            Status8 : obj.Status8,
-            Status9 : obj.Status9,
-            Status10 : obj.Status10,
-            TemplVisited : obj.TemplVisited,
-            Vbeln : obj.Vbeln });
-        });
-
-        $.each(cMdocArrayOld, function (idx, obj) {
-          aMdocOld.push({Active : obj.Active,
+          aMdoc.push({Active : true,
             CustomerDocno : obj.CustomerDocno,
             DcComment : obj.DcComment,
             DcOption : obj.DcOption,
@@ -3030,11 +3007,43 @@ sap.ui.define(
             Status8 : "None",
             Status9 : "None",
             Status10 : "None",
-            TemplVisited : obj.TemplVisited,
+            TemplVisited : true,
             Vbeln : obj.Vbeln });
         });
 
-        if(sDocList !== sDocListOld || JSON.stringify(aMdoc) !== JSON.stringify(aMdocOld) ){
+        $.each(cMdocArrayOld, function (idx, obj) {
+          aMdocOld.push({Active : true,
+            CustomerDocno : obj.CustomerDocno,
+            DcComment : obj.DcComment,
+            DcOption : obj.DcOption,
+            DcSelected : obj.DcSelected,
+            DocContent : obj.DocContent,
+            Dokar : obj.Dokar,
+            FinalDate : obj.FinalDate,
+            Keyword1 : obj.Keyword1,
+            Keyword2 : obj.Keyword2,
+            Penal : obj.Penal,
+            PlansCre : obj.PlansCre, 
+            PlansEfs : obj.PlansEfs,
+            PlansIfs : obj.PlansIfs,
+            Posnr : obj.Posnr,
+            PrelimDate : obj.PrelimDate,
+            SddcStatus : obj.SddcStatus,
+            Status1 : "None",
+            Status2 : "None",
+            Status3 : "None",
+            Status4 : "None",
+            Status5 : "None",
+            Status6 : "None",
+            Status7 : "None",
+            Status8 : "None",
+            Status9 : "None",
+            Status10 : "None",
+            TemplVisited : true,
+            Vbeln : obj.Vbeln });
+        });
+
+        if( ( sDocList !== sDocListOld && sDocListOld !==  '{}' ) || JSON.stringify(aMdoc) !== JSON.stringify(aMdocOld) ){
           
 
           sap.m.MessageBox.confirm("Die Daten wurden verändert. Sollen die Änderungen gesichert werden?", {
